@@ -1,8 +1,6 @@
 import SectionHeader from './SectionHeader.jsx';
 import { services } from '../data/siteData.js';
 
-const serviceNumbers = ['01', '02', '03', '04', '05', '06', '07'];
-
 export default function Services() {
   return (
     <section id="services" className="bg-white px-5 py-24 sm:px-6 lg:px-8">
@@ -16,7 +14,7 @@ export default function Services() {
           {services.map((service, index) => (
             <article key={service.title} className={`group rounded-lg border p-6 transition hover:-translate-y-1 hover:shadow-soft ${index === 0 ? 'border-navy-950 bg-navy-950 text-white lg:row-span-2' : 'border-slate-200 bg-white'}`}>
               <div className="mb-8 flex items-center justify-between">
-                <span className={`text-sm font-bold ${index === 0 ? 'text-cyanbrand-400' : 'text-cyan-700'}`}>{serviceNumbers[index]}</span>
+                <span className={`text-sm font-bold ${index === 0 ? 'text-cyanbrand-400' : 'text-cyan-700'}`}>{String(index + 1).padStart(2, '0')}</span>
                 <span className={`h-px w-16 ${index === 0 ? 'bg-white/20' : 'bg-slate-200'}`} />
               </div>
               <h3 className={`text-xl font-semibold ${index === 0 ? 'text-white' : 'text-navy-950'}`}>{service.title}</h3>

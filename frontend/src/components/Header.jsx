@@ -4,8 +4,10 @@ const navItems = [
   { label: 'Services', href: '#services' },
   { label: 'About', href: '#about' },
   { label: 'Process', href: '#process' },
-  { label: 'Work', href: '#work' },
+  { label: 'Portfolio', href: '#work' },
   { label: 'Templates', href: '#templates' },
+  { label: 'Add-ons', href: '#addons' },
+  { label: 'FAQs', href: '#faq' },
   { label: 'Contact', href: '#contact' }
 ];
 

@@ -17,7 +17,10 @@ export default function Footer() {
             <a href="#services" className="hover:text-white">Services</a>
             <a href="#about" className="hover:text-white">About</a>
             <a href="#process" className="hover:text-white">Process</a>
+            <a href="#work" className="hover:text-white">Portfolio</a>
             <a href="#templates" className="hover:text-white">Templates</a>
+            <a href="#addons" className="hover:text-white">Add-ons</a>
+            <a href="#faq" className="hover:text-white">FAQs</a>
             <a href="#contact" className="hover:text-white">Contact</a>
           </div>
         </div>

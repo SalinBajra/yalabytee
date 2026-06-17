@@ -5,7 +5,7 @@ export default function About() {
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyan-700">About YalaByte</p>
           <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-normal text-navy-950 sm:text-4xl lg:text-5xl">
-            A reliable IT partner for businesses that need more than a basic website
+            A reliable IT partner for businesses that need a complete digital foundation
           </h2>
           <div className="mt-8 grid grid-cols-2 gap-3">
             {[
@@ -24,10 +24,10 @@ export default function About() {
         <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
           <div className="grid gap-6 text-base leading-8 text-slate-600">
             <p>
-              YalaByte provides website development services and one-stop digital solutions for businesses that want a professional digital presence without scattered vendors or unclear execution. We combine strategy, design, development, and support into a clear delivery process.
+              YalaByte provides website development, WordPress website builds, custom web applications, domain and hosting support, and ongoing digital improvements for businesses that want one dependable partner instead of scattered vendors.
             </p>
             <p>
-              Whether you are launching a business website, planning a WordPress site, improving an existing platform, or building a custom web application, YalaByte helps translate your services into a credible digital experience that customers can understand and trust.
+              Whether you are launching a business website, planning an industry-specific WordPress site, improving an existing platform, or building a custom workflow, YalaByte helps translate your services into a credible digital experience that customers can understand and trust.
             </p>
           </div>
           <div className="mt-8 border-t border-slate-100 pt-6">

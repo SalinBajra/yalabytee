@@ -100,9 +100,9 @@ export default function Templates() {
     <section id="templates" className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="WordPress Template Samples"
-          title="Realistic website foundations for common business domains"
-          text="These are sample WordPress directions YalaByte can customize into genuine branded websites. Each concept is built around actual pages, inquiry flows, service content, and business use cases."
+          eyebrow="WordPress Website Templates"
+          title="Domain-specific WordPress packages that can be customized for your brand"
+          text="YalaByte can start from proven structures for common business domains, then customize layout, copy, pages, colors, forms, hosting setup, and add-ons for your real company."
         />
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">

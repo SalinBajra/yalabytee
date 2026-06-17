@@ -37,25 +37,46 @@ export default function Hero() {
           </div>
         </div>
         <div className="relative self-center">
-          <div className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.06] p-2 shadow-soft backdrop-blur">
-            <img
-              src="/images/yalabyte-hero.png"
-              alt="Premium web technology platform visual for YalaByte digital solutions"
-              className="h-full max-h-[560px] w-full rounded-lg object-cover object-center"
-              loading="eager"
-            />
-          </div>
-          <div className="absolute -bottom-5 left-4 right-4 grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-navy-950/90 p-3 shadow-soft backdrop-blur sm:left-8 sm:right-8 sm:gap-3 sm:p-4">
-            {[
-              ['Strategy', 'Scope'],
-              ['Design', 'UI/UX'],
-              ['Launch', 'Support']
-            ].map(([item, detail]) => (
-              <div key={item} className="rounded-lg bg-white/[0.08] px-3 py-3 text-center">
-                <p className="text-xs font-bold text-white sm:text-sm">{item}</p>
-                <p className="mt-1 text-[11px] font-medium text-slate-400">{detail}</p>
+          <div className="rounded-lg border border-white/10 bg-white/[0.06] p-4 shadow-soft backdrop-blur">
+            <div className="rounded-lg bg-white p-4 text-navy-950">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-700">YalaByte delivery board</p>
+                  <h2 className="mt-2 text-xl font-semibold">Website launch system</h2>
+                </div>
+                <span className="rounded-lg bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700">Ready to build</span>
               </div>
-            ))}
+              <div className="mt-5 grid gap-4 md:grid-cols-[0.85fr_1.15fr]">
+                <div className="grid gap-3">
+                  {['Discovery and scope', 'Brand and page structure', 'Responsive development', 'Domain, hosting, launch'].map((item, index) => (
+                    <div key={item} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                      <p className="text-xs font-bold text-cyan-700">0{index + 1}</p>
+                      <p className="mt-2 text-sm font-semibold text-navy-950">{item}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="rounded-lg bg-navy-950 p-5 text-white">
+                  <p className="text-sm font-bold uppercase tracking-[0.16em] text-cyanbrand-400">Project preview</p>
+                  <div className="mt-5 rounded-lg bg-white p-4 text-navy-950">
+                    <div className="h-3 w-28 rounded-sm bg-navy-950" />
+                    <div className="mt-4 grid grid-cols-3 gap-2">
+                      <span className="h-16 rounded-md bg-cyan-50" />
+                      <span className="h-16 rounded-md bg-slate-100" />
+                      <span className="h-16 rounded-md bg-blue-50" />
+                    </div>
+                    <div className="mt-4 h-2 w-full rounded-sm bg-slate-200" />
+                    <div className="mt-2 h-2 w-4/5 rounded-sm bg-slate-200" />
+                  </div>
+                  <div className="mt-4 grid grid-cols-3 gap-2">
+                    {['SEO', 'CMS', 'Support'].map((item) => (
+                      <div key={item} className="rounded-lg bg-white/10 px-3 py-3 text-center text-xs font-bold">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

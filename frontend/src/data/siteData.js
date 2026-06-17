@@ -33,6 +33,16 @@ export const services = [
     title: 'Digital Consulting',
     text: 'Guidance for choosing the right platforms, automations, integrations, and digital roadmap for your business.',
     outcome: 'Clearer technology decisions'
+  },
+  {
+    title: 'Domain and Hosting Support',
+    text: 'Help with domain selection, DNS setup, hosting guidance, SSL, email routing, and deployment preparation.',
+    outcome: 'Reliable launch foundation'
+  },
+  {
+    title: 'Customizations and Add-ons',
+    text: 'Extra pages, booking tools, forms, analytics, chat widgets, payment links, CRM handoff, and business-specific features.',
+    outcome: 'Website that fits your workflow'
   }
 ];
 
@@ -68,20 +78,84 @@ export const processSteps = [
 
 export const showcase = [
   {
-    title: 'Premium company websites',
-    text: 'Corporate websites with service pages, trust signals, SEO-ready structure, and clear inquiry paths.'
+    title: 'Yala Travel Co.',
+    type: 'Travel and tour website',
+    text: 'A travel website sample with destination pages, tour packages, trip inquiry forms, and content sections for seasonal offers.',
+    tags: ['WordPress-ready', 'Tour packages', 'Inquiry flow'],
+    accent: 'bg-cyan-600'
   },
   {
-    title: 'Service booking flows',
-    text: 'Quote requests, consultation forms, appointment journeys, and admin-friendly lead routing.'
+    title: 'Studio North Portfolio',
+    type: 'Portfolio website',
+    text: 'A portfolio website sample for personal brands and agencies with case studies, services, testimonials, and a polished contact path.',
+    tags: ['Case studies', 'Personal brand', 'Lead capture'],
+    accent: 'bg-navy-800'
   },
   {
-    title: 'Lead generation pages',
-    text: 'Focused landing pages for campaigns, offers, local services, and productized business packages.'
+    title: 'RapidRoute Courier',
+    type: 'Courier and logistics website',
+    text: 'A courier website sample with quote requests, service zones, shipment support content, and a tracking-ready structure.',
+    tags: ['Quote request', 'Service zones', 'Support pages'],
+    accent: 'bg-blue-700'
   },
   {
-    title: 'Custom dashboards',
-    text: 'Operational tools, customer portals, reporting views, and internal workflow applications.'
+    title: 'Business Service Hub',
+    type: 'Corporate service website',
+    text: 'A professional service website sample with landing pages, service detail pages, FAQs, and structured conversion areas.',
+    tags: ['Service pages', 'SEO structure', 'Contact CTA'],
+    accent: 'bg-slate-700'
+  }
+];
+
+export const addons = [
+  'Domain registration guidance',
+  'Hosting setup and deployment',
+  'Business email and DNS support',
+  'SSL and basic security setup',
+  'Google Analytics and Search Console',
+  'Contact forms and lead routing',
+  'Booking, quote, or inquiry flows',
+  'Content updates and page add-ons'
+];
+
+export const team = [
+  {
+    role: 'Project Strategy',
+    title: 'Discovery, scope, and digital roadmap',
+    text: 'We clarify your business goals, audiences, service structure, launch priorities, and the pages or tools needed to support them.'
+  },
+  {
+    role: 'Design and Experience',
+    title: 'Brand presentation and user journey',
+    text: 'We shape polished layouts, content hierarchy, responsive views, and interaction patterns that feel professional and easy to use.'
+  },
+  {
+    role: 'Development and Support',
+    title: 'Build, launch, and ongoing improvements',
+    text: 'We develop the website, connect forms and integrations, prepare deployment, and support future improvements after launch.'
+  }
+];
+
+export const faqs = [
+  {
+    question: 'Can YalaByte build a website from scratch?',
+    answer: 'Yes. We can plan, design, develop, and launch a professional business website from the ground up, including core pages, responsive design, SEO-ready structure, and contact flows.'
+  },
+  {
+    question: 'Do you work with WordPress websites?',
+    answer: 'Yes. We can create WordPress-ready websites for travel, portfolio, courier, service businesses, and other domains, with custom sections and manageable content structures.'
+  },
+  {
+    question: 'Can you help with domain and hosting?',
+    answer: 'Yes. We can guide domain setup, hosting selection, DNS records, SSL, deployment, and the technical steps needed to get the website live.'
+  },
+  {
+    question: 'Can we request custom features or add-ons?',
+    answer: 'Yes. Add-ons can include extra pages, quote forms, booking flows, analytics, chat widgets, CRM handoff, payment links, and business-specific website features.'
+  },
+  {
+    question: 'Do you provide support after launch?',
+    answer: 'Yes. We can help with maintenance, updates, improvements, troubleshooting, and future website enhancements after the initial launch.'
   }
 ];
 
