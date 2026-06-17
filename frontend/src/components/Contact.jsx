@@ -87,7 +87,7 @@ export default function Contact() {
           </p>
           <div className="mt-8 rounded-lg border border-white/10 bg-white/[0.06] p-6">
             <p className="font-semibold">Project inquiries</p>
-            <p className="mt-3 text-sm leading-7 text-cyanbrand-100">hello@yalabyte.com</p>
+            <p className="mt-3 text-sm leading-7 text-cyanbrand-100">info@yalabyte.com</p>
             <p className="text-sm leading-7 text-slate-300">Available for website, web app, and digital consulting inquiries.</p>
           </div>
         </div>

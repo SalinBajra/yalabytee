@@ -100,12 +100,13 @@ The production frontend output will be generated in `frontend/dist`.
 - Deploy the backend to Render, Fly.io, Railway, DigitalOcean, AWS, Azure, or another Python-compatible platform.
 - Configure the frontend environment variable `VITE_API_URL` with the backend origin.
 - Configure backend CORS for the production frontend origin.
-- Replace the contact endpoint placeholder with an email, CRM, database, or queue integration before relying on it for live inquiries.
+- Set `CONTACT_EMAIL=info@yalabyte.com` for backend deployments if you want to make the routing address explicit.
+- Connect the contact endpoint to email, CRM, database, or queue storage before relying on it for live inquiries.
 
 ## Production Checklist
 
 - Add real portfolio work, testimonials, and contact details.
 - Connect the contact form to email or CRM storage.
 - Add analytics and privacy/cookie notices if required.
-- Add a real favicon and social sharing image.
+- Add a social sharing image.
 - Review copy and metadata for final service markets and keywords.

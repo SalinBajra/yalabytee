@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
         <div>
           <p className="font-semibold">Contact</p>
-          <p className="mt-4 text-sm leading-7 text-slate-300">hello@yalabyte.com</p>
+          <p className="mt-4 text-sm leading-7 text-slate-300">info@yalabyte.com</p>
           <p className="text-sm leading-7 text-slate-300">Business inquiries and project consultations</p>
         </div>
       </div>

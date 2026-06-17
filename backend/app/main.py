@@ -17,9 +17,11 @@ class ContactSubmission(BaseModel):
 
 app = FastAPI(
     title="YalaByte API",
-    description="Backend API for YalaByte website contact submissions.",
+    description="Backend API for YalaByte website contact submissions. Project inquiries route to info@yalabyte.com.",
     version="1.0.0",
 )
+
+contact_email = os.getenv("CONTACT_EMAIL", "info@yalabyte.com")
 
 allowed_origins = [
     origin.strip()
@@ -54,6 +56,7 @@ def receive_contact_submission(submission: ContactSubmission):
             "event": "contact_submission_received",
             "service": submission.service,
             "email": submission.email,
+            "contact_email": contact_email,
             "received_at": received_at,
         }
     )
