@@ -67,7 +67,7 @@ export const processSteps = [
   {
     label: '03',
     title: 'Build',
-    text: 'We develop responsive pages, CMS-ready structures, integrations, and backend connections with clean implementation.'
+    text: 'We develop responsive pages, editable content structures, integrations, and backend connections with clean implementation.'
   },
   {
     label: '04',
@@ -81,7 +81,7 @@ export const showcase = [
     title: 'Yala Travel Co.',
     type: 'Travel and tour website',
     text: 'A travel website sample with destination pages, tour packages, trip inquiry forms, and content sections for seasonal offers.',
-    tags: ['WordPress-ready', 'Tour packages', 'Inquiry flow'],
+    tags: ['Custom pages', 'Tour packages', 'Inquiry flow'],
     accent: 'bg-cyan-600'
   },
   {
@@ -142,8 +142,8 @@ export const faqs = [
     answer: 'Yes. We can plan, design, develop, and launch a professional business website from the ground up, including core pages, responsive design, SEO-ready structure, and contact flows.'
   },
   {
-    question: 'Do you work with WordPress websites?',
-    answer: 'Yes. We can create WordPress-ready websites for travel, portfolio, courier, service businesses, and other domains, with custom sections and manageable content structures.'
+    question: 'Do you build custom websites?',
+    answer: 'Yes. We focus on professional custom websites and digital solutions shaped around your business, services, brand, pages, forms, integrations, and launch requirements.'
   },
   {
     question: 'Can you help with domain and hosting?',

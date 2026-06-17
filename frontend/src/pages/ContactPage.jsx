@@ -8,7 +8,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Tell YalaByte what you want to build"
-        text="Share your project details, preferred platform, website goals, and whether you need help with domain, hosting, customizations, or ongoing support."
+        text="Share your project details, website goals, and whether you need help with domain, hosting, custom features, or ongoing support."
       />
       <Contact />
       <FAQ />

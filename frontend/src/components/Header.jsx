@@ -11,7 +11,7 @@ function NavLink({ item, currentPath }) {
         event.preventDefault();
         navigateTo(item.path);
       }}
-      className={`whitespace-nowrap text-sm font-semibold transition ${isActive ? 'text-navy-950' : 'text-slate-600 hover:text-navy-950'}`}
+      className={`whitespace-nowrap rounded-md px-2.5 py-2 text-sm font-semibold transition ${isActive ? 'bg-slate-100 text-navy-950' : 'text-slate-600 hover:bg-slate-50 hover:text-navy-950'}`}
     >
       {item.label}
     </a>

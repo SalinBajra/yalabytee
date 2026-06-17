@@ -11,7 +11,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="What We Do"
-            title="A clean digital partner for websites, WordPress, and launch support"
+            title="A clean digital partner for websites, web products, and launch support"
             text="The full details now live on dedicated pages so the site is easier to browse. Start with a quick overview, then open the area that matches your project."
           />
           <div className="mt-12 grid gap-4 md:grid-cols-3">
@@ -28,8 +28,8 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Portfolio Preview"
-            title="WordPress website examples for real business domains"
-            text="Preview the types of client-ready sites YalaByte can customize for travel, portfolio, courier, and service businesses."
+            title="Website examples for real business domains"
+            text="Preview the types of custom websites YalaByte can shape for travel, portfolio, courier, and service businesses."
           />
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {showcase.map((item) => (

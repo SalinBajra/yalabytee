@@ -17,6 +17,11 @@ body {
   background: #f8fafc;
 }
 
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 ::selection {
   background: #13c8de;
   color: #06111f;
@@ -43,6 +48,13 @@ section[id] {
 
 .motion-soft {
   animation: fade-up 0.7s ease both;
+}
+
+.tech-surface {
+  background-image:
+    linear-gradient(rgba(19, 200, 222, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 200, 222, 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
 }
 
 @media (prefers-reduced-motion: reduce) {

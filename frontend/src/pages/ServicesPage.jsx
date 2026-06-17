@@ -9,7 +9,7 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="Website development, WordPress builds, hosting support, and custom add-ons"
+        title="Website development, web solutions, hosting support, and custom add-ons"
         text="Explore the services YalaByte can provide for businesses that need a professional website and the setup required to launch it correctly."
       />
       <Services />

@@ -7,8 +7,8 @@ export default function PortfolioPage() {
     <>
       <PageHero
         eyebrow="Portfolio"
-        title="WordPress website examples built around real client use cases"
-        text="Browse sample website builds for travel, portfolio, courier, and corporate service businesses. These examples show page structure, conversion flow, and practical features."
+        title="Example website builds shaped around real client use cases"
+        text="Browse custom website examples for travel, portfolio, courier, and corporate service businesses. These examples show page structure, conversion flow, and practical features."
       />
       <Portfolio />
       <Testimonials />
