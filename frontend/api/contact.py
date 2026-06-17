@@ -37,9 +37,10 @@ def _format_submission(payload, received_at):
 def _send_email(payload, received_at):
     smtp_host = _env("SMTP_HOST", "smtppro.zoho.com")
     smtp_port = int(_env("SMTP_PORT", "465"))
+    smtp_secure = _env("SMTP_SECURE", "true").lower() in {"1", "true", "yes", "ssl"}
     smtp_user = _env("SMTP_USER")
-    smtp_password = _env("SMTP_PASSWORD")
-    contact_to = _env("CONTACT_TO", "info@yalabyte.com")
+    smtp_password = _env("SMTP_PASSWORD") or _env("SMTP_PASS")
+    contact_to = _env("CONTACT_TO") or _env("CONTACT_RECEIVER") or "info@yalabyte.com"
 
     if not smtp_user or not smtp_password:
         return False
@@ -51,7 +52,7 @@ def _send_email(payload, received_at):
     message["Reply-To"] = payload["email"]
     message.set_content(_format_submission(payload, received_at))
 
-    if smtp_port == 465:
+    if smtp_port == 465 or smtp_secure:
         with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as smtp:
             smtp.login(smtp_user, smtp_password)
             smtp.send_message(message)
