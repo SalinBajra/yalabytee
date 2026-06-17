@@ -48,9 +48,9 @@ export default function Portfolio() {
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyanbrand-400">Portfolio</p>
-          <h2 className="mt-4 text-4xl font-semibold leading-tight text-white sm:text-5xl">Example website builds with real business logic</h2>
+          <h2 className="mt-4 text-4xl font-semibold leading-tight text-white sm:text-5xl">Live-style demos your clients can experience</h2>
           <p className="mt-5 text-base leading-8 text-slate-300">
-            These example directions show how YalaByte can structure custom websites around industry needs, user journeys, and conversion goals.
+            These are starter demo experiences you can keep improving over time. Each one shows a different type of website YalaByte can build.
           </p>
         </div>
 
@@ -80,8 +80,8 @@ export default function Portfolio() {
                   ))}
                 </div>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <button onClick={() => navigateTo(`/portfolio/${project.slug}`)} className="rounded-lg bg-navy-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800">
-                    View live demo
+                  <button onClick={() => navigateTo(`/portfolio/${project.slug}`)} className="rounded-lg bg-cyanbrand-500 px-5 py-3 text-sm font-bold text-navy-950 transition hover:bg-cyanbrand-400">
+                    Open demo
                   </button>
                   <button onClick={() => navigateTo('/contact')} className="rounded-lg border border-white/30 px-5 py-3 text-sm font-bold text-white transition hover:border-cyanbrand-500 hover:bg-white hover:text-navy-950">
                     Request similar site
