@@ -17,6 +17,19 @@ function FooterLink({ to, children }) {
   );
 }
 
+function SocialLink({ href, children }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-cyanbrand-500 hover:bg-white hover:text-navy-950"
+    >
+      {children}
+    </a>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="bg-slate-100 px-5 py-12 text-navy-950 sm:px-6 lg:px-8">
@@ -47,6 +60,10 @@ export default function Footer() {
           <p className="font-semibold">Contact</p>
           <p className="mt-4 text-sm leading-7 text-slate-600">info@yalabyte.com</p>
           <p className="text-sm leading-7 text-slate-600">Business inquiries and project consultations</p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <SocialLink href="https://www.instagram.com/yalabyte/">Instagram</SocialLink>
+            <SocialLink href="https://www.facebook.com/profile.php?id=61590901624020&mibextid=wwXIfr">Facebook</SocialLink>
+          </div>
         </div>
       </div>
       <div className="mx-auto mt-10 max-w-7xl border-t border-slate-200 pt-6 text-sm text-slate-500">
