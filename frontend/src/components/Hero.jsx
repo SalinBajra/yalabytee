@@ -1,5 +1,8 @@
 import { navigateTo } from '../utils/routes.js';
 
+const heroImage =
+  'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=88';
+
 export default function Hero() {
   return (
     <section id="home" className="relative overflow-hidden bg-[#0b0d10] text-white">
@@ -29,19 +32,18 @@ export default function Hero() {
 
           <div className="scroll-fade relative min-h-[360px] overflow-hidden rounded-[1.75rem] border border-white/10 bg-black shadow-[0_40px_120px_rgba(0,0,0,0.45)] lg:min-h-[520px]">
             <img
-              src="/images/hero-technology-visual.png"
-              alt="Website design and development workspace"
-              className="absolute inset-0 h-full w-full object-cover opacity-[0.82]"
+              src={heroImage}
+              alt="Modern workspace for website strategy and digital product development"
+              className="absolute inset-0 h-full w-full object-cover opacity-80"
               loading="eager"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/18 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 grid gap-px bg-white/10 sm:grid-cols-3">
-              {['Strategy', 'Design', 'Launch'].map((item) => (
-                <div key={item} className="bg-[#0c1016]/90 p-5 backdrop-blur">
-                  <p className="text-sm font-bold text-white">{item}</p>
-                  <p className="mt-1 text-xs text-slate-400">YalaByte delivery</p>
-                </div>
-              ))}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/5" />
+            <div className="absolute bottom-5 left-5 right-5 max-w-md rounded-2xl border border-white/10 bg-black/55 p-5 backdrop-blur-md sm:bottom-7 sm:left-7">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-cyanbrand-300">YalaByte delivery</p>
+              <h2 className="mt-3 text-2xl font-semibold leading-tight text-white">Strategy, design, development, and launch support.</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-300">
+                We build the brand, pages, forms, domain setup, and hosting path around one practical business goal.
+              </p>
             </div>
           </div>
         </div>
