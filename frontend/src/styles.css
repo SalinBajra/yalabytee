@@ -13,9 +13,14 @@ html {
 
 body {
   margin: 0;
+  background: #f8fafc;
 }
 
 ::selection {
   background: #13c8de;
   color: #06111f;
+}
+
+img {
+  max-width: 100%;
 }

@@ -75,23 +75,23 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-white px-5 py-20 sm:px-6 lg:px-8">
+    <section id="contact" className="bg-navy-950 px-5 py-24 text-white sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
         <div>
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyan-700">Contact</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-navy-950 sm:text-4xl">
-            Tell us what you are building. We will help shape the next step.
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyanbrand-400">Contact</p>
+          <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-normal text-white sm:text-4xl lg:text-5xl">
+            Tell us what you are building. We will shape the next step.
           </h2>
-          <p className="mt-5 text-base leading-8 text-slate-600">
+          <p className="mt-5 text-base leading-8 text-slate-300">
             Share your project details, timeline, and the kind of support you need. YalaByte will review your message and respond with a practical starting point.
           </p>
-          <div className="mt-8 rounded-lg bg-navy-950 p-6 text-white">
-            <p className="font-semibold">Contact placeholder</p>
-            <p className="mt-3 text-sm leading-7 text-slate-300">hello@yalabyte.com</p>
+          <div className="mt-8 rounded-lg border border-white/10 bg-white/[0.06] p-6">
+            <p className="font-semibold">Project inquiries</p>
+            <p className="mt-3 text-sm leading-7 text-cyanbrand-100">hello@yalabyte.com</p>
             <p className="text-sm leading-7 text-slate-300">Available for website, web app, and digital consulting inquiries.</p>
           </div>
         </div>
-        <form className="rounded-lg border border-slate-200 bg-slate-50 p-5 sm:p-7" onSubmit={handleSubmit}>
+        <form className="rounded-lg border border-white/10 bg-white p-5 text-navy-950 shadow-soft sm:p-7" onSubmit={handleSubmit}>
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="text-sm font-semibold text-navy-950">
               Name
@@ -128,7 +128,7 @@ export default function Contact() {
               {status.message}
             </p>
           ) : null}
-          <button className="mt-6 w-full rounded-lg bg-navy-950 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-navy-800 disabled:cursor-not-allowed disabled:opacity-60" type="submit" disabled={isSubmitting}>
+          <button className="mt-6 w-full rounded-lg bg-cyanbrand-500 px-6 py-3.5 text-sm font-bold text-navy-950 transition hover:bg-cyanbrand-400 disabled:cursor-not-allowed disabled:opacity-60" type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Sending...' : 'Send Project Inquiry'}
           </button>
         </form>
