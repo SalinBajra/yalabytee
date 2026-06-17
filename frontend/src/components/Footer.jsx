@@ -23,9 +23,14 @@ function SocialLink({ href, children }) {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-cyanbrand-500 hover:bg-white hover:text-navy-950"
+      aria-label={children}
+      className="inline-grid h-10 w-10 place-items-center rounded-full border border-slate-200 text-slate-700 transition hover:border-cyanbrand-500 hover:bg-white hover:text-navy-950"
     >
-      {children}
+      <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
+        <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" strokeWidth="2" />
+        <circle cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth="2" />
+        <circle cx="17" cy="7" r="1.1" fill="currentColor" />
+      </svg>
     </a>
   );
 }
@@ -62,7 +67,6 @@ export default function Footer() {
           <p className="text-sm leading-7 text-slate-600">Business inquiries and project consultations</p>
           <div className="mt-5 flex flex-wrap gap-3">
             <SocialLink href="https://www.instagram.com/yalabyte/">Instagram</SocialLink>
-            <SocialLink href="https://www.facebook.com/profile.php?id=61590901624020&mibextid=wwXIfr">Facebook</SocialLink>
           </div>
         </div>
       </div>
