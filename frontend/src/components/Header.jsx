@@ -11,7 +11,7 @@ function NavLink({ item, currentPath }) {
         event.preventDefault();
         navigateTo(item.path);
       }}
-      className={`whitespace-nowrap rounded-md px-2.5 py-2 text-sm font-semibold transition ${isActive ? 'bg-slate-100 text-navy-950' : 'text-slate-600 hover:bg-slate-50 hover:text-navy-950'}`}
+      className={`whitespace-nowrap rounded-md px-2.5 py-2 text-sm font-semibold transition ${isActive ? 'bg-white text-navy-950' : 'text-slate-300 hover:bg-white/10 hover:text-white'}`}
     >
       {item.label}
     </a>
@@ -20,7 +20,7 @@ function NavLink({ item, currentPath }) {
 
 export default function Header({ currentPath }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#111315]/95 shadow-[0_12px_40px_rgba(0,0,0,0.25)]">
       <nav className="mx-auto max-w-7xl px-5 py-3 sm:px-6 lg:px-8" aria-label="Primary navigation">
         <div className="flex items-center justify-between gap-5">
           <a
@@ -31,7 +31,7 @@ export default function Header({ currentPath }) {
               navigateTo('/');
             }}
           >
-            <BrandLogo variant="light" />
+            <BrandLogo />
           </a>
           <div className="hidden items-center gap-5 lg:flex">
             {routes.map((item) => (
@@ -44,12 +44,12 @@ export default function Header({ currentPath }) {
               event.preventDefault();
               navigateTo('/contact');
             }}
-            className="hidden rounded-lg bg-navy-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-navy-800 sm:inline-flex"
+            className="hidden rounded-md bg-cyanbrand-500 px-4 py-2.5 text-sm font-bold text-navy-950 transition hover:bg-cyanbrand-400 sm:inline-flex"
           >
             Start Your Project
           </a>
         </div>
-        <div className="mt-3 flex gap-4 overflow-x-auto border-t border-slate-100 pt-3 lg:hidden">
+        <div className="mt-3 flex gap-4 overflow-x-auto border-t border-white/10 pt-3 lg:hidden">
           {routes.map((item) => (
             <NavLink key={item.path} item={item} currentPath={currentPath} />
           ))}

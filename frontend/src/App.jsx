@@ -4,6 +4,7 @@ import Footer from './components/Footer.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ServicesPage from './pages/ServicesPage.jsx';
 import PortfolioPage from './pages/PortfolioPage.jsx';
+import PortfolioDemoPage from './pages/PortfolioDemoPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 
@@ -17,7 +18,8 @@ const pages = {
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
-  const Page = pages[path] || HomePage;
+  const demoMatch = path.match(/^\/portfolio\/([^/]+)$/);
+  const Page = demoMatch ? PortfolioDemoPage : pages[path] || HomePage;
 
   useEffect(() => {
     const handleNavigation = () => setPath(window.location.pathname);
@@ -29,7 +31,7 @@ export default function App() {
     <div className="min-h-screen bg-slate-50 text-ink antialiased">
       <Header currentPath={path} />
       <main>
-        <Page />
+        <Page slug={demoMatch?.[1]} />
       </main>
       <Footer />
     </div>
