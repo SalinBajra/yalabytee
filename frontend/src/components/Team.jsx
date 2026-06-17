@@ -3,7 +3,7 @@ import { team } from '../data/siteData.js';
 
 export default function Team() {
   return (
-    <section id="team" className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
+    <section className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Team Approach"

@@ -1,33 +1,37 @@
+import { useEffect, useState } from 'react';
 import Header from './components/Header.jsx';
-import Hero from './components/Hero.jsx';
-import Services from './components/Services.jsx';
-import About from './components/About.jsx';
-import Process from './components/Process.jsx';
-import Portfolio from './components/Portfolio.jsx';
-import Templates from './components/Templates.jsx';
-import AddOns from './components/AddOns.jsx';
-import Team from './components/Team.jsx';
-import Testimonials from './components/Testimonials.jsx';
-import FAQ from './components/FAQ.jsx';
-import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
+import HomePage from './pages/HomePage.jsx';
+import ServicesPage from './pages/ServicesPage.jsx';
+import PortfolioPage from './pages/PortfolioPage.jsx';
+import TemplatesPage from './pages/TemplatesPage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
+
+const pages = {
+  '/': HomePage,
+  '/services': ServicesPage,
+  '/portfolio': PortfolioPage,
+  '/templates': TemplatesPage,
+  '/about': AboutPage,
+  '/contact': ContactPage
+};
 
 export default function App() {
+  const [path, setPath] = useState(window.location.pathname);
+  const Page = pages[path] || HomePage;
+
+  useEffect(() => {
+    const handleNavigation = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', handleNavigation);
+    return () => window.removeEventListener('popstate', handleNavigation);
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-50 text-ink antialiased">
-      <Header />
+      <Header currentPath={path} />
       <main>
-        <Hero />
-        <Services />
-        <About />
-        <Process />
-        <Portfolio />
-        <Templates />
-        <AddOns />
-        <Team />
-        <Testimonials />
-        <FAQ />
-        <Contact />
+        <Page />
       </main>
       <Footer />
     </div>

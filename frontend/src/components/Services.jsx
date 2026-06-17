@@ -3,7 +3,7 @@ import { services } from '../data/siteData.js';
 
 export default function Services() {
   return (
-    <section id="services" className="bg-white px-5 py-24 sm:px-6 lg:px-8">
+    <section className="bg-white px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Services"

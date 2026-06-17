@@ -3,7 +3,7 @@ import { faqs } from '../data/siteData.js';
 
 export default function FAQ() {
   return (
-    <section id="faq" className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
+    <section className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <SectionHeader
           eyebrow="FAQs"

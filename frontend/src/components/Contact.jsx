@@ -75,7 +75,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-navy-950 px-5 py-24 text-white sm:px-6 lg:px-8">
+    <section className="bg-navy-950 px-5 py-24 text-white sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyanbrand-400">Contact</p>

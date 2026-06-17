@@ -3,7 +3,7 @@ import { addons } from '../data/siteData.js';
 
 export default function AddOns() {
   return (
-    <section id="addons" className="bg-white px-5 py-24 sm:px-6 lg:px-8">
+    <section className="bg-white px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Customization and Add-ons"

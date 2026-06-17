@@ -3,7 +3,7 @@ import { processSteps } from '../data/siteData.js';
 
 export default function Process() {
   return (
-    <section id="process" className="bg-navy-950 px-5 py-24 sm:px-6 lg:px-8">
+    <section className="bg-navy-950 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           light

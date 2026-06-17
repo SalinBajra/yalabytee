@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <section id="about" className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
+    <section className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyan-700">About YalaByte</p>

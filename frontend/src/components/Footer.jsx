@@ -1,5 +1,21 @@
 import { services } from '../data/siteData.js';
 import BrandLogo from './BrandLogo.jsx';
+import { navigateTo, routes } from '../utils/routes.js';
+
+function FooterLink({ to, children }) {
+  return (
+    <a
+      href={to}
+      onClick={(event) => {
+        event.preventDefault();
+        navigateTo(to);
+      }}
+      className="hover:text-white"
+    >
+      {children}
+    </a>
+  );
+}
 
 export default function Footer() {
   return (
@@ -14,21 +30,16 @@ export default function Footer() {
         <div>
           <p className="font-semibold">Quick links</p>
           <div className="mt-4 grid gap-3 text-sm text-slate-300">
-            <a href="#services" className="hover:text-white">Services</a>
-            <a href="#about" className="hover:text-white">About</a>
-            <a href="#process" className="hover:text-white">Process</a>
-            <a href="#portfolio" className="hover:text-white">Portfolio</a>
-            <a href="#templates" className="hover:text-white">Templates</a>
-            <a href="#addons" className="hover:text-white">Add-ons</a>
-            <a href="#faq" className="hover:text-white">FAQs</a>
-            <a href="#contact" className="hover:text-white">Contact</a>
+            {routes.map((route) => (
+              <FooterLink key={route.path} to={route.path}>{route.label}</FooterLink>
+            ))}
           </div>
         </div>
         <div>
           <p className="font-semibold">Services</p>
           <div className="mt-4 grid gap-3 text-sm text-slate-300">
             {services.slice(0, 5).map((service) => (
-              <a key={service.title} href="#services" className="hover:text-white">{service.title}</a>
+              <FooterLink key={service.title} to="/services">{service.title}</FooterLink>
             ))}
           </div>
         </div>

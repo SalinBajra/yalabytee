@@ -97,7 +97,7 @@ function TemplatePreview({ template }) {
 
 export default function Templates() {
   return (
-    <section id="templates" className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
+    <section className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="WordPress Website Templates"

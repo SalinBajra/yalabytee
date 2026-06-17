@@ -1,4 +1,5 @@
 import { proofPoints } from '../data/siteData.js';
+import { navigateTo } from '../utils/routes.js';
 
 export default function Hero() {
   return (
@@ -20,12 +21,12 @@ export default function Hero() {
             YalaByte designs and develops professional websites, WordPress experiences, and custom digital products for startups, small businesses, and growing companies that need to look credible and operate smarter.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a className="rounded-lg bg-cyanbrand-500 px-6 py-3.5 text-center text-sm font-bold text-navy-950 shadow-soft transition hover:bg-cyanbrand-400" href="#contact">
+            <button className="rounded-lg bg-cyanbrand-500 px-6 py-3.5 text-center text-sm font-bold text-navy-950 shadow-soft transition hover:bg-cyanbrand-400" onClick={() => navigateTo('/contact')}>
               Start Your Project
-            </a>
-            <a className="rounded-lg border border-white/20 px-6 py-3.5 text-center text-sm font-bold text-white transition hover:border-cyanbrand-400 hover:bg-white/[0.08]" href="#services">
+            </button>
+            <button className="rounded-lg border border-white/20 px-6 py-3.5 text-center text-sm font-bold text-white transition hover:border-cyanbrand-400 hover:bg-white/[0.08]" onClick={() => navigateTo('/services')}>
               View Services
-            </a>
+            </button>
           </div>
           <div className="mt-10 grid max-w-2xl gap-3 border-t border-white/10 pt-8 text-white sm:grid-cols-2">
             {proofPoints.map((item) => (
