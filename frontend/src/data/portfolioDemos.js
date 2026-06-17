@@ -11,8 +11,7 @@ export const portfolioDemos = [
     accent: '#5bd7ff',
     dark: '#07121c',
     tint: '#e8fbff',
-    image:
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=85',
+    image: '/images/yalabyte-demo-travel.jpg',
     nav: ['Destinations', 'Packages', 'Guides', 'Inquiry'],
     stats: [
       ['24', 'featured trips'],
@@ -45,8 +44,7 @@ export const portfolioDemos = [
     accent: '#8be7ff',
     dark: '#101114',
     tint: '#f2f7fb',
-    image:
-      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=85',
+    image: '/images/yalabyte-demo-portfolio.jpg',
     nav: ['Work', 'Services', 'About', 'Contact'],
     stats: [
       ['8', 'case studies'],
@@ -79,8 +77,7 @@ export const portfolioDemos = [
     accent: '#67e8f9',
     dark: '#06111f',
     tint: '#eff8ff',
-    image:
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1400&q=85',
+    image: '/images/yalabyte-demo-courier.jpg',
     nav: ['Services', 'Coverage', 'Tracking', 'Support'],
     stats: [
       ['Same day', 'delivery option'],

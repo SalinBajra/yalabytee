@@ -9,25 +9,25 @@ const featureCards = [
     title: 'Clean, modern design',
     text: 'Professional page systems that reflect your brand and make your business easy to understand.',
     size: 'lg:col-span-1',
-    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85'
+    image: '/images/yalabyte-feature-design.jpg'
   },
   {
     title: 'Fast, reliable builds',
     text: 'Responsive frontend, SEO-ready structure, contact forms, and launch support handled with care.',
     size: 'lg:col-span-2',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3c?auto=format&fit=crop&w=1400&q=85'
+    image: '/images/yalabyte-feature-build.jpg'
   },
   {
     title: 'Flexible for growth',
     text: 'Start with the pages you need now, then add service pages, dashboards, automations, and integrations later.',
     size: 'lg:col-span-2',
-    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1400&q=85'
+    image: '/images/yalabyte-feature-growth.jpg'
   },
   {
     title: 'Ongoing support',
     text: 'Maintenance, hosting guidance, domain setup, content updates, and practical digital consulting.',
     size: 'lg:col-span-1',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1100&q=85'
+    image: '/images/yalabyte-feature-support.jpg'
   }
 ];
 
