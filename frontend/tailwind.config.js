@@ -13,6 +13,8 @@ export default {
         cyanbrand: {
           500: '#13c8de',
           400: '#39d7e8',
+          300: '#6beaff',
+          200: '#a8f4ff',
           100: '#d8fbff'
         },
         ink: '#162132'
