@@ -53,14 +53,20 @@ export default function Contact() {
     setStatus({ type: 'idle', message: '' });
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const configuredApiUrl = import.meta.env.VITE_API_URL || '';
+      const isLocalApiUrl = configuredApiUrl.includes('localhost') || configuredApiUrl.includes('127.0.0.1');
+      const apiUrl = configuredApiUrl && !(import.meta.env.PROD && isLocalApiUrl)
+        ? configuredApiUrl
+        : import.meta.env.DEV
+          ? 'http://localhost:8000'
+          : '';
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => ({}));
       if (!response.ok) {
         throw new Error(result.detail || 'Unable to send message right now.');
       }
@@ -68,7 +74,10 @@ export default function Contact() {
       setStatus({ type: 'success', message: result.message });
       setForm(initialState);
     } catch (error) {
-      setStatus({ type: 'error', message: error.message || 'Something went wrong. Please try again.' });
+      setStatus({
+        type: 'error',
+        message: error.message || 'Unable to send your inquiry right now. Please email info@yalabyte.com directly.'
+      });
     } finally {
       setIsSubmitting(false);
     }
