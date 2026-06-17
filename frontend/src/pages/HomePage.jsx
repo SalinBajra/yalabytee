@@ -9,25 +9,25 @@ const featureCards = [
     title: 'Clean, modern design',
     text: 'Professional page systems that reflect your brand and make your business easy to understand.',
     size: 'lg:col-span-1',
-    tone: 'from-slate-800 via-slate-950 to-black'
+    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85'
   },
   {
     title: 'Fast, reliable builds',
     text: 'Responsive frontend, SEO-ready structure, contact forms, and launch support handled with care.',
     size: 'lg:col-span-2',
-    tone: 'from-cyan-300 via-sky-700 to-black'
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3c?auto=format&fit=crop&w=1400&q=85'
   },
   {
     title: 'Flexible for growth',
     text: 'Start with the pages you need now, then add service pages, dashboards, automations, and integrations later.',
     size: 'lg:col-span-2',
-    tone: 'from-slate-300 via-slate-700 to-black'
+    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1400&q=85'
   },
   {
     title: 'Ongoing support',
     text: 'Maintenance, hosting guidance, domain setup, content updates, and practical digital consulting.',
     size: 'lg:col-span-1',
-    tone: 'from-cyan-200 via-slate-600 to-black'
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1100&q=85'
   }
 ];
 
@@ -48,19 +48,12 @@ const metrics = [
 function WorkCard({ demo }) {
   return (
     <article className="group overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#0d1016] transition hover:-translate-y-1 hover:border-cyanbrand-300/50">
-      <div className={`h-56 bg-gradient-to-br ${demo.imageTone} p-5`}>
-        <div className="h-full rounded-2xl border border-white/20 bg-black/35 p-4 backdrop-blur-sm">
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
-            <span className="text-xs font-black uppercase tracking-[0.18em] text-white/80">{demo.category}</span>
-            <span className="h-8 w-8 rounded-lg bg-white/85" />
-          </div>
-          <div className="mt-8 h-3 w-28 rounded-full bg-white/80" />
-          <div className="mt-4 grid grid-cols-3 gap-3">
-            <span className="h-16 rounded-xl bg-white/80" />
-            <span className="h-16 rounded-xl bg-white/30" />
-            <span className="h-16 rounded-xl bg-white/60" />
-          </div>
-        </div>
+      <div className="relative h-64 overflow-hidden">
+        <img src={demo.image} alt={`${demo.title} website example`} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0d1016] via-black/15 to-transparent" />
+        <p className="absolute left-5 top-5 rounded-full bg-black/55 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white backdrop-blur">
+          {demo.category}
+        </p>
       </div>
       <div className="p-6">
         <h3 className="text-2xl font-semibold text-white">{demo.title}</h3>
@@ -110,19 +103,8 @@ export default function HomePage() {
                   <h3 className="text-2xl font-semibold text-white">{card.title}</h3>
                   <p className="mt-4 max-w-xl text-base leading-8 text-slate-300">{card.text}</p>
                 </div>
-                <div className={`mx-4 mb-4 h-72 rounded-[1.1rem] bg-gradient-to-br ${card.tone} p-5`}>
-                  <div className="h-full rounded-2xl border border-white/10 bg-black/30 p-4 backdrop-blur">
-                    <div className="h-2 w-28 rounded-full bg-white/80" />
-                    <div className="mt-10 grid grid-cols-3 gap-3">
-                      <span className="h-20 rounded-xl bg-white/75" />
-                      <span className="h-20 rounded-xl bg-white/25" />
-                      <span className="h-20 rounded-xl bg-white/55" />
-                    </div>
-                    <div className="mt-8 space-y-3">
-                      <span className="block h-2 rounded-full bg-white/35" />
-                      <span className="block h-2 w-4/5 rounded-full bg-white/25" />
-                    </div>
-                  </div>
+                <div className="mx-4 mb-4 h-72 overflow-hidden rounded-[1.1rem] bg-black">
+                  <img src={card.image} alt={card.title} className="h-full w-full object-cover opacity-80 transition duration-700 hover:scale-105" loading="lazy" />
                 </div>
               </article>
             ))}

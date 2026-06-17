@@ -4,28 +4,16 @@ import { navigateTo } from '../utils/routes.js';
 function PortfolioCard({ project, index }) {
   return (
     <article className="group grid gap-0 overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#0d1016] lg:grid-cols-[0.95fr_1.05fr]">
-      <div className={`min-h-[360px] bg-gradient-to-br ${project.imageTone} p-6 ${index % 2 ? 'lg:order-2' : ''}`}>
-        <div className="flex h-full flex-col justify-between rounded-[1.25rem] border border-white/20 bg-black/35 p-5 backdrop-blur">
-          <div className="flex items-center justify-between border-b border-white/10 pb-5">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-white/80">Live demo</p>
-            <span className="h-9 w-9 rounded-lg bg-white/80" />
-          </div>
-          <div>
-            <div className="h-3 w-32 rounded-full bg-white/80" />
-            <div className="mt-5 grid grid-cols-3 gap-3">
-              <span className="h-24 rounded-xl bg-white/80" />
-              <span className="h-24 rounded-xl bg-white/30" />
-              <span className="h-24 rounded-xl bg-white/60" />
+      <div className={`relative min-h-[420px] overflow-hidden bg-black ${index % 2 ? 'lg:order-2' : ''}`}>
+        <img src={project.image} alt={`${project.title} demo preview`} className="absolute inset-0 h-full w-full object-cover opacity-85 transition duration-700 group-hover:scale-105" loading="lazy" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+        <div className="absolute bottom-6 left-6 right-6 grid gap-3 sm:grid-cols-3">
+          {project.stats.map(([value, label]) => (
+            <div key={label} className="rounded-xl border border-white/10 bg-black/55 p-4 backdrop-blur">
+              <p className="text-xl font-black text-white">{value}</p>
+              <p className="mt-1 text-[11px] font-semibold text-white/70">{label}</p>
             </div>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {project.stats.map(([value, label]) => (
-              <div key={label} className="rounded-xl bg-black/35 p-3">
-                <p className="text-lg font-black text-white">{value}</p>
-                <p className="mt-1 text-[11px] font-semibold text-white/70">{label}</p>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
 

@@ -11,7 +11,8 @@ export const portfolioDemos = [
     accent: '#5bd7ff',
     dark: '#07121c',
     tint: '#e8fbff',
-    imageTone: 'from-cyan-300 via-sky-500 to-blue-950',
+    image:
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=85',
     nav: ['Destinations', 'Packages', 'Guides', 'Inquiry'],
     stats: [
       ['24', 'featured trips'],
@@ -44,7 +45,8 @@ export const portfolioDemos = [
     accent: '#8be7ff',
     dark: '#101114',
     tint: '#f2f7fb',
-    imageTone: 'from-slate-100 via-slate-500 to-black',
+    image:
+      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=85',
     nav: ['Work', 'Services', 'About', 'Contact'],
     stats: [
       ['8', 'case studies'],
@@ -77,7 +79,8 @@ export const portfolioDemos = [
     accent: '#67e8f9',
     dark: '#06111f',
     tint: '#eff8ff',
-    imageTone: 'from-cyan-200 via-blue-500 to-slate-950',
+    image:
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1400&q=85',
     nav: ['Services', 'Coverage', 'Tracking', 'Support'],
     stats: [
       ['Same day', 'delivery option'],

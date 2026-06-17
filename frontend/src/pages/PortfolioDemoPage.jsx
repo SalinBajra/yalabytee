@@ -43,24 +43,20 @@ function SiteNavigation({ demo }) {
 function DevicePreview({ demo }) {
   return (
     <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] border border-white/10 bg-black p-4 shadow-[0_34px_90px_rgba(0,0,0,0.45)]">
-      <div className={`absolute inset-0 bg-gradient-to-br ${demo.imageTone} opacity-80`} />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_34%_20%,rgba(255,255,255,0.42),transparent_22%),radial-gradient(circle_at_78%_68%,rgba(255,255,255,0.18),transparent_24%)]" />
-      <div className="relative ml-auto mt-14 w-[84%] rounded-2xl border border-white/20 bg-white p-4 text-navy-950 shadow-2xl sm:w-[76%]">
-        <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-          <span className="h-2 w-24 rounded-full bg-navy-950" />
-          <span className="rounded-full px-3 py-1 text-xs font-bold text-white" style={{ backgroundColor: demo.accent }}>
-            live
-          </span>
-        </div>
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
-          <span className="h-24 rounded-xl" style={{ backgroundColor: demo.tint }} />
-          <span className="h-24 rounded-xl bg-slate-100" />
-          <span className="h-24 rounded-xl" style={{ backgroundColor: demo.tint }} />
-        </div>
-        <div className="mt-5 space-y-2">
-          <span className="block h-2 rounded-full bg-slate-200" />
-          <span className="block h-2 w-4/5 rounded-full bg-slate-200" />
-          <span className="block h-2 w-2/3 rounded-full bg-slate-200" />
+      <img src={demo.image} alt={`${demo.title} website concept`} className="absolute inset-0 h-full w-full object-cover opacity-85" loading="eager" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-black/10" />
+      <div className="relative ml-auto mt-14 w-[84%] rounded-2xl border border-white/20 bg-black/45 p-5 text-white shadow-2xl backdrop-blur sm:w-[76%]">
+        <p className="text-xs font-black uppercase tracking-[0.2em]" style={{ color: demo.accent }}>
+          Featured page
+        </p>
+        <h2 className="mt-5 max-w-md text-4xl font-semibold leading-tight">{demo.title}</h2>
+        <p className="mt-4 max-w-md text-sm leading-7 text-slate-200">{demo.summary}</p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {demo.nav.slice(0, 3).map((item) => (
+            <span key={item} className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold text-white">
+              {item}
+            </span>
+          ))}
         </div>
       </div>
       <div className="relative mt-6 grid gap-3 sm:grid-cols-3">
