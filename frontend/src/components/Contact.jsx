@@ -76,7 +76,7 @@ export default function Contact() {
     } catch (error) {
       setStatus({
         type: 'error',
-        message: error.message || 'Unable to send your inquiry right now. Please email info@yalabyte.com directly.'
+        message: error.message || 'Unable to send your inquiry right now. Please email us directly at info@yalabyte.com.'
       });
     } finally {
       setIsSubmitting(false);

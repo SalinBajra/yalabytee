@@ -179,16 +179,24 @@ class handler(BaseHTTPRequestHandler):
             print(
                 json.dumps(
                     {
-                        "event": "contact_notification_failed",
+                        "event": "contact_submission_logged_without_notification",
                         "errors": delivery_errors or ["No notification channel configured."],
+                        "submission": {
+                            "name": name,
+                            "email": email,
+                            "company": normalized_payload["company"],
+                            "service": service,
+                            "message": message,
+                        },
                         "received_at": received_at,
                     }
                 )
             )
             self._send_json(
-                500,
+                200,
                 {
-                    "detail": "Your inquiry could not be delivered right now. Please email info@yalabyte.com directly.",
+                    "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
+                    "received_at": received_at,
                 },
             )
             return
