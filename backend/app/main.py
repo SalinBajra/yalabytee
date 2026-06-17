@@ -10,6 +10,7 @@ from pydantic import BaseModel, EmailStr, Field
 class ContactSubmission(BaseModel):
     name: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
+    phone: Optional[str] = Field(default=None, max_length=40)
     company: Optional[str] = Field(default=None, max_length=120)
     service: str = Field(..., min_length=2, max_length=80)
     message: str = Field(..., min_length=20, max_length=2000)
@@ -56,6 +57,7 @@ def receive_contact_submission(submission: ContactSubmission):
             "event": "contact_submission_received",
             "service": submission.service,
             "email": submission.email,
+            "phone": submission.phone,
             "contact_email": contact_email,
             "received_at": received_at,
         }

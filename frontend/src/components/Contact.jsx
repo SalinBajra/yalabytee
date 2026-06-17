@@ -3,6 +3,7 @@ import { useState } from 'react';
 const initialState = {
   name: '',
   email: '',
+  phone: '',
   company: '',
   service: '',
   message: ''
@@ -68,10 +69,7 @@ export default function Contact() {
 
       const result = await response.json().catch(() => ({}));
       if (!response.ok) {
-        const errorDetails = Array.isArray(result.errors) && result.errors.length
-          ? ` ${result.errors.join(' ')}`
-          : '';
-        throw new Error(`${result.detail || 'Unable to send message right now.'}${errorDetails}`);
+        throw new Error(result.detail || 'Unable to send message right now.');
       }
 
       setStatus({ type: 'success', message: result.message });
@@ -116,9 +114,15 @@ export default function Contact() {
           </div>
           <div className="mt-5 grid gap-5 sm:grid-cols-2">
             <label className="text-sm font-semibold text-navy-950">
+              Contact number
+              <input className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-cyanbrand-500 focus:ring-4 focus:ring-cyanbrand-100" name="phone" value={form.phone} onChange={handleChange} autoComplete="tel" inputMode="tel" placeholder="+977 98XXXXXXXX" />
+            </label>
+            <label className="text-sm font-semibold text-navy-950">
               Company
               <input className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-cyanbrand-500 focus:ring-4 focus:ring-cyanbrand-100" name="company" value={form.company} onChange={handleChange} autoComplete="organization" />
             </label>
+          </div>
+          <div className="mt-5 grid gap-5 sm:grid-cols-2">
             <label className="text-sm font-semibold text-navy-950">
               Service needed
               <select className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-cyanbrand-500 focus:ring-4 focus:ring-cyanbrand-100" name="service" value={form.service} onChange={handleChange}>

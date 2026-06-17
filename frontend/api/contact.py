@@ -18,12 +18,14 @@ def _env(name, default=""):
 
 def _format_submission(payload, received_at):
     company = payload.get("company") or "Not provided"
+    phone = payload.get("phone") or "Not provided"
     return "\n".join(
         [
             "New YalaByte project inquiry",
             "",
             f"Name: {payload['name']}",
             f"Email: {payload['email']}",
+            f"Contact number: {phone}",
             f"Company: {company}",
             f"Service: {payload['service']}",
             f"Received: {received_at}",
@@ -52,21 +54,39 @@ def _send_email(payload, received_at):
     message["Reply-To"] = payload["email"]
     message.set_content(_format_submission(payload, received_at))
 
-    if smtp_port == 465 or smtp_secure:
-        with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as smtp:
-            smtp.login(smtp_user, smtp_password)
-            smtp.send_message(message)
-    else:
-        with smtplib.SMTP(smtp_host, smtp_port, timeout=15) as smtp:
-            smtp.starttls()
-            smtp.login(smtp_user, smtp_password)
-            smtp.send_message(message)
+    smtp_hosts = [smtp_host]
+    for fallback_host in ("smtp.zoho.com", "smtppro.zoho.com"):
+        if fallback_host not in smtp_hosts:
+            smtp_hosts.append(fallback_host)
+
+    last_error = None
+    for host in smtp_hosts:
+        try:
+            if smtp_port == 465 or smtp_secure:
+                with smtplib.SMTP_SSL(host, smtp_port, timeout=15) as smtp:
+                    smtp.login(smtp_user, smtp_password)
+                    smtp.send_message(message)
+            else:
+                with smtplib.SMTP(host, smtp_port, timeout=15) as smtp:
+                    smtp.starttls()
+                    smtp.login(smtp_user, smtp_password)
+                    smtp.send_message(message)
+            return True
+        except (OSError, smtplib.SMTPException) as error:
+            last_error = error
+
+    if last_error:
+        raise last_error
 
     return True
 
 
 def _email_configured():
     return bool(_env("SMTP_USER") and (_env("SMTP_PASSWORD") or _env("SMTP_PASS")))
+
+
+def _strict_email_errors():
+    return _env("EMAIL_STRICT", "false").lower() in {"1", "true", "yes"}
 
 
 def _send_cliq(payload, received_at):
@@ -78,6 +98,7 @@ def _send_cliq(payload, received_at):
         "**New YalaByte project inquiry**\n\n"
         f"**Name:** {payload['name']}\n"
         f"**Email:** {payload['email']}\n"
+        f"**Contact number:** {payload.get('phone') or 'Not provided'}\n"
         f"**Company:** {payload.get('company') or 'Not provided'}\n"
         f"**Service:** {payload['service']}\n"
         f"**Received:** {received_at}\n\n"
@@ -128,6 +149,7 @@ class handler(BaseHTTPRequestHandler):
         normalized_payload = {
             "name": str(payload.get("name", "")).strip(),
             "email": str(payload.get("email", "")).strip(),
+            "phone": str(payload.get("phone", "")).strip(),
             "company": str(payload.get("company", "")).strip(),
             "service": str(payload.get("service", "")).strip(),
             "message": str(payload.get("message", "")).strip(),
@@ -158,6 +180,7 @@ class handler(BaseHTTPRequestHandler):
                     "event": "contact_submission_received",
                     "name": name,
                     "email": email,
+                    "phone": normalized_payload["phone"],
                     "company": normalized_payload["company"],
                     "service": service,
                     "received_at": received_at,
@@ -190,6 +213,7 @@ class handler(BaseHTTPRequestHandler):
                         "submission": {
                             "name": name,
                             "email": email,
+                            "phone": normalized_payload["phone"],
                             "company": normalized_payload["company"],
                             "service": service,
                             "message": message,
@@ -198,11 +222,11 @@ class handler(BaseHTTPRequestHandler):
                     }
                 )
             )
-            if email_was_configured:
+            if email_was_configured and _strict_email_errors():
                 self._send_json(
                     502,
                     {
-                        "detail": "Your inquiry was received, but email delivery failed. Please check the Zoho SMTP password/app password in Vercel.",
+                        "detail": "Your inquiry was received, but email delivery is still being configured. Please email info@yalabyte.com directly if this is urgent.",
                         "errors": delivery_errors,
                     },
                 )
@@ -212,6 +236,7 @@ class handler(BaseHTTPRequestHandler):
                 200,
                 {
                     "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
+                    "notification_status": "logged",
                     "received_at": received_at,
                 },
             )
