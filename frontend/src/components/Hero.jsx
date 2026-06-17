@@ -8,8 +8,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(6,17,31,0.98)_0%,rgba(7,26,47,0.94)_42%,rgba(15,53,95,0.72)_100%)]" />
         <div className="absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:72px_72px]" />
       </div>
-      <div className="relative mx-auto grid max-w-7xl gap-14 px-5 py-20 sm:px-6 sm:py-24 lg:min-h-[760px] lg:grid-cols-[0.94fr_1.06fr] lg:items-center lg:px-8 lg:py-24">
-        <div className="flex flex-col justify-center">
+      <div className="relative mx-auto grid max-w-7xl gap-14 px-5 py-20 sm:px-6 sm:py-24 lg:min-h-[720px] lg:grid-cols-[0.94fr_1.06fr] lg:items-center lg:px-8 lg:py-24">
+        <div className="motion-soft flex flex-col justify-center">
           <p className="mb-5 inline-flex w-fit rounded-full border border-white/10 bg-white/[0.08] px-4 py-2 text-sm font-semibold text-cyanbrand-100">
             Website development, WordPress, web apps, and digital consulting
           </p>
@@ -36,7 +36,7 @@ export default function Hero() {
             ))}
           </div>
         </div>
-        <div className="relative self-center">
+        <div className="motion-soft relative self-center [animation-delay:120ms]">
           <div className="rounded-lg border border-white/10 bg-white/[0.06] p-4 shadow-soft backdrop-blur">
             <div className="rounded-lg bg-white p-4 text-navy-950">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">

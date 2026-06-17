@@ -107,7 +107,7 @@ export default function Templates() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {templates.map((template) => (
-            <article key={template.domain} className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+            <article key={template.domain} className="motion-soft overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
               <TemplatePreview template={template} />
               <div className="p-6">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-700">{template.domain} website sample</p>

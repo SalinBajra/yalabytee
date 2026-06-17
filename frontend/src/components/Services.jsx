@@ -12,7 +12,7 @@ export default function Services() {
         />
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
-            <article key={service.title} className={`group rounded-lg border p-6 transition hover:-translate-y-1 hover:shadow-soft ${index === 0 ? 'border-navy-950 bg-navy-950 text-white lg:row-span-2' : 'border-slate-200 bg-white'}`}>
+            <article key={service.title} className={`motion-soft group rounded-lg border p-6 transition hover:-translate-y-1 hover:shadow-soft ${index === 0 ? 'border-navy-950 bg-navy-950 text-white lg:row-span-2' : 'border-slate-200 bg-white'}`} style={{ animationDelay: `${index * 45}ms` }}>
               <div className="mb-8 flex items-center justify-between">
                 <span className={`text-sm font-bold ${index === 0 ? 'text-cyanbrand-400' : 'text-cyan-700'}`}>{String(index + 1).padStart(2, '0')}</span>
                 <span className={`h-px w-16 ${index === 0 ? 'bg-white/20' : 'bg-slate-200'}`} />
