@@ -75,7 +75,26 @@ Create `frontend/.env`:
 VITE_API_URL=http://localhost:8000
 ```
 
-For production, set `VITE_API_URL` to the deployed backend URL and update backend CORS origins in `backend/app/main.py` to include the deployed frontend domain.
+For Vercel production, leave `VITE_API_URL` empty or unset so the form uses the built-in `/api/contact` serverless endpoint.
+
+### Contact Notifications on Vercel
+
+Set these in Vercel Project Settings > Environments > Production > Environment Variables:
+
+```env
+SMTP_HOST=smtppro.zoho.com
+SMTP_PORT=465
+SMTP_USER=info@yalabyte.com
+SMTP_PASS=your-zoho-app-password
+SMTP_SECURE=true
+CONTACT_RECEIVER=info@yalabyte.com
+CLIQ_WEBHOOK_URL=your-zoho-cliq-incoming-webhook-url
+EMAIL_STRICT=false
+```
+
+`CLIQ_WEBHOOK_URL` sends every valid inquiry into the configured Zoho Cliq channel. The webhook itself controls which channel receives the message. Email and Cliq are independent: if SMTP is still blocked, Cliq can still receive notifications.
+
+For local FastAPI development, set `VITE_API_URL` to the deployed or local backend URL and update backend CORS origins in `backend/app/main.py` to include the deployed frontend domain.
 
 Backend CORS can also be configured with:
 

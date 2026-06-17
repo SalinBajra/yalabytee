@@ -90,12 +90,12 @@ def _strict_email_errors():
 
 
 def _send_cliq(payload, received_at):
-    webhook_url = _env("CLIQ_WEBHOOK_URL")
+    webhook_url = _env("CLIQ_WEBHOOK_URL") or _env("ZOHO_CLIQ_WEBHOOK_URL")
     if not webhook_url:
         return False
 
     text = (
-        "**New YalaByte project inquiry**\n\n"
+        "New YalaByte project inquiry\n\n"
         f"**Name:** {payload['name']}\n"
         f"**Email:** {payload['email']}\n"
         f"**Contact number:** {payload.get('phone') or 'Not provided'}\n"
@@ -192,16 +192,16 @@ class handler(BaseHTTPRequestHandler):
         delivery_errors = []
 
         try:
-            if _send_email(normalized_payload, received_at):
-                delivered.append("email")
-        except (OSError, smtplib.SMTPException) as error:
-            delivery_errors.append(f"email: {error}")
-
-        try:
             if _send_cliq(normalized_payload, received_at):
                 delivered.append("cliq")
         except (OSError, urllib.error.URLError) as error:
             delivery_errors.append(f"cliq: {error}")
+
+        try:
+            if _send_email(normalized_payload, received_at):
+                delivered.append("email")
+        except (OSError, smtplib.SMTPException) as error:
+            delivery_errors.append(f"email: {error}")
 
         if not delivered:
             email_was_configured = _email_configured()
