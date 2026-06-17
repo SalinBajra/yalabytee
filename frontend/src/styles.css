@@ -105,6 +105,38 @@ section[id] {
   animation: fade-up 0.7s ease both;
 }
 
+.scroll-fade {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-fade {
+    animation: scroll-fade both linear;
+    animation-timeline: view();
+    animation-range: entry 0% exit 90%;
+  }
+}
+
+@keyframes scroll-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  22% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  72% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0.18;
+    transform: translateY(-26px) scale(0.985);
+  }
+}
+
 .code-grid {
   background-image:
     linear-gradient(rgba(19, 200, 222, 0.12) 1px, transparent 1px),
@@ -148,6 +180,12 @@ section[id] {
 
   .motion-soft {
     animation: none;
+  }
+
+  .scroll-fade {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 
   .code-grid,

@@ -46,47 +46,21 @@ export default function Hero() {
             ))}
           </div>
         </div>
-        <div className="motion-soft relative self-center [animation-delay:120ms]">
-          <div className="rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-soft">
-            <div className="rounded-lg bg-slate-950 p-4 text-white">
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyanbrand-400">YalaByte delivery board</p>
-                  <h2 className="mt-2 text-xl font-semibold text-white">Website launch system</h2>
-                </div>
-                <span className="rounded-lg bg-cyanbrand-500 px-3 py-2 text-xs font-bold text-navy-950">Ready to build</span>
+        <div className="motion-soft scroll-fade relative self-center [animation-delay:120ms]">
+          <div className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] p-3 shadow-soft">
+            <img
+              src="/images/hero-technology-visual.png"
+              alt="Website development workspace with responsive web design screens"
+              className="h-full max-h-[560px] w-full rounded-md object-cover object-center"
+              loading="eager"
+            />
+          </div>
+          <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-navy-950/90 p-3 shadow-soft backdrop-blur sm:left-8 sm:right-8">
+            {['Design', 'Develop', 'Launch'].map((item) => (
+              <div key={item} className="rounded-md bg-white/[0.08] px-3 py-3 text-center text-xs font-bold text-white">
+                {item}
               </div>
-              <div className="mt-5 grid gap-4 md:grid-cols-[0.85fr_1.15fr]">
-                <div className="grid gap-3">
-                  {['Discovery and scope', 'Brand and page structure', 'Responsive development', 'Domain, hosting, launch'].map((item, index) => (
-                    <div key={item} className="rounded-lg border border-white/10 bg-white/[0.06] p-4">
-                      <p className="text-xs font-bold text-cyanbrand-400">0{index + 1}</p>
-                      <p className="mt-2 text-sm font-semibold text-slate-100">{item}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="rounded-lg bg-navy-950 p-5 text-white">
-                  <p className="text-sm font-bold uppercase tracking-[0.16em] text-cyanbrand-400">Project preview</p>
-                  <div className="mt-5 rounded-lg bg-white p-4 text-navy-950">
-                    <div className="h-3 w-28 rounded-sm bg-navy-950" />
-                    <div className="mt-4 grid grid-cols-3 gap-2">
-                      <span className="h-16 rounded-md bg-cyan-50" />
-                      <span className="h-16 rounded-md bg-slate-100" />
-                      <span className="h-16 rounded-md bg-blue-50" />
-                    </div>
-                    <div className="mt-4 h-2 w-full rounded-sm bg-slate-200" />
-                    <div className="mt-2 h-2 w-4/5 rounded-sm bg-slate-200" />
-                  </div>
-                  <div className="mt-4 grid grid-cols-3 gap-2">
-                    {['SEO', 'Content', 'Support'].map((item) => (
-                      <div key={item} className="rounded-lg bg-white/10 px-3 py-3 text-center text-xs font-bold">
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
