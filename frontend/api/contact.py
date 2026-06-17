@@ -107,7 +107,18 @@ def _send_cliq(payload, received_at):
 
     request = urllib.request.Request(
         webhook_url,
-        data=json.dumps({"text": text}).encode("utf-8"),
+        data=json.dumps(
+            {
+                "name": payload["name"],
+                "email": payload["email"],
+                "phone": payload.get("phone") or "",
+                "company": payload.get("company") or "",
+                "service": payload["service"],
+                "message": payload["message"],
+                "received_at": received_at,
+                "text": text,
+            }
+        ).encode("utf-8"),
         headers={"Content-Type": "application/json"},
         method="POST",
     )
