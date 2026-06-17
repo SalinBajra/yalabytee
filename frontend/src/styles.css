@@ -72,12 +72,32 @@ section[id] {
   }
 }
 
-@keyframes float-panel {
+@keyframes halo-turn {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes ribbon-slide {
   0%, 100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) rotate(-8deg);
   }
   50% {
-    transform: translate3d(0, -10px, 0);
+    transform: translate3d(-18px, -10px, 0) rotate(-8deg);
+  }
+}
+
+@keyframes code-rise {
+  from {
+    transform: translateY(14px);
+    opacity: 0.35;
+  }
+  to {
+    transform: translateY(-14px);
+    opacity: 0.8;
   }
 }
 
@@ -98,12 +118,20 @@ section[id] {
   animation: scan 7s ease-in-out infinite;
 }
 
-.float-panel {
-  animation: float-panel 6s ease-in-out infinite;
+.dev-halo {
+  animation: halo-turn 28s linear infinite;
+  background:
+    radial-gradient(circle at center, rgba(19, 200, 222, 0.12), transparent 58%),
+    conic-gradient(from 0deg, transparent, rgba(19, 200, 222, 0.2), transparent 34%);
 }
 
-.float-panel-delayed {
-  animation: float-panel 7s ease-in-out 1.2s infinite;
+.dev-ribbon {
+  animation: ribbon-slide 8s ease-in-out infinite;
+}
+
+.dev-code-lines {
+  gap: 0.55rem;
+  animation: code-rise 5s ease-in-out infinite alternate;
 }
 
 .tech-surface {
@@ -124,8 +152,9 @@ section[id] {
 
   .code-grid,
   .scan-line,
-  .float-panel,
-  .float-panel-delayed {
+  .dev-halo,
+  .dev-ribbon,
+  .dev-code-lines {
     animation: none;
   }
 }

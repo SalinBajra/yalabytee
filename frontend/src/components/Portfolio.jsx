@@ -83,7 +83,7 @@ export default function Portfolio() {
                   <button onClick={() => navigateTo(`/portfolio/${project.slug}`)} className="rounded-lg bg-navy-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800">
                     View live demo
                   </button>
-                  <button onClick={() => navigateTo('/contact')} className="rounded-lg border border-slate-200 px-5 py-3 text-sm font-bold text-navy-950 transition hover:border-cyanbrand-500">
+                  <button onClick={() => navigateTo('/contact')} className="rounded-lg border border-white/30 px-5 py-3 text-sm font-bold text-white transition hover:border-cyanbrand-500 hover:bg-white hover:text-navy-950">
                     Request similar site
                   </button>
                 </div>
