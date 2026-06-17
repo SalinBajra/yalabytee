@@ -8,6 +8,25 @@ export default function Hero() {
         <div className="absolute inset-x-0 top-0 h-px bg-cyanbrand-400/50" />
         <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(6,17,31,1)_0%,rgba(7,26,47,0.96)_48%,rgba(11,37,65,0.92)_100%)]" />
         <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:64px_64px]" />
+        <div className="code-grid absolute inset-0 opacity-40" />
+        <div className="scan-line absolute left-0 top-0 h-px w-full bg-cyanbrand-400/60" />
+        <div className="absolute right-[8%] top-24 hidden w-72 rounded-lg border border-white/10 bg-white/[0.04] p-4 text-xs text-slate-300 shadow-soft lg:block float-panel">
+          <div className="mb-4 flex items-center justify-between">
+            <span className="font-bold text-cyanbrand-400">deploy.preview</span>
+            <span className="rounded-sm bg-emerald-400/15 px-2 py-1 text-emerald-300">live</span>
+          </div>
+          {['build: responsive pages', 'api: contact endpoint', 'seo: metadata ready'].map((line) => (
+            <div key={line} className="mt-2 rounded-md bg-white/[0.05] px-3 py-2 font-mono">{line}</div>
+          ))}
+        </div>
+        <div className="absolute bottom-20 left-[6%] hidden w-56 rounded-lg border border-cyanbrand-400/20 bg-cyanbrand-500/10 p-4 text-xs text-cyanbrand-100 lg:block float-panel-delayed">
+          <p className="font-bold uppercase tracking-[0.16em]">Launch stack</p>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            {['React', 'FastAPI', 'SEO', 'Hosting'].map((item) => (
+              <span key={item} className="rounded-md bg-navy-950/80 px-3 py-2 text-center font-semibold">{item}</span>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="relative mx-auto grid max-w-7xl gap-14 px-5 py-20 sm:px-6 sm:py-24 lg:min-h-[720px] lg:grid-cols-[0.94fr_1.06fr] lg:items-center lg:px-8 lg:py-24">
         <div className="motion-soft flex flex-col justify-center">

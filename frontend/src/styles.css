@@ -46,8 +46,64 @@ section[id] {
   }
 }
 
+@keyframes grid-drift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 96px 64px, 64px 96px;
+  }
+}
+
+@keyframes scan {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(720px);
+    opacity: 0;
+  }
+}
+
+@keyframes float-panel {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
 .motion-soft {
   animation: fade-up 0.7s ease both;
+}
+
+.code-grid {
+  background-image:
+    linear-gradient(rgba(19, 200, 222, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 200, 222, 0.1) 1px, transparent 1px);
+  background-size: 96px 96px;
+  animation: grid-drift 18s linear infinite;
+  mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+}
+
+.scan-line {
+  animation: scan 7s ease-in-out infinite;
+}
+
+.float-panel {
+  animation: float-panel 6s ease-in-out infinite;
+}
+
+.float-panel-delayed {
+  animation: float-panel 7s ease-in-out 1.2s infinite;
 }
 
 .tech-surface {
@@ -63,6 +119,13 @@ section[id] {
   }
 
   .motion-soft {
+    animation: none;
+  }
+
+  .code-grid,
+  .scan-line,
+  .float-panel,
+  .float-panel-delayed {
     animation: none;
   }
 }
