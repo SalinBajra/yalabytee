@@ -65,6 +65,10 @@ def _send_email(payload, received_at):
     return True
 
 
+def _email_configured():
+    return bool(_env("SMTP_USER") and (_env("SMTP_PASSWORD") or _env("SMTP_PASS")))
+
+
 def _send_cliq(payload, received_at):
     webhook_url = _env("CLIQ_WEBHOOK_URL")
     if not webhook_url:
@@ -177,6 +181,7 @@ class handler(BaseHTTPRequestHandler):
             delivery_errors.append(f"cliq: {error}")
 
         if not delivered:
+            email_was_configured = _email_configured()
             print(
                 json.dumps(
                     {
@@ -193,6 +198,16 @@ class handler(BaseHTTPRequestHandler):
                     }
                 )
             )
+            if email_was_configured:
+                self._send_json(
+                    502,
+                    {
+                        "detail": "Your inquiry was received, but email delivery failed. Please check the Zoho SMTP password/app password in Vercel.",
+                        "errors": delivery_errors,
+                    },
+                )
+                return
+
             self._send_json(
                 200,
                 {

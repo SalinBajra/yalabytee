@@ -68,7 +68,10 @@ export default function Contact() {
 
       const result = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(result.detail || 'Unable to send message right now.');
+        const errorDetails = Array.isArray(result.errors) && result.errors.length
+          ? ` ${result.errors.join(' ')}`
+          : '';
+        throw new Error(`${result.detail || 'Unable to send message right now.'}${errorDetails}`);
       }
 
       setStatus({ type: 'success', message: result.message });
