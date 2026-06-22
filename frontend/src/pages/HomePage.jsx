@@ -11,26 +11,25 @@ const process = [
   ['04', 'Launch properly', 'Final checks, forms, analytics, domain connection, and a clean handoff. We stay available afterward.']
 ];
 
-function ProjectCard({ project, featured }) {
+function ProjectCard({ project }) {
   return (
-    <article className={`group ${featured ? 'lg:col-span-2' : ''}`}>
+    <article className="group">
       <button
         type="button"
         onClick={() => navigateTo(`/portfolio/${project.slug}`)}
-        className="block w-full text-left"
+        className="block w-full overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] text-left transition hover:border-cyanbrand-400/50"
         aria-label={`View ${project.title}`}
       >
-        <div className={`relative overflow-hidden bg-slate-900 ${featured ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+        <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
           <img src={project.image} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-          <span className="absolute bottom-5 right-5 grid h-11 w-11 place-items-center rounded-full bg-white text-lg text-black transition group-hover:bg-cyanbrand-300">↗</span>
-        </div>
-        <div className="flex items-start justify-between gap-5 border-b border-white/15 py-5">
-          <div>
-            <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-            <p className="mt-1 text-sm text-slate-500">{project.category}</p>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-cyanbrand-300">{project.category}</p>
+              <h3 className="mt-2 text-xl font-semibold text-white">{project.title}</h3>
+            </div>
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white text-black transition group-hover:bg-cyanbrand-300">↗</span>
           </div>
-          <p className="hidden max-w-sm text-right text-sm leading-6 text-slate-400 sm:block">{project.summary}</p>
         </div>
       </button>
     </article>
@@ -65,18 +64,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#0b0d10] px-5 py-20 text-white sm:px-6 lg:px-8 lg:py-28">
+      <section className="bg-[#0b0d10] px-5 py-16 text-white sm:px-6 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyanbrand-300">Selected work</p>
-              <h2 className="mt-5 text-4xl font-medium tracking-[-0.035em] sm:text-6xl">Built to be explored.</h2>
+              <h2 className="mt-4 text-4xl font-medium tracking-[-0.035em] sm:text-5xl">A quick look at our Live Demos.</h2>
             </div>
-            <p className="max-w-md text-sm leading-7 text-slate-400">Explore complete Live Demos that show how content, interaction, and visual direction come together.</p>
+            <button onClick={() => navigateTo('/portfolio')} className="w-fit text-sm font-bold text-white underline decoration-cyanbrand-400 decoration-2 underline-offset-8 transition hover:text-cyanbrand-200">
+              View all Live Demos
+            </button>
           </div>
-          <div className="mt-14 grid gap-x-6 gap-y-12 lg:grid-cols-2">
-            {portfolioDemos.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} featured={index === 0} />
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {portfolioDemos.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </div>
