@@ -21,11 +21,11 @@ export default function Hero() {
         <div className="relative z-10 mx-auto flex min-h-[calc(100svh-76px)] w-full max-w-7xl flex-col justify-end px-5 pb-12 pt-72 sm:px-6 sm:pb-16 sm:pt-80 lg:px-8 lg:pb-20 lg:pt-24">
           <div className="hero-copy max-w-3xl">
             <h1 className="text-[clamp(3.2rem,8.4vw,8rem)] font-semibold uppercase leading-[0.82] tracking-[-0.055em]">
-              Design.<br />Build.<br /><span className="text-white/35">Launch.</span>
+              Websites<br />built for<br /><span className="text-white/35">business.</span>
             </h1>
             <div className="mt-8 flex max-w-2xl flex-col gap-7 border-t border-white/15 pt-6 sm:flex-row sm:items-end sm:justify-between">
               <p className="max-w-md text-sm leading-7 text-white/60 sm:text-base">
-                Business websites and custom web applications, designed and developed by YalaByte in Nepal.
+                YalaByte designs and develops practical websites and custom web applications for growing businesses in Nepal and beyond.
               </p>
               <div className="flex shrink-0 gap-3">
                 <button onClick={() => navigateTo('/portfolio')} className="border border-white/30 px-5 py-3 text-xs font-black uppercase tracking-[0.12em] transition hover:border-white hover:bg-white hover:text-[#070716]">
