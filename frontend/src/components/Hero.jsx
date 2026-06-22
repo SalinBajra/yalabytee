@@ -9,10 +9,7 @@ export default function Hero() {
       <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-16 sm:px-6 sm:pt-20 lg:px-8 lg:pb-24">
         <div className="grid gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:items-end">
           <div className="motion-soft">
-            <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
-              <span className="h-2 w-2 rounded-full bg-cyanbrand-400" /> Independent web studio
-            </p>
-            <h1 className="mt-8 max-w-3xl text-5xl font-medium leading-[0.96] tracking-[-0.045em] text-white sm:text-7xl lg:text-[5.5rem]">
+            <h1 className="max-w-3xl text-5xl font-medium leading-[0.96] tracking-[-0.045em] text-white sm:text-7xl lg:text-[5.5rem]">
               Your business deserves a better website.
             </h1>
             <p className="mt-8 max-w-lg text-lg leading-8 text-slate-400">
@@ -37,9 +34,6 @@ export default function Hero() {
               loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-            <div className="absolute bottom-0 left-0 border-r border-t border-white/10 bg-[#0b0d10]/90 px-6 py-5 backdrop-blur-md">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyanbrand-300">Based in Lebanon · working worldwide</p>
-            </div>
           </div>
         </div>
       </div>
