@@ -39,6 +39,10 @@ img {
   max-width: 100%;
 }
 
+.text-balance {
+  text-wrap: balance;
+}
+
 section[id] {
   scroll-margin-top: 116px;
 }

@@ -8,10 +8,10 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="A practical IT partner for businesses building a serious digital presence"
-        text="Learn how YalaByte approaches strategy, design, development, launch, and long-term support for growing businesses."
+        title="Practical digital work, thoughtfully delivered"
+        text="YalaByte brings strategy, design, development, launch, and long-term support into one clear working relationship."
       />
-      <About />
+      <About showIntro={false} />
       <Team />
       <Process />
     </>

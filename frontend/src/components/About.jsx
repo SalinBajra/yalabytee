@@ -1,13 +1,19 @@
-export default function About() {
+export default function About({ showIntro = true }) {
   return (
     <section className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyan-700">About YalaByte</p>
-          <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-normal text-navy-950 sm:text-4xl lg:text-5xl">
-            A reliable IT partner for businesses that need a complete digital foundation
-          </h2>
-          <div className="mt-8 grid grid-cols-2 gap-3">
+          {showIntro ? (
+            <>
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyan-700">About YalaByte</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-normal text-navy-950 sm:text-4xl lg:text-5xl">
+                A reliable IT partner for businesses that need a complete digital foundation
+              </h2>
+            </>
+          ) : (
+            <h2 className="max-w-xl text-3xl font-semibold leading-tight text-navy-950 sm:text-4xl">One connected partner, from first plan to launch day.</h2>
+          )}
+          <div className="mt-8 grid gap-3 min-[420px]:grid-cols-2">
             {[
               ['Premium', 'Brand-first presentation'],
               ['Practical', 'Built for real workflows'],
