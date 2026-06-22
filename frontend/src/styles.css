@@ -91,6 +91,26 @@ section[id] {
   }
 }
 
+@keyframes hero-frame-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-orb-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1.02);
+  }
+  50% {
+    transform: translate3d(-1.2%, 1.2%, 0) scale(1.055);
+  }
+}
+
 @keyframes grid-drift {
   from {
     background-position: 0 0, 0 0;
@@ -152,6 +172,15 @@ section[id] {
 
 .hero-copy {
   animation: hero-copy-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-frame {
+  animation: hero-frame-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-orb {
+  animation: hero-orb-float 12s ease-in-out infinite;
+  filter: saturate(1.08) contrast(1.02);
 }
 
 .hero-visual {
@@ -263,6 +292,8 @@ section[id] {
   }
 
   .hero-copy,
+  .hero-frame,
+  .hero-orb,
   .hero-visual,
   .hero-image-drift {
     animation: none;
