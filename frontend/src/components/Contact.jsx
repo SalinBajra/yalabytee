@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { displayPhoneNumber, phoneNumber, whatsappUrl } from './ContactShortcuts.jsx';
 
 const initialState = {
   name: '',
@@ -99,10 +98,6 @@ export default function Contact() {
           <div className="mt-8 rounded-lg border border-white/10 bg-white/[0.06] p-6">
             <p className="font-semibold">Project inquiries</p>
             <a className="mt-3 block text-sm leading-7 text-cyanbrand-100 transition hover:text-white" href="mailto:info@yalabyte.com">info@yalabyte.com</a>
-            <div className="flex flex-wrap gap-x-4 text-sm leading-7">
-              <a className="text-cyanbrand-100 transition hover:text-white" href={`tel:${phoneNumber}`}>{displayPhoneNumber}</a>
-              <a className="font-semibold text-[#62e895] transition hover:text-white" href={whatsappUrl} target="_blank" rel="noreferrer">Chat on WhatsApp</a>
-            </div>
             <p className="text-sm leading-7 text-slate-300">Available for website, web app, and digital consulting inquiries.</p>
           </div>
         </div>

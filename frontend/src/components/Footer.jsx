@@ -1,7 +1,7 @@
 import { services } from '../data/siteData.js';
 import BrandLogo from './BrandLogo.jsx';
 import { navigateTo, routes } from '../utils/routes.js';
-import { displayPhoneNumber, phoneNumber, whatsappUrl } from './ContactShortcuts.jsx';
+import { whatsappUrl } from './ContactShortcuts.jsx';
 
 function FooterLink({ to, children }) {
   return (
@@ -65,7 +65,6 @@ export default function Footer() {
         <div>
           <p className="font-semibold">Contact</p>
           <a className="mt-4 block text-sm leading-7 text-slate-600 transition hover:text-navy-950" href="mailto:info@yalabyte.com">info@yalabyte.com</a>
-          <a className="block text-sm leading-7 text-slate-600 transition hover:text-navy-950" href={`tel:${phoneNumber}`}>{displayPhoneNumber}</a>
           <p className="text-sm leading-7 text-slate-600">Business inquiries and project consultations</p>
           <div className="mt-5 flex flex-wrap gap-3">
             <SocialLink href="https://www.instagram.com/yalabyte/">Instagram</SocialLink>
