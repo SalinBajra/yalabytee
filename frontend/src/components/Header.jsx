@@ -44,7 +44,7 @@ export default function Header({ currentPath }) {
             </a>
             <div className="hidden items-center gap-4 border-l border-white/15 pl-4 xl:flex">
               <div>
-                <p className="text-sm font-semibold tracking-[-0.01em] text-white">YalaByte</p>
+                <p className="text-xs font-medium uppercase tracking-[0.34em] text-slate-100">Yala Byte</p>
                 <p className="mt-0.5 text-xs text-slate-400">Your vision, built for the web.</p>
               </div>
             </div>
