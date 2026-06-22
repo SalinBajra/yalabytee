@@ -47,7 +47,7 @@ export default function HomePage() {
           <div className="grid gap-10 border-b border-black/15 pb-14 lg:grid-cols-[0.55fr_1.45fr]">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">What we do</p>
             <h2 className="max-w-4xl text-4xl font-medium leading-[1.08] tracking-[-0.035em] sm:text-5xl lg:text-6xl">
-              We turn a fuzzy brief into a website people understand—and a business can actually use.
+              We turn your ideas into a website that customers understand and your business can rely on.
             </h2>
           </div>
           <div className="mt-2">
