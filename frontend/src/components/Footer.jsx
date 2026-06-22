@@ -41,7 +41,7 @@ export default function Footer() {
     <footer className="bg-slate-100 px-5 py-12 text-navy-950 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.2fr_0.7fr_1fr_0.8fr]">
         <div>
-          <BrandLogo variant="light" />
+          <BrandLogo />
           <p className="mt-5 max-w-sm text-sm leading-7 text-slate-600">
             Focused websites and digital tools for service businesses and growing teams.
           </p>
