@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Hero from '../components/Hero.jsx';
 import FAQ from '../components/FAQ.jsx';
 import { portfolioDemos } from '../data/portfolioDemos.js';
@@ -37,28 +38,52 @@ function ProjectCard({ project }) {
 }
 
 export default function HomePage() {
+  useEffect(() => {
+    const elements = document.querySelectorAll('.home-reveal');
+
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach((element) => element.classList.add('is-visible'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -48px' }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Hero />
 
       <section className="bg-[#f2f0e9] px-5 py-20 text-[#111315] sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-10 border-b border-black/15 pb-14 lg:grid-cols-[0.55fr_1.45fr]">
+          <div className="home-reveal grid gap-10 border-b border-black/15 pb-14 lg:grid-cols-[0.55fr_1.45fr]">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">What we do</p>
             <h2 className="max-w-4xl text-4xl font-medium leading-[1.08] tracking-[-0.035em] sm:text-5xl lg:text-6xl">
-              Clear websites for businesses with something real to offer.
+              Design, development, and website support in one place.
             </h2>
           </div>
           <div className="mt-2">
             {services.slice(0, 4).map((service, index) => (
-              <article key={service.title} className="grid gap-4 border-b border-black/15 py-7 transition hover:pl-2 md:grid-cols-[0.2fr_0.65fr_1fr] md:items-baseline">
+              <article key={service.title} className="home-reveal grid gap-4 border-b border-black/15 py-7 transition hover:pl-2 md:grid-cols-[0.2fr_0.65fr_1fr] md:items-baseline" style={{ '--reveal-delay': `${index * 65}ms` }}>
                 <p className="text-xs font-bold text-slate-400">0{index + 1}</p>
                 <h3 className="text-xl font-semibold">{service.title}</h3>
                 <p className="max-w-xl text-base leading-7 text-slate-600">{service.text}</p>
               </article>
             ))}
           </div>
-          <button onClick={() => navigateTo('/services')} className="mt-8 text-sm font-bold underline decoration-cyanbrand-500 decoration-2 underline-offset-8">
+          <button onClick={() => navigateTo('/services')} className="home-reveal mt-8 text-sm font-bold underline decoration-cyanbrand-500 decoration-2 underline-offset-8">
             Explore all services
           </button>
         </div>
@@ -66,18 +91,20 @@ export default function HomePage() {
 
       <section className="bg-[#0b0d10] px-5 py-16 text-white sm:px-6 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div className="home-reveal flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyanbrand-300">Selected work</p>
-              <h2 className="mt-4 text-4xl font-medium tracking-[-0.035em] sm:text-5xl">A quick look at our Live Demos.</h2>
+              <h2 className="mt-4 text-4xl font-medium tracking-[-0.035em] sm:text-5xl">Three websites you can explore.</h2>
             </div>
             <button onClick={() => navigateTo('/portfolio')} className="w-fit text-sm font-bold text-white underline decoration-cyanbrand-400 decoration-2 underline-offset-8 transition hover:text-cyanbrand-200">
               View all Live Demos
             </button>
           </div>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {portfolioDemos.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+            {portfolioDemos.map((project, index) => (
+              <div key={project.slug} className="home-reveal" style={{ '--reveal-delay': `${index * 90}ms` }}>
+                <ProjectCard project={project} />
+              </div>
             ))}
           </div>
         </div>
@@ -85,14 +112,14 @@ export default function HomePage() {
 
       <section className="bg-[#dff7f8] px-5 py-20 text-[#111315] sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.7fr_1.3fr]">
-          <div className="lg:sticky lg:top-32 lg:self-start">
+          <div className="home-reveal lg:sticky lg:top-32 lg:self-start">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-800">How it works</p>
-            <h2 className="mt-5 max-w-md text-4xl font-medium leading-tight tracking-[-0.035em] sm:text-5xl">From brief to launch, without the mystery.</h2>
-            <p className="mt-6 max-w-sm leading-7 text-slate-600">Each stage ends with something concrete to review, so decisions are made before the next stage begins.</p>
+            <h2 className="mt-5 max-w-md text-4xl font-medium leading-tight tracking-[-0.035em] sm:text-5xl">How a website project runs.</h2>
+            <p className="mt-6 max-w-sm leading-7 text-slate-600">Each stage has a clear output to review before the next one begins.</p>
           </div>
           <div>
-            {process.map(([number, title, text]) => (
-              <article key={title} className="grid gap-5 border-t border-black/20 py-8 sm:grid-cols-[0.15fr_0.55fr_1fr]">
+            {process.map(([number, title, text], index) => (
+              <article key={title} className="home-reveal grid gap-5 border-t border-black/20 py-8 sm:grid-cols-[0.15fr_0.55fr_1fr]" style={{ '--reveal-delay': `${index * 65}ms` }}>
                 <p className="text-sm font-bold text-cyan-800">{number}</p>
                 <h3 className="text-xl font-semibold">{title}</h3>
                 <p className="max-w-lg leading-7 text-slate-600">{text}</p>
@@ -105,10 +132,10 @@ export default function HomePage() {
       <FAQ />
 
       <section className="bg-[#0b0d10] px-5 py-20 text-white sm:px-6 lg:px-8 lg:py-28">
-        <div className="mx-auto max-w-7xl border-t border-white/15 pt-12">
+        <div className="home-reveal mx-auto max-w-7xl border-t border-white/15 pt-12">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyanbrand-300">Have a project in mind?</p>
           <div className="mt-7 flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
-            <h2 className="max-w-4xl text-5xl font-medium leading-[0.98] tracking-[-0.045em] sm:text-7xl lg:text-8xl">Let’s make it feel like you.</h2>
+            <h2 className="max-w-4xl text-5xl font-medium leading-[0.98] tracking-[-0.045em] sm:text-7xl lg:text-8xl">Tell us what you need.</h2>
             <button onClick={() => navigateTo('/contact')} className="shrink-0 rounded-full bg-cyanbrand-400 px-7 py-4 text-sm font-bold text-navy-950 transition hover:bg-white">
               Start a conversation ↗
             </button>
