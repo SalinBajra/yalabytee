@@ -34,21 +34,21 @@ export default function DemoLauncher({ project, className = '', children }) {
 
           <div className="relative mx-auto flex min-h-full max-w-7xl flex-col justify-between px-5 py-7 sm:px-8 sm:py-10">
             <div className="flex items-center justify-between border-b border-white/15 pb-5">
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-cyanbrand-300">YalaByte · Live experience</p>
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-cyanbrand-300">YalaByte · Website demo</p>
               <button type="button" onClick={() => setIsLaunching(false)} className="text-xs font-bold uppercase tracking-[0.16em] text-white/55 transition hover:text-white">Cancel</button>
             </div>
 
             <div className="demo-launcher-copy max-w-3xl py-16">
               <div className="mb-7 flex items-center gap-3">
                 <span className="demo-launcher-pulse h-2.5 w-2.5 rounded-full bg-cyanbrand-300" />
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/55">Preparing {project.title}</span>
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/55">Demo selected</span>
               </div>
               <p className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: project.accent }}>{project.category}</p>
               <h2 className="mt-5 max-w-3xl text-5xl font-semibold leading-[0.95] tracking-[-0.04em] sm:text-7xl lg:text-8xl">
-                Get ready for a live experience.
+                Opening {project.title}.
               </h2>
               <p className="mt-7 max-w-xl text-base leading-8 text-white/65 sm:text-lg">
-                Step inside a complete website concept—and picture what your own could become.
+                Explore the pages, navigation, content, and inquiry flow in this complete website demo.
               </p>
             </div>
 
