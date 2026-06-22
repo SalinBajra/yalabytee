@@ -23,7 +23,6 @@ export default function Hero() {
                 View selected work <span aria-hidden="true">→</span>
               </button>
             </div>
-            <p className="mt-14 border-t border-white/10 pt-5 text-sm text-slate-500">Design · Development · Launch support</p>
           </div>
 
           <div className="scroll-fade relative min-h-[390px] overflow-hidden border border-white/10 bg-black lg:min-h-[560px]">
