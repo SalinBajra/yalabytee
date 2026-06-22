@@ -19,7 +19,7 @@ const pages = {
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
-  const demoMatch = path.match(/^\/portfolio\/([^/]+)$/);
+  const demoMatch = path.match(/^\/portfolio\/([^/]+)(?:\/([^/]+))?\/?$/);
   const Page = demoMatch ? PortfolioDemoPage : pages[path] || HomePage;
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function App() {
   }, []);
 
   if (demoMatch) {
-    return <PortfolioDemoPage slug={demoMatch[1]} />;
+    return <PortfolioDemoPage slug={demoMatch[1]} page={demoMatch[2] || 'home'} />;
   }
 
   return (
