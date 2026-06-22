@@ -10,10 +10,10 @@ const initialState = {
 };
 
 const serviceOptions = [
-  'Website Development',
-  'Business Website Design',
+  'Company Website',
+  'Website Redesign',
   'Custom Web Applications',
-  'UI/UX Design',
+  'UX and Interface Design',
   'SEO-ready Website Setup',
   'Maintenance and Support',
   'Digital Consulting'

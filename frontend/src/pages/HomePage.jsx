@@ -5,10 +5,10 @@ import { services } from '../data/siteData.js';
 import { navigateTo } from '../utils/routes.js';
 
 const process = [
-  ['01', 'Get aligned', 'A focused conversation about your business, customers, content, and what the website needs to accomplish.'],
-  ['02', 'Shape the site', 'We set the direction, write a clear page structure, and design the key screens before the full build.'],
-  ['03', 'Build and refine', 'Responsive development, thoughtful details, and practical feedback rounds—kept in one clear workflow.'],
-  ['04', 'Launch properly', 'Final checks, forms, analytics, domain connection, and a clean handoff. We stay available afterward.']
+  ['01', 'Define the job', 'We agree on the audience, pages, content, required features, and what a useful result looks like.'],
+  ['02', 'Set the structure', 'You review the page plan and key layouts before time is spent building the full site.'],
+  ['03', 'Build the website', 'We develop the responsive pages, connect forms, and refine the details against real content.'],
+  ['04', 'Launch and hand over', 'We test the site, connect the domain and analytics, then show you how everything works.']
 ];
 
 function ProjectCard({ project }) {
@@ -46,7 +46,7 @@ export default function HomePage() {
           <div className="grid gap-10 border-b border-black/15 pb-14 lg:grid-cols-[0.55fr_1.45fr]">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">What we do</p>
             <h2 className="max-w-4xl text-4xl font-medium leading-[1.08] tracking-[-0.035em] sm:text-5xl lg:text-6xl">
-              We turn your ideas into a website that customers understand and your business can rely on.
+              Clear websites for businesses with something real to offer.
             </h2>
           </div>
           <div className="mt-2">
@@ -87,8 +87,8 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.7fr_1.3fr]">
           <div className="lg:sticky lg:top-32 lg:self-start">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-800">How it works</p>
-            <h2 className="mt-5 max-w-md text-4xl font-medium leading-tight tracking-[-0.035em] sm:text-5xl">Clear enough to keep moving.</h2>
-            <p className="mt-6 max-w-sm leading-7 text-slate-600">You always know what we are working on, what we need from you, and what comes next.</p>
+            <h2 className="mt-5 max-w-md text-4xl font-medium leading-tight tracking-[-0.035em] sm:text-5xl">From brief to launch, without the mystery.</h2>
+            <p className="mt-6 max-w-sm leading-7 text-slate-600">Each stage ends with something concrete to review, so decisions are made before the next stage begins.</p>
           </div>
           <div>
             {process.map(([number, title, text]) => (

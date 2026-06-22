@@ -1,6 +1,5 @@
 import PageHero from '../components/PageHero.jsx';
 import Portfolio from '../components/Portfolio.jsx';
-import Testimonials from '../components/Testimonials.jsx';
 import { portfolioDemos } from '../data/portfolioDemos.js';
 import { navigateTo } from '../utils/routes.js';
 
@@ -18,7 +17,6 @@ export default function PortfolioPage() {
         ))}
       />
       <Portfolio showIntro={false} />
-      <Testimonials />
     </>
   );
 }

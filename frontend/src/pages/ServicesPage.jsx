@@ -9,8 +9,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="Websites and digital systems built for growing businesses"
-        text="From a polished company website to custom tools, hosting, and ongoing support—choose the help your business needs now, with room to grow later."
+        title="The design and development your website actually needs"
+        text="Company websites, redesigns, custom tools, hosting, and ongoing support—scoped around the job rather than a fixed package."
       />
       <Services showIntro={false} />
       <AddOns />

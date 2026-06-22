@@ -9,8 +9,8 @@ export default function Services({ showIntro = true }) {
           <SectionHeader
             light
             eyebrow="Services"
-            title="A complete digital team for the work that moves your business forward"
-            text="From the first website impression to the systems behind your operations, YalaByte gives businesses a practical path to better digital infrastructure."
+            title="Website work, scoped around the actual job"
+            text="Start with a new company website, improve an existing one, or add the custom tools your team needs."
           />
         ) : null}
         <div className={`${showIntro ? 'mt-14' : ''} grid gap-4 sm:grid-cols-2 lg:grid-cols-3`}>

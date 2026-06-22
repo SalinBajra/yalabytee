@@ -43,7 +43,7 @@ export default function Footer() {
         <div>
           <BrandLogo variant="light" />
           <p className="mt-5 max-w-sm text-sm leading-7 text-slate-600">
-            Custom websites and digital solutions for businesses ready to build a stronger online presence.
+            Focused websites and digital tools for service businesses and growing teams.
           </p>
         </div>
         <div>
