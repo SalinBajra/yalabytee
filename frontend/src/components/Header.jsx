@@ -43,9 +43,10 @@ export default function Header({ currentPath }) {
               <BrandLogo />
             </a>
             <div className="hidden items-center gap-4 border-l border-white/15 pl-4 xl:flex">
-              <p className="text-[10px] font-bold uppercase leading-4 tracking-[0.16em] text-slate-400">
-                Web design &amp; development<br />Nepal / Remote
-              </p>
+              <div>
+                <p className="text-sm font-semibold tracking-[-0.01em] text-white">YalaByte</p>
+                <p className="mt-0.5 text-xs text-slate-400">Your vision, built for the web.</p>
+              </div>
             </div>
           </div>
           <div className="hidden items-center gap-3 lg:flex">
