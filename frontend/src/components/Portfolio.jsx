@@ -51,7 +51,7 @@ export default function Portfolio({ showIntro = true }) {
             Example websites with real user flow
           </h2>
           <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-slate-300">
-            Open each concept as a complete, standalone website experience. Both layouts are designed to translate into editable WordPress templates for real client projects.
+            Open each concept as a complete, standalone website experience. Every layout is designed to translate into an editable WordPress template for real client projects.
           </p>
         </div> : null}
         <div className={`${showIntro ? 'mt-16' : ''} grid gap-8`}>

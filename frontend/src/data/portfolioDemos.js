@@ -36,5 +36,24 @@ export const portfolioDemos = [
       ['Local', 'daily baking']
     ],
     features: ['Editable food menu', 'Opening hours', 'Location and map', 'Events and reservations']
+  },
+  {
+    slug: 'logistics',
+    title: 'Northstar Logistics',
+    category: 'Logistics WordPress template',
+    headline: 'Freight that keeps business moving.',
+    summary:
+      'A credible logistics website with service details, coverage information, shipment tracking, company credentials, and a structured quote request.',
+    cta: 'Request a quote',
+    secondaryCta: 'Explore services',
+    accent: '#ffb547',
+    image: '/images/yalabyte-demo-courier.jpg',
+    nav: ['Services', 'Coverage', 'Tracking', 'Company'],
+    stats: [
+      ['42', 'service markets'],
+      ['98.6%', 'on-time delivery'],
+      ['24/7', 'shipment support']
+    ],
+    features: ['Freight service pages', 'Coverage directory', 'Shipment tracking', 'Quote request flow']
   }
 ];
