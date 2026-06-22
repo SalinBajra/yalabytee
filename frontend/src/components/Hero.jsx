@@ -1,6 +1,6 @@
 import { navigateTo } from '../utils/routes.js';
 
-const heroImage = '/images/yalabyte-hero-workspace.jpg';
+const heroImage = '/images/yalabyte-hero-digital-system.png';
 
 export default function Hero() {
   return (
@@ -31,16 +31,16 @@ export default function Hero() {
           </div>
 
           <figure className="hero-visual relative lg:justify-self-end">
-            <div className="relative aspect-[4/5] min-h-[430px] overflow-hidden border border-white/10 bg-slate-900 sm:aspect-[5/4] lg:aspect-[4/5] lg:min-h-[610px] lg:w-[30rem]">
+            <div className="relative aspect-[4/3] min-h-[340px] overflow-hidden border border-cyanbrand-400/15 bg-[#061522] sm:min-h-[430px] lg:min-h-0 lg:w-[34rem]">
               <img
                 src={heroImage}
-                alt="A modern workspace with glass meeting rooms"
-                className="hero-image-drift absolute inset-0 h-full w-full object-cover grayscale-[15%]"
+                alt="Abstract three-dimensional digital system with connected rings"
+                className="hero-image-drift absolute inset-0 h-full w-full object-cover"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#061522]/50 via-transparent to-transparent" />
               <figcaption className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-5 border-t border-white/25 pt-4 text-xs text-white/75 sm:inset-x-7 sm:bottom-7">
-                <span>Design · Development · Support</span>
+                <span>Websites · Applications · Digital systems</span>
                 <span className="text-cyanbrand-300">YB / 2026</span>
               </figcaption>
             </div>
