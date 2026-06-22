@@ -72,7 +72,7 @@ export default function HomePage() {
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyanbrand-300">Selected work</p>
               <h2 className="mt-5 text-4xl font-medium tracking-[-0.035em] sm:text-6xl">Built to be explored.</h2>
             </div>
-            <p className="max-w-md text-sm leading-7 text-slate-400">A few working concepts that show how content, interaction, and visual direction come together.</p>
+            <p className="max-w-md text-sm leading-7 text-slate-400">Explore complete Live Demos that show how content, interaction, and visual direction come together.</p>
           </div>
           <div className="mt-14 grid gap-x-6 gap-y-12 lg:grid-cols-2">
             {portfolioDemos.map((project, index) => (

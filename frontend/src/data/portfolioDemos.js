@@ -2,10 +2,10 @@ export const portfolioDemos = [
   {
     slug: 'travel',
     title: 'Aster Travels',
-    category: 'Travel WordPress template',
+    category: 'Travel Live Demo',
     headline: 'Go where the story takes you.',
     summary:
-      'A complete travel website concept with destinations, curated packages, trip details, testimonials, and a focused inquiry journey.',
+      'A complete travel website with destinations, curated packages, trip details, testimonials, and a focused inquiry journey.',
     cta: 'Explore journeys',
     secondaryCta: 'View packages',
     accent: '#f4b860',
@@ -21,10 +21,10 @@ export const portfolioDemos = [
   {
     slug: 'cafe',
     title: 'Morrow Coffee',
-    category: 'Café WordPress template',
+    category: 'Café Live Demo',
     headline: 'Coffee made slowly. Days made better.',
     summary:
-      'A warm café website concept with a clear menu, brand story, opening hours, location details, and reservation-ready calls to action.',
+      'A warm café website with a clear menu, brand story, opening hours, location details, and reservation-ready calls to action.',
     cta: 'See the menu',
     secondaryCta: 'Plan your visit',
     accent: '#d8a25e',
@@ -40,7 +40,7 @@ export const portfolioDemos = [
   {
     slug: 'logistics',
     title: 'Northstar Logistics',
-    category: 'Logistics WordPress template',
+    category: 'Logistics Live Demo',
     headline: 'Freight that keeps business moving.',
     summary:
       'A credible logistics website with service details, coverage information, shipment tracking, company credentials, and a structured quote request.',

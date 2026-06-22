@@ -5,7 +5,7 @@ function PortfolioCard({ project, index }) {
   return (
     <article className="group grid gap-0 overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#0d1016] lg:grid-cols-[0.95fr_1.05fr]">
       <div className={`relative min-h-[420px] overflow-hidden bg-black ${index % 2 ? 'lg:order-2' : ''}`}>
-        <img src={project.image} alt={`${project.title} demo preview`} className="absolute inset-0 h-full w-full object-cover opacity-85 transition duration-700 group-hover:scale-105" loading="lazy" />
+        <img src={project.image} alt={`${project.title} Live Demo preview`} className="absolute inset-0 h-full w-full object-cover opacity-85 transition duration-700 group-hover:scale-105" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
         <div className="absolute bottom-6 left-6 right-6 grid gap-3 sm:grid-cols-3">
           {project.stats.map(([value, label]) => (
@@ -30,7 +30,7 @@ function PortfolioCard({ project, index }) {
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
           <button onClick={() => navigateTo(`/portfolio/${project.slug}`)} className="rounded-xl bg-cyanbrand-400 px-5 py-3 text-sm font-black text-navy-950 transition hover:bg-white">
-            View live demo
+            View Live Demo
           </button>
           <button onClick={() => navigateTo('/contact')} className="rounded-xl border border-white/25 px-5 py-3 text-sm font-black text-white transition hover:border-cyanbrand-300 hover:text-cyanbrand-200">
             Request similar site
@@ -48,10 +48,10 @@ export default function Portfolio({ showIntro = true }) {
         {showIntro ? <div className="mx-auto max-w-4xl text-center">
           <p className="text-xs font-black uppercase tracking-[0.22em] text-cyanbrand-300">Portfolio</p>
           <h2 className="mt-5 text-5xl font-semibold leading-[1.02] tracking-normal sm:text-6xl lg:text-7xl">
-            Example websites with real user flow
+            Live Demos with real user flow
           </h2>
           <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-slate-300">
-            Open each concept as a complete, standalone website experience. Every layout is designed to translate into an editable WordPress template for real client projects.
+            Open each Live Demo as a complete, standalone website with realistic pages, content, navigation, and conversion paths.
           </p>
         </div> : null}
         <div className={`${showIntro ? 'mt-16' : ''} grid gap-8`}>

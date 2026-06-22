@@ -8,9 +8,9 @@ function DemoBar({ name }) {
         <button onClick={() => navigateTo('/portfolio')} className="text-sm font-bold text-slate-300 transition hover:text-white">
           <span aria-hidden="true">←</span> Portfolio
         </button>
-        <p className="hidden text-xs font-bold uppercase tracking-[0.18em] text-slate-400 sm:block">Live template · {name}</p>
+        <p className="hidden text-xs font-bold uppercase tracking-[0.18em] text-slate-400 sm:block">Live Demo · {name}</p>
         <button onClick={() => navigateTo('/contact')} className="rounded-full bg-white px-4 py-2 text-xs font-black text-[#07101a] transition hover:bg-cyanbrand-300 sm:text-sm">
-          Use this template
+          Request this website
         </button>
       </div>
     </div>
@@ -44,7 +44,7 @@ function TravelHeader({ overlay = false }) {
 }
 
 function TravelFooter() {
-  return <footer className="flex flex-col justify-between gap-5 bg-[#102823] px-6 py-8 text-sm text-white/60 sm:flex-row sm:px-12"><strong className="text-white">ASTER.</strong><span>Travel template demo by YalaByte</span><span>Instagram · Journal · Contact</span></footer>;
+  return <footer className="flex flex-col justify-between gap-5 bg-[#102823] px-6 py-8 text-sm text-white/60 sm:flex-row sm:px-12"><strong className="text-white">ASTER.</strong><span>Travel Live Demo by YalaByte</span><span>Instagram · Journal · Contact</span></footer>;
 }
 
 const travelPageContent = {
@@ -192,7 +192,7 @@ function CafeHeader() {
 }
 
 function CafeFooter() {
-  return <footer className="bg-[#141b16] px-6 py-12 text-[#f7efe2] sm:px-12"><div className="mx-auto flex max-w-[1480px] flex-col justify-between gap-8 sm:flex-row"><div><p className="font-serif text-3xl">Morrow</p><p className="mt-2 text-sm text-white/50">Coffee · Kitchen · Neighbourhood</p></div><div className="text-sm leading-7 text-white/55">Instagram<br />hello@morrow.example</div><p className="text-sm text-white/40">Café template demo by YalaByte</p></div></footer>;
+  return <footer className="bg-[#141b16] px-6 py-12 text-[#f7efe2] sm:px-12"><div className="mx-auto flex max-w-[1480px] flex-col justify-between gap-8 sm:flex-row"><div><p className="font-serif text-3xl">Morrow</p><p className="mt-2 text-sm text-white/50">Coffee · Kitchen · Neighbourhood</p></div><div className="text-sm leading-7 text-white/55">Instagram<br />hello@morrow.example</div><p className="text-sm text-white/40">Café Live Demo by YalaByte</p></div></footer>;
 }
 
 function CafePage({ demo, page }) {
