@@ -1,5 +1,6 @@
 import { portfolioDemos } from '../data/portfolioDemos.js';
 import { navigateTo } from '../utils/routes.js';
+import DemoLauncher from './DemoLauncher.jsx';
 
 function PortfolioCard({ project, index }) {
   return (
@@ -29,9 +30,9 @@ function PortfolioCard({ project, index }) {
           ))}
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
-          <button onClick={() => navigateTo(`/portfolio/${project.slug}`)} className="rounded-xl bg-cyanbrand-400 px-5 py-3 text-sm font-black text-navy-950 transition hover:bg-white">
+          <DemoLauncher project={project} className="rounded-xl bg-cyanbrand-400 px-5 py-3 text-sm font-black text-navy-950 transition hover:bg-white">
             View Live Demo
-          </button>
+          </DemoLauncher>
           <button onClick={() => navigateTo('/contact')} className="rounded-xl border border-white/25 px-5 py-3 text-sm font-black text-white transition hover:border-cyanbrand-300 hover:text-cyanbrand-200">
             Request similar site
           </button>
