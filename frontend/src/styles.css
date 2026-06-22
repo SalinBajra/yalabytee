@@ -135,6 +135,14 @@ section[id] {
   50% { opacity: 0.35; box-shadow: 0 0 0 8px rgba(57, 215, 232, 0.08); }
 }
 
+@keyframes demo-launcher-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes demo-launcher-dot {
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+
 .demo-launcher { animation: demo-launcher-in 300ms ease both; }
 .demo-launcher-copy { animation: demo-launcher-copy-in 650ms 100ms cubic-bezier(0.22, 1, 0.36, 1) both; }
 .demo-launcher-image { animation: demo-launcher-zoom 2.4s ease-out both; }
@@ -147,6 +155,10 @@ section[id] {
   animation: demo-launcher-progress 2.4s linear both;
 }
 .demo-launcher-pulse { animation: demo-launcher-pulse 1s ease-in-out infinite; }
+.demo-launcher-spinner { animation: demo-launcher-spin 800ms linear infinite; }
+.demo-launcher-loader-dot { animation: demo-launcher-dot 900ms ease-in-out infinite; }
+.demo-launcher-loader-dot:nth-child(3) { animation-delay: 120ms; }
+.demo-launcher-loader-dot:nth-child(4) { animation-delay: 240ms; }
 
 @keyframes grid-drift {
   from {
@@ -365,7 +377,9 @@ section[id] {
   .demo-launcher-copy,
   .demo-launcher-image,
   .demo-launcher-progress,
-  .demo-launcher-pulse {
+  .demo-launcher-pulse,
+  .demo-launcher-spinner,
+  .demo-launcher-loader-dot {
     animation: none;
   }
 }

@@ -39,9 +39,11 @@ export default function DemoLauncher({ project, className = '', children }) {
             </div>
 
             <div className="demo-launcher-copy max-w-3xl py-16">
-              <div className="mb-7 flex items-center gap-3">
-                <span className="demo-launcher-pulse h-2.5 w-2.5 rounded-full bg-cyanbrand-300" />
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/55">Demo selected</span>
+              <div className="mb-7 flex items-center gap-2" role="status" aria-label={`Loading ${project.title}`}>
+                <span className="demo-launcher-spinner h-5 w-5 rounded-full border border-white/20 border-t-cyanbrand-300" />
+                <span className="demo-launcher-loader-dot h-1 w-1 rounded-full bg-white/35" />
+                <span className="demo-launcher-loader-dot h-1 w-1 rounded-full bg-white/35" />
+                <span className="demo-launcher-loader-dot h-1 w-1 rounded-full bg-white/35" />
               </div>
               <p className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: project.accent }}>{project.category}</p>
               <h2 className="mt-5 max-w-3xl text-5xl font-semibold leading-[0.95] tracking-[-0.04em] sm:text-7xl lg:text-8xl">
