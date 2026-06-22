@@ -28,11 +28,15 @@ export default function App() {
     return () => window.removeEventListener('popstate', handleNavigation);
   }, []);
 
+  if (demoMatch) {
+    return <PortfolioDemoPage slug={demoMatch[1]} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-ink antialiased">
       <Header currentPath={path} />
       <main>
-        <Page slug={demoMatch?.[1]} />
+        <Page />
       </main>
       <Footer />
       <ContactShortcuts />

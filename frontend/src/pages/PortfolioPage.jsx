@@ -9,8 +9,8 @@ export default function PortfolioPage() {
     <>
       <PageHero
         eyebrow="Portfolio"
-        title="Working website concepts, built around real business needs"
-        text="Explore interactive examples for travel, creative, logistics, and service businesses—each shaped around a clear customer journey."
+        title="Two complete website demos, ready to explore"
+        text="Open a travel or café concept and browse it like a real client website. Each can be adapted into an editable WordPress build with your branding and content."
         actions={portfolioDemos.map((demo) => (
           <button key={demo.slug} onClick={() => navigateTo(`/portfolio/${demo.slug}`)} className="rounded-lg border border-white/20 px-4 py-2.5 text-sm font-bold text-white transition hover:border-cyanbrand-400 hover:bg-white/[0.08]">
             {demo.title}
