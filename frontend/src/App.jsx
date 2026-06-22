@@ -7,6 +7,7 @@ import PortfolioPage from './pages/PortfolioPage.jsx';
 import PortfolioDemoPage from './pages/PortfolioDemoPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import ContactShortcuts from './components/ContactShortcuts.jsx';
 
 const pages = {
   '/': HomePage,
@@ -34,6 +35,7 @@ export default function App() {
         <Page slug={demoMatch?.[1]} />
       </main>
       <Footer />
+      <ContactShortcuts />
     </div>
   );
 }
