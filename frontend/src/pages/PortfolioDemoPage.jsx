@@ -70,13 +70,20 @@ function TravelPage({ demo, page }) {
     return <div className="min-h-screen bg-[#f4efe6] text-[#17332d]"><DemoBar name={demo.title} /><TravelHeader /><main className="mx-auto grid max-w-[1300px] gap-14 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-12 lg:py-28"><div><p className="text-xs font-black uppercase tracking-[0.25em] text-[#b66f2e]">Start a conversation</p><h1 className="mt-6 font-serif text-6xl leading-tight">Tell us where your mind is wandering.</h1><p className="mt-7 text-lg leading-8 text-[#48645d]">Share a few details and a travel designer will respond with thoughtful first ideas within two working days.</p></div><form className="grid gap-5 rounded-[2rem] bg-white p-6 shadow-xl sm:grid-cols-2 sm:p-10" onSubmit={(event)=>{event.preventDefault();navigateTo('/contact');}}>{['Your name','Email address','Where would you like to go?','Preferred travel dates','Number of travelers','Approximate budget'].map((field)=><label key={field} className="text-sm font-bold">{field}<input className="mt-2 w-full rounded-xl border border-[#17332d]/15 px-4 py-3 font-normal outline-none focus:border-[#b66f2e]" /></label>)}<label className="text-sm font-bold sm:col-span-2">What would make this trip special?<textarea className="mt-2 min-h-32 w-full rounded-xl border border-[#17332d]/15 px-4 py-3 font-normal outline-none focus:border-[#b66f2e]" /></label><button className="rounded-full bg-[#17332d] px-7 py-4 text-sm font-black text-white sm:col-span-2">Send trip inquiry</button></form></main><TravelFooter /></div>;
   }
   const content = travelPageContent[page] || travelPageContent.journeys;
-  return <div className="bg-[#f4efe6] text-[#17332d]"><DemoBar name={demo.title} /><TravelHeader /><main><section className="bg-[#17332d] px-5 py-20 text-white sm:px-8 lg:px-12 lg:py-28"><div className="mx-auto max-w-[1480px]"><p className="text-xs font-black uppercase tracking-[0.25em] text-[#f4b860]">{content.eyebrow}</p><h1 className="mt-6 max-w-4xl font-serif text-6xl leading-tight sm:text-7xl">{content.title}</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">{content.intro}</p></div></section><section className="mx-auto grid max-w-[1480px] gap-6 px-5 py-20 sm:px-8 md:grid-cols-2 lg:px-12 lg:py-28">{content.items.map(([title,meta,text],index)=><article key={title} className="overflow-hidden rounded-[1.5rem] bg-white shadow-sm"><div className="h-64 overflow-hidden"><img src={demo.image} alt="" className={`h-full w-full object-cover ${index%2 ? 'object-[65%_65%]' : 'object-[42%_60%]'}`} /></div><div className="p-7"><p className="text-xs font-black uppercase tracking-[0.16em] text-[#b66f2e]">{meta}</p><h2 className="mt-4 font-serif text-3xl">{title}</h2><p className="mt-3 leading-7 text-[#48645d]">{text}</p><DemoLink to="/portfolio/travel/inquire" className="mt-6 inline-block text-sm font-black">Explore this journey <ArrowIcon /></DemoLink></div></article>)}</section></main><TravelFooter /></div>;
+  return <div className="bg-[#f4efe6] text-[#17332d]"><DemoBar name={demo.title} /><TravelHeader /><main><section className="bg-[#17332d] px-5 py-20 text-white sm:px-8 lg:px-12 lg:py-28"><div className="mx-auto max-w-[1480px]"><p className="text-xs font-black uppercase tracking-[0.25em] text-[#f4b860]">{content.eyebrow}</p><h1 className="mt-6 max-w-4xl font-serif text-6xl leading-tight sm:text-7xl">{content.title}</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">{content.intro}</p></div></section><section className="mx-auto grid max-w-[1480px] gap-6 px-5 py-20 sm:px-8 md:grid-cols-2 lg:px-12 lg:py-28">{content.items.map(([title,meta,text],index)=><article key={title} className="overflow-hidden rounded-[1.5rem] bg-white shadow-sm"><div className="h-64 overflow-hidden"><img src={travelImages[index % travelImages.length]} alt={`${title} travel destination`} className="h-full w-full object-cover transition duration-700 hover:scale-105" /></div><div className="p-7"><p className="text-xs font-black uppercase tracking-[0.16em] text-[#b66f2e]">{meta}</p><h2 className="mt-4 font-serif text-3xl">{title}</h2><p className="mt-3 leading-7 text-[#48645d]">{text}</p><DemoLink to="/portfolio/travel/inquire" className="mt-6 inline-block text-sm font-black">Explore this journey <ArrowIcon /></DemoLink></div></article>)}</section></main><TravelFooter /></div>;
 }
 
 const travelDestinations = [
-  ['Himalayan Light', 'Nepal · 9 days', 'object-[48%_58%]'],
-  ['Desert & Stone', 'Jordan · 7 days', 'object-[38%_72%]'],
-  ['Wild Coastlines', 'Portugal · 6 days', 'object-[62%_48%]']
+  ['Himalayan Light', 'Nepal · 9 days', '/images/travel-nepal.png'],
+  ['Desert & Stone', 'Jordan · 7 days', '/images/travel-jordan.png'],
+  ['Wild Coastlines', 'Portugal · 6 days', '/images/travel-portugal.png']
+];
+
+const travelImages = [
+  '/images/travel-nepal.png',
+  '/images/travel-jordan.png',
+  '/images/travel-portugal.png',
+  '/images/travel-scotland.png'
 ];
 
 const travelPackages = [
@@ -117,9 +124,9 @@ function TravelDemo({ demo, page }) {
             <p className="max-w-md text-base leading-8 text-[#48645d]">Every route is researched in person and shaped with local hosts, guides, and independent places to stay.</p>
           </div>
           <div className="mt-14 grid gap-5 lg:grid-cols-3">
-            {travelDestinations.map(([title, meta, position], index) => (
+            {travelDestinations.map(([title, meta, image], index) => (
               <DemoLink to="/portfolio/travel/inquire" key={title} className={`group relative overflow-hidden rounded-[1.5rem] ${index === 1 ? 'lg:mt-16' : index === 2 ? 'lg:mt-32' : ''}`}>
-                <img src={demo.image} alt="" className={`h-[470px] w-full object-cover ${position} transition duration-700 group-hover:scale-105`} />
+                <img src={image} alt={`${title} destination`} className="h-[470px] w-full object-cover transition duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-7 text-white">
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/65">{meta}</p>
@@ -131,7 +138,7 @@ function TravelDemo({ demo, page }) {
         </section>
 
         <section id="story" className="grid bg-[#17332d] text-white lg:grid-cols-2">
-          <div className="min-h-[520px] overflow-hidden"><img src={demo.image} alt="Scenic travel route" className="h-full w-full object-cover object-[48%_65%]" /></div>
+          <div className="min-h-[520px] overflow-hidden"><img src="/images/travel-scotland.png" alt="Remote road through the Scottish Highlands" className="h-full w-full object-cover object-center" /></div>
           <div className="flex items-center px-6 py-20 sm:px-12 lg:px-20">
             <div className="max-w-xl">
               <p className="text-xs font-black uppercase tracking-[0.25em] text-[#f4b860]">Why Aster</p>
