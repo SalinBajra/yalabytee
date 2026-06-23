@@ -18,7 +18,7 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#070716] via-[#070716]/85 to-transparent lg:via-[#070716]/45" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-[#070716] to-transparent" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-start px-5 pb-12 pt-64 sm:px-6 sm:pb-16 sm:pt-72 lg:min-h-[calc(100svh-76px)] lg:px-8 lg:pb-20 lg:pt-16">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-start px-5 pb-12 pt-64 sm:px-6 sm:pb-16 sm:pt-72 lg:min-h-[calc(100svh-76px)] lg:justify-center lg:px-8 lg:pb-12 lg:pt-20">
           <div className="hero-copy max-w-3xl">
             <h1 className="text-[clamp(3.2rem,8.4vw,8rem)] font-semibold uppercase leading-[0.82] tracking-[-0.055em]">
               Design.<br />Build.<br /><span className="text-white/35">Launch.</span>
