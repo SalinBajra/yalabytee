@@ -266,12 +266,26 @@ class handler(BaseHTTPRequestHandler):
 
         delivered = []
         delivery_errors = []
+        crm_status = "not_configured"
 
         try:
             if _create_crm_lead(normalized_payload, received_at):
                 delivered.append("crm")
+                crm_status = "saved"
         except (OSError, urllib.error.URLError) as error:
+            crm_status = "failed"
             delivery_errors.append(f"crm: {error}")
+
+        print(
+            json.dumps(
+                {
+                    "event": "crm_delivery_status",
+                    "status": crm_status,
+                    "has_supabase_url": bool(_env("SUPABASE_URL")),
+                    "has_supabase_server_key": bool(_env("SUPABASE_SERVICE_ROLE_KEY")),
+                }
+            )
+        )
 
         try:
             if _send_cliq(normalized_payload, received_at):
@@ -319,6 +333,7 @@ class handler(BaseHTTPRequestHandler):
                 {
                     "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
                     "notification_status": "logged",
+                    "crm_status": crm_status,
                     "received_at": received_at,
                 },
             )
@@ -328,6 +343,7 @@ class handler(BaseHTTPRequestHandler):
             200,
             {
                 "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
+                "crm_status": crm_status,
                 "received_at": received_at,
             },
         )
