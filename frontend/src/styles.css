@@ -542,8 +542,8 @@ body {
 .studio-hero__title em { color: rgba(255,255,255,.46); font-style: normal; }
 .studio-hero__intro-row {
   max-width: 790px;
-  margin-top: 46px;
-  padding-top: 27px;
+  margin-top: 88px;
+  padding-top: 28px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
