@@ -31,8 +31,8 @@ export default function Header({ currentPath }) {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070716]/95 backdrop-blur-xl">
       <nav className="mx-auto max-w-7xl px-5 py-3 sm:px-6 lg:px-8" aria-label="Primary navigation">
-        <div className="flex items-center justify-between gap-5">
-          <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between gap-3 sm:gap-5">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <a
               href="/"
               aria-label="YalaByte home"
@@ -42,11 +42,8 @@ export default function Header({ currentPath }) {
             >
               <BrandLogo />
             </a>
-            <div className="hidden items-center gap-4 border-l border-white/15 pl-4 xl:flex">
-              <div>
-                <p className="text-xs font-semibold tracking-[0.18em] text-slate-100">YalaByte</p>
-                <p className="mt-0.5 text-xs text-slate-400">Websites built for your business.</p>
-              </div>
+            <div className="flex min-w-0 items-center border-l border-white/15 pl-3 sm:pl-4">
+              <p className="whitespace-nowrap text-[10px] font-medium uppercase tracking-[0.24em] text-slate-100 sm:text-xs sm:tracking-[0.34em]">Yala Byte</p>
             </div>
           </div>
           <div className="hidden items-center gap-3 lg:flex">
@@ -73,13 +70,13 @@ export default function Header({ currentPath }) {
             <span className="text-xl leading-none">{menuOpen ? '×' : '≡'}</span>
           </button>
         </div>
-        <div className={`${menuOpen ? 'grid' : 'hidden'} mt-3 gap-1 border-t border-white/10 pt-3 sm:flex sm:overflow-x-auto lg:hidden`}>
+        <div className={`${menuOpen ? 'grid' : 'hidden'} mt-3 gap-1 border-t border-white/10 pt-3 sm:flex sm:justify-between sm:overflow-x-auto lg:hidden`}>
           {routes.map((item) => (
             <a
               key={item.path}
               href={item.path}
               onClick={(event) => goTo(event, item.path)}
-              className={`rounded-md px-3 py-2.5 text-sm font-semibold ${currentPath === item.path ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/10 hover:text-white'}`}
+              className={`whitespace-nowrap rounded-md px-3 py-2.5 text-sm font-semibold sm:px-2 ${currentPath === item.path ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/10 hover:text-white'}`}
             >
               {item.label}
             </a>
