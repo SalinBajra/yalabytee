@@ -1,11 +1,8 @@
-import hashlib
-import http.client
 import json
 import os
 import re
 import smtplib
 import urllib.error
-import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from email.message import EmailMessage
@@ -90,78 +87,6 @@ def _email_configured():
 
 def _strict_email_errors():
     return _env("EMAIL_STRICT", "false").lower() in {"1", "true", "yes"}
-
-
-def _create_crm_lead(payload, received_at):
-    supabase_url = _env("SUPABASE_URL").rstrip("/")
-    service_role_key = _env("SUPABASE_SERVICE_ROLE_KEY")
-    if not supabase_url or not service_role_key:
-        return False
-
-    submission_fingerprint = hashlib.sha256(
-        f"{received_at}|{payload['email']}|{payload.get('phone', '')}".encode("utf-8")
-    ).hexdigest()[:32]
-    lead_id = f"lead-web-{submission_fingerprint}"
-    lead = {
-        "id": lead_id,
-        "name": payload["name"],
-        "email": payload["email"],
-        "phone": payload.get("phone") or "",
-        "company": payload.get("company") or "",
-        "service": payload["service"],
-        "status": "new",
-        "priority": "Medium",
-        "owner": "",
-        "value": "",
-        "followUpDate": "",
-        "source": "Website",
-        "message": payload["message"],
-        "notes": "",
-        "createdAt": received_at,
-        "updatedAt": received_at,
-        "activities": [
-            {
-                "id": f"activity-web-{submission_fingerprint}",
-                "type": "Created",
-                "text": "Lead created automatically from website inquiry.",
-                "at": received_at,
-            }
-        ],
-    }
-
-    headers = {
-        "apikey": service_role_key,
-        "Content-Type": "application/json",
-        "Prefer": "return=minimal",
-    }
-    # Legacy service-role keys are JWTs and also use Authorization. New
-    # sb_secret_ keys are opaque API keys and must not be sent as bearer JWTs.
-    if not service_role_key.startswith("sb_secret_"):
-        headers["Authorization"] = f"Bearer {service_role_key}"
-
-    parsed_url = urllib.parse.urlparse(supabase_url)
-    if parsed_url.scheme != "https" or not parsed_url.hostname:
-        raise OSError("SUPABASE_URL must be a valid https:// project URL.")
-
-    body = json.dumps(
-        {
-            "id": lead_id,
-            "data": lead,
-            "created_at": received_at,
-            "updated_at": received_at,
-        }
-    ).encode("utf-8")
-    connection = http.client.HTTPSConnection(parsed_url.hostname, parsed_url.port or 443, timeout=15)
-    try:
-        connection.request("POST", "/rest/v1/leads", body=body, headers=headers)
-        response = connection.getresponse()
-        response_body = response.read().decode("utf-8", errors="replace")
-        if response.status < 200 or response.status >= 300:
-            raise OSError(f"Supabase HTTP {response.status}: {response_body[:500] or response.reason}")
-    finally:
-        connection.close()
-
-    return True
 
 
 def _send_cliq(payload, received_at):
@@ -276,37 +201,6 @@ class handler(BaseHTTPRequestHandler):
 
         delivered = []
         delivery_errors = []
-        crm_status = "not_configured"
-        crm_error = ""
-
-        try:
-            if _create_crm_lead(normalized_payload, received_at):
-                delivered.append("crm")
-                crm_status = "saved"
-        except urllib.error.HTTPError as error:
-            crm_status = "failed"
-            try:
-                response_detail = error.read().decode("utf-8", errors="replace")[:500]
-            except OSError:
-                response_detail = ""
-            crm_error = f"HTTP {error.code}: {response_detail or error.reason}"
-            delivery_errors.append(f"crm: {crm_error}")
-        except (OSError, urllib.error.URLError) as error:
-            crm_status = "failed"
-            crm_error = str(error)
-            delivery_errors.append(f"crm: {crm_error}")
-
-        print(
-            json.dumps(
-                {
-                    "event": "crm_delivery_status",
-                    "status": crm_status,
-                    "has_supabase_url": bool(_env("SUPABASE_URL")),
-                    "has_supabase_server_key": bool(_env("SUPABASE_SERVICE_ROLE_KEY")),
-                    "error": crm_error,
-                }
-            )
-        )
 
         try:
             if _send_cliq(normalized_payload, received_at):
@@ -354,7 +248,6 @@ class handler(BaseHTTPRequestHandler):
                 {
                     "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
                     "notification_status": "logged",
-                    "crm_status": crm_status,
                     "received_at": received_at,
                 },
             )
@@ -364,7 +257,6 @@ class handler(BaseHTTPRequestHandler):
             200,
             {
                 "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
-                "crm_status": crm_status,
                 "received_at": received_at,
             },
         )
