@@ -194,8 +194,6 @@ body {
   aspect-ratio: 1;
   transform: translateY(-51%);
   opacity: .92;
-  animation: hero-system-float 12s 1.55s ease-in-out infinite;
-  will-change: transform;
 }
 
 .system-visual {
@@ -356,10 +354,6 @@ body {
 @keyframes system-spin { to { transform: rotate(360deg); } }
 @keyframes system-spin-reverse { to { transform: rotate(-360deg); } }
 @keyframes system-arrive { from { opacity: 0; transform: scale(.74) rotate(-14deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
-@keyframes hero-system-float {
-  0%, 100% { transform: translate3d(0, -51%, 0) scale(1.02); }
-  50% { transform: translate3d(-1.2%, -49.8%, 0) scale(1.055); }
-}
 @keyframes hero-glow-drift { to { transform: translate3d(-5%, 5%, 0) scale(1.12); } }
 @keyframes live-pulse { 50% { opacity: .45; box-shadow: 0 0 0 8px rgba(75,228,255,0), 0 0 10px #4be4ff; } }
 @keyframes scroll-nudge { 50% { transform: translateY(5px); } }
