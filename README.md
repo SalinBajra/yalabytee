@@ -91,10 +91,10 @@ CONTACT_RECEIVER=info@yalabyte.com
 CLIQ_WEBHOOK_URL=your-zoho-cliq-incoming-webhook-url
 EMAIL_STRICT=false
 SUPABASE_URL=https://your-project-ref.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-secret-or-legacy-service-role-key
 ```
 
-`SUPABASE_SERVICE_ROLE_KEY` is a server-only secret used by the website contact endpoint to create CRM leads. Never prefix it with `VITE_` or expose it in frontend code. Valid form submissions are saved with status `New` and source `Website`.
+`SUPABASE_SERVICE_ROLE_KEY` accepts Supabase's current `sb_secret_` key or the legacy service-role key. It is a server-only secret used by the website contact endpoint to create CRM leads. Never prefix it with `VITE_` or expose it in frontend code. Valid form submissions are saved with status `New` and source `Website`.
 
 `CLIQ_WEBHOOK_URL` sends every valid inquiry into the configured Zoho Cliq channel. The webhook itself controls which channel receives the message. Email and Cliq are independent: if SMTP is still blocked, Cliq can still receive notifications.
 

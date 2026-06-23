@@ -124,6 +124,16 @@ def _create_crm_lead(payload, received_at):
         ],
     }
 
+    headers = {
+        "apikey": service_role_key,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal",
+    }
+    # Legacy service-role keys are JWTs and also use Authorization. New
+    # sb_secret_ keys are opaque API keys and must not be sent as bearer JWTs.
+    if not service_role_key.startswith("sb_secret_"):
+        headers["Authorization"] = f"Bearer {service_role_key}"
+
     request = urllib.request.Request(
         f"{supabase_url}/rest/v1/leads",
         data=json.dumps(
@@ -134,12 +144,7 @@ def _create_crm_lead(payload, received_at):
                 "updated_at": received_at,
             }
         ).encode("utf-8"),
-        headers={
-            "apikey": service_role_key,
-            "Authorization": f"Bearer {service_role_key}",
-            "Content-Type": "application/json",
-            "Prefer": "return=minimal",
-        },
+        headers=headers,
         method="POST",
     )
 
