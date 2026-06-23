@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import Hero from '../components/Hero.jsx';
-import { portfolioDemos } from '../data/portfolioDemos.js';
 import { navigateTo } from '../utils/routes.js';
 
 const services = [
@@ -57,28 +56,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="studio-section studio-work">
-        <div className="studio-container">
-          <div className="home-reveal studio-heading studio-heading--light">
-            <p>Selected work / 02</p>
-            <h2>Designed to look right.<br />Built to work hard.</h2>
-          </div>
-          <div className="studio-projects">
-            {portfolioDemos.slice(0, 3).map((project, index) => (
-              <button key={project.slug} className="home-reveal studio-project" style={{ '--reveal-delay': `${index * 80}ms` }} onClick={() => navigateTo(`/portfolio/${project.slug}`)}>
-                <span className="studio-project__image"><img src={project.image} alt="" loading="lazy" /><i>View project ↗</i></span>
-                <span className="studio-project__meta"><b>{project.title}</b><small>{project.category}</small></span>
-              </button>
-            ))}
-          </div>
-          <button className="home-reveal studio-text-link studio-text-link--light" onClick={() => navigateTo('/portfolio')}>View all work <span>→</span></button>
-        </div>
-      </section>
-
       <section className="studio-section studio-process">
         <div className="studio-container studio-process__grid">
           <div className="home-reveal studio-heading studio-heading--compact">
-            <p>Process / 03</p>
+            <p>Process / 02</p>
             <h2>From first conversation to confident launch.</h2>
           </div>
           <div className="studio-process__steps">
@@ -93,7 +74,7 @@ export default function HomePage() {
 
       <section className="studio-about">
         <div className="studio-container home-reveal studio-about__grid">
-          <p>About YalaByte / 04</p>
+          <p>About YalaByte / 03</p>
           <div>
             <h2>Based in Nepal.<br />Built for everywhere.</h2>
             <p>YalaByte builds premium websites and web platforms for ambitious businesses—from Nepal to clients worldwide. We bring strategy, design, and development together to create digital work with lasting value.</p>

@@ -48,7 +48,6 @@ export default function Hero() {
 
       <div className="studio-hero__inner">
         <div className="studio-hero__copy">
-          <p className="studio-hero__eyebrow"><span /> Website development studio · Nepal / Worldwide</p>
           <h1 className="studio-hero__title">
             DESIGN.<br />BUILD.<br /><em>LAUNCH.</em>
           </h1>
