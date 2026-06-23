@@ -1,85 +1,75 @@
+import { useRef } from 'react';
 import { navigateTo } from '../utils/routes.js';
 
-const capabilities = ['Digital products', 'Web platforms', 'AI-ready systems'];
-
-function SystemVisual() {
-  return (
-    <div className="system-visual" aria-hidden="true">
-      <div className="system-aura" />
-      <div className="system-orbit system-orbit--outer">
-        <span className="orbit-node orbit-node--one" />
-        <span className="orbit-node orbit-node--two" />
-      </div>
-      <div className="system-orbit system-orbit--middle">
-        <span className="orbit-label">YB / 26</span>
-      </div>
-      <div className="system-orbit system-orbit--inner" />
-      <div className="system-core">
-        <span className="system-core__glow" />
-        <span className="system-core__mark">YB</span>
-      </div>
-      <div className="system-sweep" />
-    </div>
-  );
-}
+const capabilities = ['Business Websites', 'Web Platforms', 'Launch Support'];
 
 export default function Hero() {
+  const visualRef = useRef(null);
+
+  const handlePointerMove = (event) => {
+    if (!visualRef.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+    visualRef.current.style.setProperty('--parallax-x', `${x * 14}px`);
+    visualRef.current.style.setProperty('--parallax-y', `${y * 10}px`);
+  };
+
+  const resetPointer = () => {
+    visualRef.current?.style.setProperty('--parallax-x', '0px');
+    visualRef.current?.style.setProperty('--parallax-y', '0px');
+  };
+
   return (
-    <section id="home" className="hero-shell">
-      <div className="hero-ambient" aria-hidden="true">
-        <div className="hero-grid" />
-        <div className="hero-glow hero-glow--violet" />
-        <div className="hero-glow hero-glow--cyan" />
-        <div className="hero-noise" />
+    <section id="home" className="studio-hero" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
+      <div className="studio-hero__scene" aria-hidden="true">
+        <div className="studio-hero__grid" />
+        <div className="studio-hero__beam" />
+        <div className="studio-hero__particles">
+          {Array.from({ length: 10 }, (_, index) => <i key={index} />)}
+        </div>
       </div>
 
-      <div className="hero-system-wrap">
-        <SystemVisual />
+      <div ref={visualRef} className="studio-visual" aria-hidden="true">
+        <div className="studio-visual__float">
+          <div className="studio-visual__halo" />
+          <img
+            src="/images/yalabyte-hero-digital-system.png"
+            alt=""
+            className="studio-visual__image"
+            loading="eager"
+            fetchPriority="high"
+          />
+          <div className="studio-visual__light" />
+        </div>
       </div>
 
-      <div className="hero-coordinates hero-coordinates--top" aria-hidden="true">
-        <span>27.7172° N</span><span>85.3240° E</span>
-      </div>
+      <div className="studio-hero__fade" aria-hidden="true" />
 
-      <div className="hero-layout">
-        <div className="hero-copy">
-          <div className="hero-eyebrow">
-            <span className="hero-live-dot" />
-            Independent digital studio · Nepal / Worldwide
-          </div>
-
-          <h1 className="hero-title">
-            We engineer
-            <span>digital momentum.</span>
+      <div className="studio-hero__inner">
+        <div className="studio-hero__copy">
+          <p className="studio-hero__eyebrow"><span /> Website development studio · Nepal / Worldwide</p>
+          <h1 className="studio-hero__title">
+            DESIGN.<br />BUILD.<br /><em>LAUNCH.</em>
           </h1>
-
-          <p className="hero-intro">
-            Strategy, design, and development for ambitious companies ready to move from a good idea to a category-defining digital product.
-          </p>
-
-          <div className="hero-actions">
-            <button onClick={() => navigateTo('/contact')} className="hero-button hero-button--primary">
-              Start a project <span aria-hidden="true">↗</span>
-            </button>
-            <button onClick={() => navigateTo('/portfolio')} className="hero-button hero-button--secondary">
-              Explore our work <span aria-hidden="true">→</span>
-            </button>
+          <div className="studio-hero__intro-row">
+            <p>Premium business websites and custom web applications, designed and developed by YalaByte in Nepal.</p>
+            <div className="studio-hero__actions">
+              <button onClick={() => navigateTo('/portfolio')} className="studio-button studio-button--outline">View Work</button>
+              <button onClick={() => navigateTo('/contact')} className="studio-button studio-button--solid">Contact</button>
+            </div>
           </div>
         </div>
 
-        <div className="hero-bottom">
-          <p className="hero-bottom__label">Built for what’s next</p>
-          <div className="hero-capabilities">
-            {capabilities.map((item, index) => (
-              <span key={item}><b>0{index + 1}</b>{item}</span>
-            ))}
+        <div className="studio-hero__strip">
+          <span className="studio-hero__strip-label">Built for what’s next</span>
+          <div className="studio-hero__capabilities">
+            {capabilities.map((item, index) => <span key={item}><b>0{index + 1}</b>{item}</span>)}
           </div>
-          <a href="#capabilities" className="hero-scroll" onClick={(event) => {
+          <a href="#services" onClick={(event) => {
             event.preventDefault();
-            document.querySelector('#capabilities')?.scrollIntoView({ behavior: 'smooth' });
-          }}>
-            Scroll to discover <i aria-hidden="true">↓</i>
-          </a>
+            document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' });
+          }}>Explore <i>↓</i></a>
         </div>
       </div>
     </section>

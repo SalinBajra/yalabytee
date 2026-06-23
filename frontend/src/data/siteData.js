@@ -31,7 +31,7 @@ export const services = [
   },
   {
     title: 'Digital Consulting',
-    text: 'Guidance for choosing the right platforms, automations, integrations, and digital roadmap for your business.',
+    text: 'Guidance for choosing the right platforms, integrations, workflows, and digital roadmap for your business.',
     outcome: 'Clearer technology decisions'
   },
   {

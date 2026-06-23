@@ -58,7 +58,7 @@ export default function Header({ currentPath }) {
             }}
             className="hidden rounded-md bg-cyanbrand-400 px-4 py-2.5 text-sm font-bold text-navy-950 transition hover:-translate-y-0.5 hover:bg-white sm:inline-flex"
           >
-            Discuss a project <span aria-hidden="true" className="ml-2">↗</span>
+            Discuss a Project <span aria-hidden="true" className="ml-2">↗</span>
           </a>
           <button
             type="button"
