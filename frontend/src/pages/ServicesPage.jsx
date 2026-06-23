@@ -14,13 +14,6 @@ const launchSupport = [
   'Contact and inquiry flows', 'Content updates', 'Ongoing maintenance'
 ];
 
-const steps = [
-  ['Discover', 'Scope, goals, audience'],
-  ['Design', 'Structure and interface'],
-  ['Develop', 'Responsive, clean build'],
-  ['Launch', 'Testing and handover']
-];
-
 export default function ServicesPage() {
   usePageReveal();
 
@@ -59,19 +52,6 @@ export default function ServicesPage() {
           </div>
           <div className="service-support-list">
             {launchSupport.map((item, index) => <p className="page-reveal" style={{ '--page-delay': `${index * 55}ms` }} key={item}><span>0{index + 1}</span>{item}</p>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="service-process-section">
-        <div className="studio-container">
-          <div className="page-reveal service-process-heading"><p className="inner-label">How we work / 03</p><h2>A clear route from brief to browser.</h2></div>
-          <div className="service-process-line">
-            {steps.map(([title, text], index) => (
-              <article className="page-reveal" style={{ '--page-delay': `${index * 80}ms` }} key={title}>
-                <span>0{index + 1}</span><h3>{title}</h3><p>{text}</p>
-              </article>
-            ))}
           </div>
         </div>
       </section>
