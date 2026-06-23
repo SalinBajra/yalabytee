@@ -1,9 +1,11 @@
 import hashlib
+import http.client
 import json
 import os
 import re
 import smtplib
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from email.message import EmailMessage
@@ -137,22 +139,27 @@ def _create_crm_lead(payload, received_at):
     if not service_role_key.startswith("sb_secret_"):
         headers["Authorization"] = f"Bearer {service_role_key}"
 
-    request = urllib.request.Request(
-        f"{supabase_url}/rest/v1/leads",
-        data=json.dumps(
-            {
-                "id": lead_id,
-                "data": lead,
-                "created_at": received_at,
-                "updated_at": received_at,
-            }
-        ).encode("utf-8"),
-        headers=headers,
-        method="POST",
-    )
+    parsed_url = urllib.parse.urlparse(supabase_url)
+    if parsed_url.scheme != "https" or not parsed_url.hostname:
+        raise OSError("SUPABASE_URL must be a valid https:// project URL.")
 
-    with urllib.request.urlopen(request, timeout=15):
-        pass
+    body = json.dumps(
+        {
+            "id": lead_id,
+            "data": lead,
+            "created_at": received_at,
+            "updated_at": received_at,
+        }
+    ).encode("utf-8")
+    connection = http.client.HTTPSConnection(parsed_url.hostname, parsed_url.port or 443, timeout=15)
+    try:
+        connection.request("POST", "/rest/v1/leads", body=body, headers=headers)
+        response = connection.getresponse()
+        response_body = response.read().decode("utf-8", errors="replace")
+        if response.status < 200 or response.status >= 300:
+            raise OSError(f"Supabase HTTP {response.status}: {response_body[:500] or response.reason}")
+    finally:
+        connection.close()
 
     return True
 
