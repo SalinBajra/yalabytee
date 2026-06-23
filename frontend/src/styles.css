@@ -542,8 +542,8 @@ body {
 .studio-hero__title em { color: rgba(255,255,255,.46); font-style: normal; }
 .studio-hero__intro-row {
   max-width: 790px;
-  margin-top: 31px;
-  padding-top: 22px;
+  margin-top: 46px;
+  padding-top: 27px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -700,7 +700,7 @@ body {
   .studio-visual { width: 105vw; right: -53vw; top: 31%; opacity: .55; }
   .studio-hero__title { font-size: clamp(4rem, 20.5vw, 6rem); }
   .studio-hero__eyebrow { max-width: 78%; font-size: 8px; line-height: 1.5; }
-  .studio-hero__intro-row { margin-top: 25px; padding-top: 18px; display: block; }
+  .studio-hero__intro-row { margin-top: 32px; padding-top: 21px; display: block; }
   .studio-hero__intro-row > p { max-width: 94%; font-size: 13px; line-height: 1.65; }
   .studio-hero__actions { margin-top: 20px; }
   .studio-button { min-height: 46px; padding: 0 16px; font-size: 9px; }
