@@ -4,6 +4,7 @@ import re
 import smtplib
 import urllib.error
 import urllib.request
+import uuid
 from datetime import datetime, timezone
 from email.message import EmailMessage
 from http.server import BaseHTTPRequestHandler
@@ -87,6 +88,65 @@ def _email_configured():
 
 def _strict_email_errors():
     return _env("EMAIL_STRICT", "false").lower() in {"1", "true", "yes"}
+
+
+def _create_crm_lead(payload, received_at):
+    supabase_url = _env("SUPABASE_URL").rstrip("/")
+    service_role_key = _env("SUPABASE_SERVICE_ROLE_KEY")
+    if not supabase_url or not service_role_key:
+        return False
+
+    lead_id = f"lead-{uuid.uuid4()}"
+    lead = {
+        "id": lead_id,
+        "name": payload["name"],
+        "email": payload["email"],
+        "phone": payload.get("phone") or "",
+        "company": payload.get("company") or "",
+        "service": payload["service"],
+        "status": "new",
+        "priority": "Medium",
+        "owner": "",
+        "value": "",
+        "followUpDate": "",
+        "source": "Website",
+        "message": payload["message"],
+        "notes": "",
+        "createdAt": received_at,
+        "updatedAt": received_at,
+        "activities": [
+            {
+                "id": f"activity-{uuid.uuid4()}",
+                "type": "Created",
+                "text": "Lead created automatically from website inquiry.",
+                "at": received_at,
+            }
+        ],
+    }
+
+    request = urllib.request.Request(
+        f"{supabase_url}/rest/v1/leads",
+        data=json.dumps(
+            {
+                "id": lead_id,
+                "data": lead,
+                "created_at": received_at,
+                "updated_at": received_at,
+            }
+        ).encode("utf-8"),
+        headers={
+            "apikey": service_role_key,
+            "Authorization": f"Bearer {service_role_key}",
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal",
+        },
+        method="POST",
+    )
+
+    with urllib.request.urlopen(request, timeout=15):
+        pass
+
+    return True
 
 
 def _send_cliq(payload, received_at):
@@ -201,6 +261,12 @@ class handler(BaseHTTPRequestHandler):
 
         delivered = []
         delivery_errors = []
+
+        try:
+            if _create_crm_lead(normalized_payload, received_at):
+                delivered.append("crm")
+        except (OSError, urllib.error.URLError) as error:
+            delivery_errors.append(f"crm: {error}")
 
         try:
             if _send_cliq(normalized_payload, received_at):
