@@ -40,7 +40,7 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <section className="bg-[#f2f0e9] px-5 py-20 text-[#111315] sm:px-6 lg:px-8 lg:py-28">
+      <section id="capabilities" className="bg-[#f2f0e9] px-5 py-20 text-[#111315] sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="home-reveal grid gap-10 border-b border-black/15 pb-14 lg:grid-cols-[0.55fr_1.45fr]">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">What we do</p>

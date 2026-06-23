@@ -1,43 +1,87 @@
 import { navigateTo } from '../utils/routes.js';
 
-const heroImage = '/images/yalabyte-hero-digital-system.png';
+const capabilities = ['Digital products', 'Web platforms', 'AI-ready systems'];
+
+function SystemVisual() {
+  return (
+    <div className="system-visual" aria-hidden="true">
+      <div className="system-aura" />
+      <div className="system-orbit system-orbit--outer">
+        <span className="orbit-node orbit-node--one" />
+        <span className="orbit-node orbit-node--two" />
+      </div>
+      <div className="system-orbit system-orbit--middle">
+        <span className="orbit-label">YB / 26</span>
+      </div>
+      <div className="system-orbit system-orbit--inner" />
+      <div className="system-core">
+        <span className="system-core__glow" />
+        <span className="system-core__mark">YB</span>
+      </div>
+      <div className="system-sweep" />
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-[calc(100svh-76px)] overflow-hidden bg-[#070716] text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(96,49,175,0.18),transparent_38%)]" />
-        <div className="absolute -right-[20%] top-[3%] h-[56%] w-[95%] sm:-right-[12%] sm:top-[-4%] sm:h-[76%] sm:w-[80%] lg:-right-[5%] lg:top-[-10%] lg:h-[110%] lg:w-[68%]">
-          <img
-            src={heroImage}
-            alt="Abstract digital system formed from connected three-dimensional rings"
-            className="hero-orb h-full w-full object-contain"
-            loading="eager"
-          />
-        </div>
+    <section id="home" className="hero-shell">
+      <div className="hero-ambient" aria-hidden="true">
+        <div className="hero-grid" />
+        <div className="hero-glow hero-glow--violet" />
+        <div className="hero-glow hero-glow--cyan" />
+        <div className="hero-noise" />
+      </div>
 
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#070716] via-[#070716]/85 to-transparent lg:via-[#070716]/45" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-[#070716] to-transparent" />
+      <div className="hero-system-wrap">
+        <SystemVisual />
+      </div>
 
-        <div className="relative z-10 mx-auto flex min-h-[calc(100svh-76px)] w-full max-w-7xl flex-col justify-end px-5 pb-12 pt-72 sm:px-6 sm:pb-16 sm:pt-80 lg:px-8 lg:pb-20 lg:pt-24">
-          <div className="hero-copy max-w-3xl">
-            <h1 className="text-[clamp(3.2rem,8.4vw,8rem)] font-semibold uppercase leading-[0.82] tracking-[-0.055em]">
-              Design.<br />Build.<br /><span className="text-white/35">Launch.</span>
-            </h1>
-            <div className="mt-8 flex max-w-2xl flex-col gap-7 border-t border-white/15 pt-6 sm:flex-row sm:items-end sm:justify-between">
-              <p className="max-w-md text-sm leading-7 text-white/60 sm:text-base">
-                Business websites and custom web applications, designed and developed by YalaByte in Nepal.
-              </p>
-              <div className="flex shrink-0 gap-3">
-                <button onClick={() => navigateTo('/portfolio')} className="border border-white/30 px-5 py-3 text-xs font-black uppercase tracking-[0.12em] transition hover:border-white hover:bg-white hover:text-[#070716]">
-                  View work
-                </button>
-                <button onClick={() => navigateTo('/contact')} className="bg-cyanbrand-400 px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#070716] transition hover:bg-white">
-                  Contact
-                </button>
-              </div>
-            </div>
+      <div className="hero-coordinates hero-coordinates--top" aria-hidden="true">
+        <span>27.7172° N</span><span>85.3240° E</span>
+      </div>
+
+      <div className="hero-layout">
+        <div className="hero-copy">
+          <div className="hero-eyebrow">
+            <span className="hero-live-dot" />
+            Independent digital studio · Nepal / Worldwide
+          </div>
+
+          <h1 className="hero-title">
+            We engineer
+            <span>digital momentum.</span>
+          </h1>
+
+          <p className="hero-intro">
+            Strategy, design, and development for ambitious companies ready to move from a good idea to a category-defining digital product.
+          </p>
+
+          <div className="hero-actions">
+            <button onClick={() => navigateTo('/contact')} className="hero-button hero-button--primary">
+              Start a project <span aria-hidden="true">↗</span>
+            </button>
+            <button onClick={() => navigateTo('/portfolio')} className="hero-button hero-button--secondary">
+              Explore our work <span aria-hidden="true">→</span>
+            </button>
           </div>
         </div>
+
+        <div className="hero-bottom">
+          <p className="hero-bottom__label">Built for what’s next</p>
+          <div className="hero-capabilities">
+            {capabilities.map((item, index) => (
+              <span key={item}><b>0{index + 1}</b>{item}</span>
+            ))}
+          </div>
+          <a href="#capabilities" className="hero-scroll" onClick={(event) => {
+            event.preventDefault();
+            document.querySelector('#capabilities')?.scrollIntoView({ behavior: 'smooth' });
+          }}>
+            Scroll to discover <i aria-hidden="true">↓</i>
+          </a>
+        </div>
+      </div>
     </section>
   );
 }
