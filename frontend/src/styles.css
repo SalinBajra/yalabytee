@@ -681,6 +681,51 @@ body {
 @keyframes studio-halo-pulse { 0%,100% { opacity: .36; transform: scale(.96); } 50% { opacity: .76; transform: scale(1.08); } }
 @keyframes studio-light-turn { to { transform: rotate(360deg); } }
 
+/* Give full-HD and larger desktops a roomier, better-balanced composition.
+   The viewport resolution, rather than the monitor's physical size, is what
+   determines this breakpoint. */
+@media (min-width: 1440px) {
+  .studio-hero__inner,
+  .studio-container {
+    width: min(calc(100% - 96px), 1500px);
+  }
+
+  .studio-hero__inner {
+    padding-top: clamp(58px, 6.5vh, 76px);
+  }
+
+  .studio-hero__copy {
+    max-width: 720px;
+  }
+
+  .studio-hero__title {
+    font-size: clamp(6.75rem, 5.85vw, 7.25rem);
+  }
+
+  .studio-hero__intro-row {
+    max-width: 720px;
+    margin-top: clamp(44px, 5.5vh, 60px);
+    padding-top: 24px;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .studio-hero__intro-row > p {
+    max-width: 420px;
+  }
+
+  .studio-visual {
+    right: max(2vw, calc((100vw - 1560px) / 2));
+    width: min(49vw, 850px);
+  }
+
+  .studio-hero__strip {
+    margin-top: 36px;
+  }
+}
+
 @media (max-width: 900px) {
   .studio-visual { width: 80vw; right: -27vw; top: 40%; opacity: .7; }
   .studio-hero__fade { background: linear-gradient(90deg, #05060d 0%, rgba(5,6,13,.92) 42%, rgba(5,6,13,.22) 100%), linear-gradient(0deg,#05060d,transparent 32%); }
