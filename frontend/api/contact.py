@@ -267,14 +267,24 @@ class handler(BaseHTTPRequestHandler):
         delivered = []
         delivery_errors = []
         crm_status = "not_configured"
+        crm_error = ""
 
         try:
             if _create_crm_lead(normalized_payload, received_at):
                 delivered.append("crm")
                 crm_status = "saved"
+        except urllib.error.HTTPError as error:
+            crm_status = "failed"
+            try:
+                response_detail = error.read().decode("utf-8", errors="replace")[:500]
+            except OSError:
+                response_detail = ""
+            crm_error = f"HTTP {error.code}: {response_detail or error.reason}"
+            delivery_errors.append(f"crm: {crm_error}")
         except (OSError, urllib.error.URLError) as error:
             crm_status = "failed"
-            delivery_errors.append(f"crm: {error}")
+            crm_error = str(error)
+            delivery_errors.append(f"crm: {crm_error}")
 
         print(
             json.dumps(
@@ -283,6 +293,7 @@ class handler(BaseHTTPRequestHandler):
                     "status": crm_status,
                     "has_supabase_url": bool(_env("SUPABASE_URL")),
                     "has_supabase_server_key": bool(_env("SUPABASE_SERVICE_ROLE_KEY")),
+                    "error": crm_error,
                 }
             )
         )
