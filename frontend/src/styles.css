@@ -681,10 +681,10 @@ body {
 @keyframes studio-halo-pulse { 0%,100% { opacity: .36; transform: scale(.96); } 50% { opacity: .76; transform: scale(1.08); } }
 @keyframes studio-light-turn { to { transform: rotate(360deg); } }
 
-/* Give full-HD and larger desktops a roomier, better-balanced composition.
-   The viewport resolution, rather than the monitor's physical size, is what
-   determines this breakpoint. */
-@media (min-width: 1440px) {
+/* Keep laptop, zoomed-desktop, and full-HD compositions visually consistent.
+   Fluid viewport sizing avoids a dramatic jump when browser zoom changes the
+   effective CSS width. */
+@media (min-width: 1200px) {
   .studio-hero__inner,
   .studio-container {
     width: min(calc(100% - 96px), 1500px);
@@ -699,7 +699,7 @@ body {
   }
 
   .studio-hero__title {
-    font-size: clamp(6.75rem, 5.85vw, 7.25rem);
+    font-size: clamp(5.25rem, 6.2vw, 7.25rem);
   }
 
   .studio-hero__intro-row {
@@ -718,7 +718,7 @@ body {
 
   .studio-visual {
     right: max(2vw, calc((100vw - 1560px) / 2));
-    width: min(49vw, 850px);
+    width: min(49vw, 900px);
   }
 
   .studio-hero__strip {
