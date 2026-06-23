@@ -72,18 +72,21 @@ export default function Contact() {
         throw new Error(result.detail || 'Unable to send message right now.');
       }
 
-      const crmResponse = await fetch('/api/crm-lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
-      });
-      const crmResult = await crmResponse.json().catch(() => ({}));
-      if (!crmResponse.ok) {
-        throw new Error(crmResult.detail || 'Your inquiry was received, but CRM synchronization failed.');
-      }
-
       setStatus({ type: 'success', message: result.message });
       setForm(initialState);
+
+      try {
+        const crmResponse = await fetch('/api/crm-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form)
+        });
+        if (!crmResponse.ok) {
+          console.warn('CRM synchronization is temporarily unavailable.');
+        }
+      } catch {
+        console.warn('CRM synchronization is temporarily unavailable.');
+      }
     } catch (error) {
       setStatus({
         type: 'error',

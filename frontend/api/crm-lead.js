@@ -88,7 +88,15 @@ export default async function handler(request, response) {
 
     return response.status(201).json({ status: 'saved', leadId });
   } catch (error) {
-    console.error('CRM delivery failed', error instanceof Error ? error.message : 'Unknown error');
+    const cause = error instanceof Error && error.cause instanceof Error ? error.cause : null;
+    console.error(
+      'CRM delivery failed',
+      error instanceof Error ? error.message : 'Unknown error',
+      cause?.name || '',
+      cause?.message || '',
+      'code:',
+      cause && 'code' in cause ? cause.code : ''
+    );
     return response.status(502).json({ detail: 'Unable to reach the CRM database.' });
   }
 }
