@@ -1,10 +1,10 @@
+import hashlib
 import json
 import os
 import re
 import smtplib
 import urllib.error
 import urllib.request
-import uuid
 from datetime import datetime, timezone
 from email.message import EmailMessage
 from http.server import BaseHTTPRequestHandler
@@ -96,7 +96,10 @@ def _create_crm_lead(payload, received_at):
     if not supabase_url or not service_role_key:
         return False
 
-    lead_id = f"lead-{uuid.uuid4()}"
+    submission_fingerprint = hashlib.sha256(
+        f"{received_at}|{payload['email']}|{payload.get('phone', '')}".encode("utf-8")
+    ).hexdigest()[:32]
+    lead_id = f"lead-web-{submission_fingerprint}"
     lead = {
         "id": lead_id,
         "name": payload["name"],
@@ -116,7 +119,7 @@ def _create_crm_lead(payload, received_at):
         "updatedAt": received_at,
         "activities": [
             {
-                "id": f"activity-{uuid.uuid4()}",
+                "id": f"activity-web-{submission_fingerprint}",
                 "type": "Created",
                 "text": "Lead created automatically from website inquiry.",
                 "at": received_at,
