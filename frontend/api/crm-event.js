@@ -37,18 +37,22 @@ export default async function handler(request, response) {
     }
 
     const actorName = user.user_metadata?.name || actorEmail.split('@')[0];
+    const ownerName = String(lead.owner || '').trim();
+    const hasDifferentOwner = ownerName
+      && ownerName.localeCompare(actorName, undefined, { sensitivity: 'base' }) !== 0;
     const text = [
-      '🆕 **New CRM lead added**',
+      'Hi Team! 🚀',
       '',
-      `**Lead:** ${lead.name}`,
+      `**${actorName}** has added a new lead: **${lead.name}**.`,
+      ...(hasDifferentOwner ? [`This lead is assigned to **${ownerName}**.`] : []),
+      '',
+      "Please take a look and let's rock and roll! 🤘",
+      '',
       `**Company:** ${lead.company || 'Not provided'}`,
       `**Service:** ${lead.service || 'Not specified'}`,
       `**Email:** ${lead.email || 'Not provided'}`,
       `**Phone:** ${lead.phone || 'Not provided'}`,
       `**Source:** ${lead.source || 'Manual entry'}`,
-      `**Owner:** ${lead.owner || 'Unassigned'}`,
-      '',
-      `**Added by:** ${actorName} (${actorEmail})`,
       'Open CRM: https://crm.yalabyte.com'
     ].join('\n');
 
