@@ -59,7 +59,23 @@ export default async function handler(request, response) {
     const cliqResponse = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, event: 'crm_new_lead', lead_name: lead.name, added_by: actorEmail })
+      body: JSON.stringify({
+        event: 'crm_new_lead',
+        title: 'New CRM lead added',
+        name: lead.name,
+        email: lead.email || 'Not provided',
+        phone: lead.phone || 'Not provided',
+        company: lead.company || 'Not provided',
+        service: lead.service || 'Not specified',
+        source: lead.source || 'Manual entry',
+        owner: ownerName || actorName,
+        actor_name: actorName,
+        actor_email: actorEmail,
+        lead_name: lead.name,
+        added_by: actorEmail,
+        message: text,
+        text
+      })
     });
     if (!cliqResponse.ok) {
       console.error('Cliq CRM notification failed', cliqResponse.status);
