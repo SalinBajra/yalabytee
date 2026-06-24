@@ -137,7 +137,7 @@ def _save_crm_lead(payload, received_at):
         return False
 
     fingerprint = hashlib.sha256(
-        f"{received_at}|{payload['email'].lower()}|{payload.get('phone', '')}|{payload['message']}".encode("utf-8")
+        f"{payload['email'].lower()}|{payload.get('phone', '')}|{payload['service']}|{payload['message']}".encode("utf-8")
     ).hexdigest()[:32]
     lead_id = f"lead-web-{fingerprint}"
     crm_lead = {
@@ -267,6 +267,14 @@ class handler(BaseHTTPRequestHandler):
         except (OSError, urllib.error.URLError, urllib.error.HTTPError) as error:
             delivery_errors.append(f"crm: {error}")
 
+        if not crm_saved:
+            print(json.dumps({"event": "crm_lead_delivery_failed", "errors": delivery_errors, "received_at": received_at}))
+            self._send_json(
+                502,
+                {"detail": "Your inquiry could not be added to our CRM. Please try again.", "crm_status": "unavailable"},
+            )
+            return
+
         try:
             if _send_cliq(normalized_payload, received_at):
                 delivered.append("cliq")
@@ -278,6 +286,14 @@ class handler(BaseHTTPRequestHandler):
                 delivered.append("email")
         except (OSError, smtplib.SMTPException) as error:
             delivery_errors.append(f"email: {error}")
+
+        if "cliq" not in delivered:
+            print(json.dumps({"event": "website_lead_cliq_failed", "errors": delivery_errors, "received_at": received_at}))
+            self._send_json(
+                502,
+                {"detail": "Your inquiry was saved, but team notification failed. Please try again.", "crm_status": "saved"},
+            )
+            return
 
         if not delivered:
             email_was_configured = _email_configured()
