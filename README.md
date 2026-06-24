@@ -105,6 +105,8 @@ The client portal is available at `/client-portal`. Website inquiries only creat
 
 Add `https://www.yalabyte.com/client-portal` to the Supabase Authentication redirect allow list. The browser needs `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`; the invitation endpoint needs the server-only `SUPABASE_SERVICE_ROLE_KEY` and optional `CLIENT_PORTAL_URL`.
 
+To send portal invitations from `info@yalabyte.com`, configure Supabase **Authentication → Email → SMTP Settings** with the YalaByte Zoho SMTP credentials and set the sender email to `info@yalabyte.com`. The invitation recipient is always taken from the saved CRM contact or lead email.
+
 `CLIQ_WEBHOOK_URL` sends every valid inquiry into the configured Zoho Cliq channel. The webhook itself controls which channel receives the message. Email and Cliq are independent: if SMTP is still blocked, Cliq can still receive notifications.
 
 For local FastAPI development, set `VITE_API_URL` to the deployed or local backend URL and update backend CORS origins in `backend/app/main.py` to include the deployed frontend domain.
