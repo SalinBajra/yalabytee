@@ -4,6 +4,7 @@ import os
 import re
 import smtplib
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from email.message import EmailMessage
@@ -136,9 +137,18 @@ def _save_crm_lead(payload, received_at):
     if not supabase_url or not server_key:
         return False
 
-    fingerprint = hashlib.sha256(
-        f"{payload['email'].lower()}|{payload.get('phone', '')}|{payload['service']}|{payload['message']}".encode("utf-8")
-    ).hexdigest()[:32]
+    normalized_email = payload["email"].strip().lower()
+    query = urllib.parse.urlencode({"select": "id", "data->>email": f"ilike.{normalized_email}", "limit": "1"})
+    lookup_request = urllib.request.Request(
+        f"{supabase_url}/rest/v1/leads?{query}",
+        headers={"apikey": server_key, **({} if server_key.startswith("sb_secret_") else {"Authorization": f"Bearer {server_key}"})},
+        method="GET",
+    )
+    with urllib.request.urlopen(lookup_request, timeout=15) as existing_response:
+        if json.loads(existing_response.read().decode("utf-8") or "[]"):
+            return "duplicate"
+
+    fingerprint = hashlib.sha256(normalized_email.encode("utf-8")).hexdigest()[:32]
     lead_id = f"lead-web-{fingerprint}"
     crm_lead = {
         "id": lead_id,
@@ -170,22 +180,27 @@ def _save_crm_lead(payload, received_at):
     headers = {
         "apikey": server_key,
         "Content-Type": "application/json",
-        "Prefer": "resolution=merge-duplicates,return=minimal",
+        "Prefer": "return=minimal",
     }
     if not server_key.startswith("sb_secret_"):
         headers["Authorization"] = f"Bearer {server_key}"
 
     request = urllib.request.Request(
-        f"{supabase_url}/rest/v1/leads?on_conflict=id",
+        f"{supabase_url}/rest/v1/leads",
         data=json.dumps(
             {"id": lead_id, "data": crm_lead, "created_at": received_at, "updated_at": received_at}
         ).encode("utf-8"),
         headers=headers,
         method="POST",
     )
-    with urllib.request.urlopen(request, timeout=15):
-        pass
-    return True
+    try:
+        with urllib.request.urlopen(request, timeout=15):
+            pass
+    except urllib.error.HTTPError as error:
+        if error.code == 409:
+            return "duplicate"
+        raise
+    return "created"
 
 
 class handler(BaseHTTPRequestHandler):
@@ -260,14 +275,25 @@ class handler(BaseHTTPRequestHandler):
 
         delivered = []
         delivery_errors = []
-        crm_saved = False
+        crm_status = "unavailable"
 
         try:
-            crm_saved = _save_crm_lead(normalized_payload, received_at)
+            crm_status = _save_crm_lead(normalized_payload, received_at)
         except (OSError, urllib.error.URLError, urllib.error.HTTPError) as error:
             delivery_errors.append(f"crm: {error}")
 
-        if not crm_saved:
+        if crm_status == "duplicate":
+            self._send_json(
+                200,
+                {
+                    "message": "Please have patience—we have already received your request, and our YalaByte heroes are on the way to assist you. 😊",
+                    "crm_status": "duplicate",
+                    "received_at": received_at,
+                },
+            )
+            return
+
+        if crm_status != "created":
             print(json.dumps({"event": "crm_lead_delivery_failed", "errors": delivery_errors, "received_at": received_at}))
             self._send_json(
                 502,
@@ -329,7 +355,7 @@ class handler(BaseHTTPRequestHandler):
                 {
                     "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
                     "notification_status": "logged",
-                    "crm_status": "saved" if crm_saved else "unavailable",
+                    "crm_status": "saved",
                     "received_at": received_at,
                 },
             )
@@ -339,7 +365,7 @@ class handler(BaseHTTPRequestHandler):
             200,
             {
                 "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
-                "crm_status": "saved" if crm_saved else "unavailable",
+                "crm_status": "saved",
                 "received_at": received_at,
             },
         )

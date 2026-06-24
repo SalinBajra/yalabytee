@@ -33,7 +33,7 @@ export default async function handler(request, response) {
 
   const receivedAt = new Date().toISOString();
   const fingerprint = createHash('sha256')
-    .update(`${lead.email}|${lead.phone}|${lead.service}|${lead.message}`)
+    .update(lead.email)
     .digest('hex')
     .slice(0, 32);
   const leadId = `lead-web-${fingerprint}`;
