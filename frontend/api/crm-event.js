@@ -40,19 +40,20 @@ export default async function handler(request, response) {
     const ownerName = String(lead.owner || '').trim();
     const hasDifferentOwner = ownerName
       && ownerName.localeCompare(actorName, undefined, { sensitivity: 'base' }) !== 0;
-    const text = [
+    const botMessage = [
       'Hi Team! 🚀',
       '',
-      `**${actorName}** has added a new lead: **${lead.name}**.`,
-      ...(hasDifferentOwner ? [`This lead is assigned to **${ownerName}**.`] : []),
+      `${actorName} has added a new lead: ${lead.name}.`,
+      ...(hasDifferentOwner ? [`This lead is assigned to ${ownerName}.`] : []),
       '',
-      "Please take a look and let's rock and roll! 🤘",
+      "Please take a look—let's rock and roll! 🤘"
+    ].join('\n');
+    const text = [
+      botMessage,
       '',
-      `**Company:** ${lead.company || 'Not provided'}`,
-      `**Service:** ${lead.service || 'Not specified'}`,
-      `**Email:** ${lead.email || 'Not provided'}`,
-      `**Phone:** ${lead.phone || 'Not provided'}`,
-      `**Source:** ${lead.source || 'Manual entry'}`,
+      `Company: ${lead.company || 'Not provided'}`,
+      `Service: ${lead.service || 'Not specified'}`,
+      `Source: ${lead.source || 'Manual entry'}`,
       'Open CRM: https://crm.yalabyte.com'
     ].join('\n');
 
@@ -61,6 +62,7 @@ export default async function handler(request, response) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         event: 'crm_new_lead',
+        notification_type: 'manual_crm_lead',
         title: 'New CRM lead added',
         name: lead.name,
         email: lead.email || 'Not provided',
@@ -73,7 +75,7 @@ export default async function handler(request, response) {
         actor_email: actorEmail,
         lead_name: lead.name,
         added_by: actorEmail,
-        message: text,
+        message: botMessage,
         text
       })
     });
