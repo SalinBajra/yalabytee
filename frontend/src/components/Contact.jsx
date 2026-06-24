@@ -74,19 +74,6 @@ export default function Contact() {
 
       setStatus({ type: 'success', message: result.message });
       setForm(initialState);
-
-      try {
-        const crmResponse = await fetch('/api/crm-lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form)
-        });
-        if (!crmResponse.ok) {
-          console.warn('CRM synchronization is temporarily unavailable.');
-        }
-      } catch {
-        console.warn('CRM synchronization is temporarily unavailable.');
-      }
     } catch (error) {
       setStatus({
         type: 'error',

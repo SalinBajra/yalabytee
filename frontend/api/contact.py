@@ -1,4 +1,5 @@
 import json
+import hashlib
 import os
 import re
 import smtplib
@@ -129,6 +130,64 @@ def _send_cliq(payload, received_at):
     return True
 
 
+def _save_crm_lead(payload, received_at):
+    supabase_url = _env("SUPABASE_URL").rstrip("/")
+    server_key = _env("SUPABASE_SERVICE_ROLE_KEY")
+    if not supabase_url or not server_key:
+        return False
+
+    fingerprint = hashlib.sha256(
+        f"{received_at}|{payload['email'].lower()}|{payload.get('phone', '')}|{payload['message']}".encode("utf-8")
+    ).hexdigest()[:32]
+    lead_id = f"lead-web-{fingerprint}"
+    crm_lead = {
+        "id": lead_id,
+        "name": payload["name"],
+        "email": payload["email"].lower(),
+        "phone": payload.get("phone") or "",
+        "company": payload.get("company") or "",
+        "service": payload["service"],
+        "message": payload["message"],
+        "status": "new",
+        "priority": "Medium",
+        "owner": "",
+        "value": "",
+        "followUpDate": "",
+        "source": "Website",
+        "notes": "",
+        "createdAt": received_at,
+        "updatedAt": received_at,
+        "activities": [
+            {
+                "id": f"activity-web-{fingerprint}",
+                "type": "Created",
+                "text": "Lead created automatically from website inquiry.",
+                "at": received_at,
+                "by": "YalaByte website",
+            }
+        ],
+    }
+    headers = {
+        "apikey": server_key,
+        "Content-Type": "application/json",
+        "Prefer": "resolution=merge-duplicates,return=minimal",
+    }
+    if not server_key.startswith("sb_secret_"):
+        headers["Authorization"] = f"Bearer {server_key}"
+
+    request = urllib.request.Request(
+        f"{supabase_url}/rest/v1/leads?on_conflict=id",
+        data=json.dumps(
+            {"id": lead_id, "data": crm_lead, "created_at": received_at, "updated_at": received_at}
+        ).encode("utf-8"),
+        headers=headers,
+        method="POST",
+    )
+    with urllib.request.urlopen(request, timeout=15):
+        pass
+    return True
+
+
 class handler(BaseHTTPRequestHandler):
     def _send_json(self, status, payload):
         body = json.dumps(payload).encode("utf-8")
@@ -201,6 +260,12 @@ class handler(BaseHTTPRequestHandler):
 
         delivered = []
         delivery_errors = []
+        crm_saved = False
+
+        try:
+            crm_saved = _save_crm_lead(normalized_payload, received_at)
+        except (OSError, urllib.error.URLError, urllib.error.HTTPError) as error:
+            delivery_errors.append(f"crm: {error}")
 
         try:
             if _send_cliq(normalized_payload, received_at):
@@ -248,6 +313,7 @@ class handler(BaseHTTPRequestHandler):
                 {
                     "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
                     "notification_status": "logged",
+                    "crm_status": "saved" if crm_saved else "unavailable",
                     "received_at": received_at,
                 },
             )
@@ -257,6 +323,7 @@ class handler(BaseHTTPRequestHandler):
             200,
             {
                 "message": "Thank you. Your project inquiry has been received and YalaByte will follow up soon.",
+                "crm_status": "saved" if crm_saved else "unavailable",
                 "received_at": received_at,
             },
         )
