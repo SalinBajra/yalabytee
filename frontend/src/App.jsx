@@ -7,6 +7,7 @@ import PortfolioPage from './pages/PortfolioPage.jsx';
 import PortfolioDemoPage from './pages/PortfolioDemoPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import ClientPortalPage from './pages/ClientPortalPage.jsx';
 import ContactShortcuts from './components/ContactShortcuts.jsx';
 
 const pages = {
@@ -31,6 +32,8 @@ export default function App() {
   if (demoMatch) {
     return <PortfolioDemoPage slug={demoMatch[1]} page={demoMatch[2] || 'home'} />;
   }
+
+  if (path === '/client-portal') return <ClientPortalPage />;
 
   return (
     <div className="min-h-screen bg-slate-50 text-ink antialiased">

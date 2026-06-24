@@ -73,6 +73,8 @@ Create `frontend/.env`:
 
 ```env
 VITE_API_URL=http://localhost:8000
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=your-browser-safe-publishable-key
 ```
 
 For Vercel production, leave `VITE_API_URL` empty or unset so the form uses the built-in `/api/contact` serverless endpoint.
@@ -92,9 +94,16 @@ CLIQ_WEBHOOK_URL=your-zoho-cliq-incoming-webhook-url
 EMAIL_STRICT=false
 SUPABASE_URL=https://your-project-ref.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=your-supabase-secret-or-legacy-service-role-key
+CLIENT_PORTAL_URL=https://www.yalabyte.com/client-portal
 ```
 
 `SUPABASE_SERVICE_ROLE_KEY` accepts Supabase's current `sb_secret_` key or the legacy service-role key. It is a server-only secret used by the website contact endpoint to create CRM leads. Never prefix it with `VITE_` or expose it in frontend code. Valid form submissions are saved with status `New` and source `Website`.
+
+### Invite-only client portal
+
+The client portal is available at `/client-portal`. Website inquiries only create CRM leads; they do not create accounts. After qualification, a signed-in `@yalabyte.com` teammate invites the saved contact from the CRM. The server-only `/api/client-invite` endpoint sends the Supabase invitation and links the login to that contact. Clients then use passwordless email links to create and follow support tickets.
+
+Add `https://www.yalabyte.com/client-portal` to the Supabase Authentication redirect allow list. The browser needs `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`; the invitation endpoint needs the server-only `SUPABASE_SERVICE_ROLE_KEY` and optional `CLIENT_PORTAL_URL`.
 
 `CLIQ_WEBHOOK_URL` sends every valid inquiry into the configured Zoho Cliq channel. The webhook itself controls which channel receives the message. Email and Cliq are independent: if SMTP is still blocked, Cliq can still receive notifications.
 
