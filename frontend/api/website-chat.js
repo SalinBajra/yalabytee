@@ -111,10 +111,13 @@ export default async function handler(request, response) {
   const message = String(payload.message || '').trim();
   const sourcePath = String(payload.sourcePath || '').trim();
 
-  if (!name || !email || !phone || !company || !message) {
-    return response.status(400).json({ detail: 'Name, email, phone, company, and message are required.' });
+  if (!conversationId && (!name || !email || !phone || !company || !message)) {
+    return response.status(400).json({ detail: 'Name, email, phone, company, and message are required to start a chat.' });
   }
-  if (!EMAIL_PATTERN.test(email) || phone.length < 7 || message.length < 20) {
+  if (conversationId && !message) {
+    return response.status(400).json({ detail: 'Message is required.' });
+  }
+  if (!conversationId && (!EMAIL_PATTERN.test(email) || phone.length < 7 || message.length < 20)) {
     return response.status(400).json({ detail: 'Invalid chat details.' });
   }
 
@@ -144,7 +147,7 @@ export default async function handler(request, response) {
   } else {
     const { data: existing, error: loadError } = await supabase
       .from('website_chat_conversations')
-      .select('id,status,ended_at')
+      .select('id,status,ended_at,customer_name,customer_email,customer_phone,customer_company')
       .eq('id', conversationId)
       .single();
 
@@ -161,8 +164,10 @@ export default async function handler(request, response) {
       .from('website_chat_conversations')
       .update({
         status: 'open',
-        customer_phone: phone,
-        customer_company: company,
+        customer_name: name || existing.customer_name,
+        customer_email: email || existing.customer_email,
+        customer_phone: phone || existing.customer_phone,
+        customer_company: company || existing.customer_company,
         updated_at: now,
         last_activity_at: now
       })
@@ -179,7 +184,7 @@ export default async function handler(request, response) {
     .insert({
       conversation_id: conversation.id,
       author_type: 'client',
-      author_name: name,
+      author_name: name || 'Website visitor',
       author_email: email,
       body: message,
       created_at: now
