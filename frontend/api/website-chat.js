@@ -49,6 +49,17 @@ export default async function handler(request, response) {
     const conversationId = String(request.query?.conversationId || '').trim();
     if (!conversationId) return response.status(400).json({ detail: 'Conversation id is required.' });
 
+    const { data: conversation, error: conversationError } = await supabase
+      .from('website_chat_conversations')
+      .select('id,status,customer_name,customer_email,customer_phone,customer_company,ended_at,ended_by,end_reason')
+      .eq('id', conversationId)
+      .single();
+
+    if (conversationError) {
+      console.error('Website chat conversation load failed', conversationError);
+      return response.status(502).json({ detail: publicError(conversationError, 'Unable to load chat conversation.') });
+    }
+
     const { data, error } = await supabase
       .from('website_chat_messages')
       .select('*')
@@ -60,17 +71,45 @@ export default async function handler(request, response) {
       return response.status(502).json({ detail: publicError(error, 'Unable to load chat messages.') });
     }
 
-    return response.status(200).json({ messages: data || [] });
+    return response.status(200).json({ conversation, messages: data || [] });
   }
 
   const payload = request.body || {};
+  const action = String(payload.action || '').trim();
+  const conversationId = String(payload.conversationId || '').trim();
+  const now = new Date().toISOString();
+
+  if (action === 'end') {
+    if (!conversationId) return response.status(400).json({ detail: 'Conversation id is required.' });
+
+    const { data, error } = await supabase
+      .from('website_chat_conversations')
+      .update({
+        status: 'resolved',
+        ended_at: now,
+        ended_by: 'client',
+        end_reason: 'client_ended',
+        updated_at: now,
+        last_activity_at: now
+      })
+      .eq('id', conversationId)
+      .select('id,status,ended_at,ended_by,end_reason')
+      .single();
+
+    if (error) {
+      console.error('Website chat end failed', error);
+      return response.status(502).json({ detail: publicError(error, 'Unable to end chat conversation.') });
+    }
+
+    return response.status(200).json({ status: 'ended', conversationId: data.id, conversation: data });
+  }
+
   const name = String(payload.name || '').trim();
   const email = String(payload.email || '').trim().toLowerCase();
   const phone = String(payload.phone || '').trim();
   const company = String(payload.company || '').trim();
   const message = String(payload.message || '').trim();
   const sourcePath = String(payload.sourcePath || '').trim();
-  const conversationId = String(payload.conversationId || '').trim();
 
   if (!name || !email || !phone || !company || !message) {
     return response.status(400).json({ detail: 'Name, email, phone, company, and message are required.' });
@@ -78,8 +117,6 @@ export default async function handler(request, response) {
   if (!EMAIL_PATTERN.test(email) || phone.length < 7 || message.length < 20) {
     return response.status(400).json({ detail: 'Invalid chat details.' });
   }
-
-  const now = new Date().toISOString();
 
   let conversation = { id: conversationId };
   if (!conversationId) {
@@ -105,6 +142,21 @@ export default async function handler(request, response) {
     }
     conversation = data;
   } else {
+    const { data: existing, error: loadError } = await supabase
+      .from('website_chat_conversations')
+      .select('id,status,ended_at')
+      .eq('id', conversationId)
+      .single();
+
+    if (loadError) {
+      console.error('Website chat conversation lookup failed', loadError);
+      return response.status(502).json({ detail: publicError(loadError, 'Unable to continue chat conversation.') });
+    }
+
+    if (existing?.ended_at || existing?.status === 'resolved') {
+      return response.status(409).json({ detail: 'This chat has ended. Please start a new chat to send another message.' });
+    }
+
     const { error } = await supabase
       .from('website_chat_conversations')
       .update({
