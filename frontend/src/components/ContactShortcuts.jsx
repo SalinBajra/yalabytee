@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 const phoneNumber = '+9779705501969';
 const displayPhoneNumber = '+977 9705501969';
 const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}`;
-const chatUrl = 'https://chat.yalabyte.com';
 
-export { chatUrl, displayPhoneNumber, phoneNumber, whatsappUrl };
+export { displayPhoneNumber, phoneNumber, whatsappUrl };
 
 export default function ContactShortcuts() {
   const [isVisible, setIsVisible] = useState(false);
@@ -58,23 +57,6 @@ export default function ContactShortcuts() {
           <path d="M8.7 3.8 10.3 7c.3.6.2 1.3-.3 1.8L8.8 10c1.1 2.3 2.9 4.1 5.2 5.2l1.2-1.2c.5-.5 1.2-.6 1.8-.3l3.2 1.6c.7.3 1 1 .8 1.7l-.5 2.3c-.2.8-.9 1.4-1.7 1.4C10.2 20.7 3.3 13.8 3.3 5.2c0-.8.6-1.5 1.4-1.7L7 3c.7-.2 1.4.1 1.7.8Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         <span className="hidden text-sm font-semibold sm:inline">Call us</span>
-      </a>
-      <a
-        href={chatUrl}
-        tabIndex={isVisible ? 0 : -1}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Open YalaByte chat"
-        title="Open YalaByte chat"
-        className={`group flex h-12 items-center gap-2 rounded-full border border-cyanbrand-200 bg-white px-3.5 text-navy-950 shadow-lg transition-all duration-500 motion-reduce:transition-none hover:-translate-y-0.5 hover:border-cyanbrand-400 hover:bg-cyanbrand-50 ${
-          isVisible ? 'translate-y-0 opacity-100 delay-150' : 'translate-y-3 opacity-0 delay-0'
-        }`}
-      >
-        <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-          <path d="M5 6.5h14v9H9.5L5 19.5v-13Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M8.5 10h7M8.5 12.8h4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <span className="hidden text-sm font-semibold sm:inline">Chat</span>
       </a>
       <a
         href={whatsappUrl}

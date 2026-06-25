@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import ClientPortalPage from './pages/ClientPortalPage.jsx';
 import ContactShortcuts from './components/ContactShortcuts.jsx';
+import ChatwootWidget from './components/ChatwootWidget.jsx';
 
 const pages = {
   '/': HomePage,
@@ -43,6 +44,7 @@ export default function App() {
       </main>
       <Footer />
       <ContactShortcuts />
+      <ChatwootWidget />
     </div>
   );
 }
