@@ -2,6 +2,15 @@ import { createHash } from 'node:crypto';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function getSupabaseServerKey() {
+  return (
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+    || process.env.SUPABASE_SECRET_KEY
+    || process.env.SUPABASE_SERVICE_KEY
+    || ''
+  );
+}
+
 function serverHeaders(serverKey, prefer = 'return=representation') {
   return {
     apikey: serverKey,
@@ -18,7 +27,7 @@ export default async function handler(request, response) {
   }
 
   const supabaseUrl = String(process.env.SUPABASE_URL || '').replace(/\/$/, '');
-  const serverKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+  const serverKey = getSupabaseServerKey();
   if (!supabaseUrl || !serverKey) {
     return response.status(503).json({ detail: 'Chat integration is not configured.' });
   }
@@ -85,7 +94,10 @@ export default async function handler(request, response) {
       if (!conversationResponse.ok || !conversation?.id) {
         const detail = JSON.stringify(conversationRows).slice(0, 500);
         console.error('Website chat conversation failed', conversationResponse.status, detail);
-        return response.status(502).json({ detail: `Unable to start chat conversation (${conversationResponse.status}).` });
+        const hint = conversationResponse.status === 401 || conversationResponse.status === 403
+          ? ' Supabase rejected the server key. In Vercel, set SUPABASE_SERVICE_ROLE_KEY or SUPABASE_SECRET_KEY to the secret/service-role key, not the publishable/anon key.'
+          : '';
+        return response.status(502).json({ detail: `Unable to start chat conversation (${conversationResponse.status}).${hint}` });
       }
     } else {
       await fetch(`${supabaseUrl}/rest/v1/website_chat_conversations?id=eq.${encodeURIComponent(conversationId)}`, {
@@ -114,7 +126,10 @@ export default async function handler(request, response) {
     if (!messageResponse.ok) {
       const detail = (await messageResponse.text()).slice(0, 500);
       console.error('Website chat message failed', messageResponse.status, detail);
-      return response.status(502).json({ detail: 'Unable to save chat message.' });
+      const hint = messageResponse.status === 401 || messageResponse.status === 403
+        ? ' Supabase rejected the server key. Check the website Vercel secret key.'
+        : '';
+      return response.status(502).json({ detail: `Unable to save chat message.${hint}` });
     }
 
     if (!conversationId) {
