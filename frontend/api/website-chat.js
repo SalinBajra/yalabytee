@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { createClient } from '@supabase/supabase-js';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -67,19 +66,20 @@ export default async function handler(request, response) {
   const payload = request.body || {};
   const name = String(payload.name || '').trim();
   const email = String(payload.email || '').trim().toLowerCase();
+  const phone = String(payload.phone || '').trim();
+  const company = String(payload.company || '').trim();
   const message = String(payload.message || '').trim();
   const sourcePath = String(payload.sourcePath || '').trim();
   const conversationId = String(payload.conversationId || '').trim();
 
-  if (!name || !email || !message) {
-    return response.status(400).json({ detail: 'Name, email, and message are required.' });
+  if (!name || !email || !phone || !company || !message) {
+    return response.status(400).json({ detail: 'Name, email, phone, company, and message are required.' });
   }
-  if (!EMAIL_PATTERN.test(email) || message.length < 20) {
+  if (!EMAIL_PATTERN.test(email) || phone.length < 7 || message.length < 20) {
     return response.status(400).json({ detail: 'Invalid chat details.' });
   }
 
   const now = new Date().toISOString();
-  const fingerprint = createHash('sha256').update(email).digest('hex').slice(0, 32);
 
   let conversation = { id: conversationId };
   if (!conversationId) {
@@ -88,6 +88,8 @@ export default async function handler(request, response) {
       .insert({
         customer_name: name,
         customer_email: email,
+        customer_phone: phone,
+        customer_company: company,
         subject: 'Website chat',
         source_path: sourcePath,
         created_at: now,
@@ -107,6 +109,8 @@ export default async function handler(request, response) {
       .from('website_chat_conversations')
       .update({
         status: 'open',
+        customer_phone: phone,
+        customer_company: company,
         updated_at: now,
         last_activity_at: now
       })
@@ -132,47 +136,6 @@ export default async function handler(request, response) {
   if (messageError) {
     console.error('Website chat message failed', messageError);
     return response.status(502).json({ detail: publicError(messageError, 'Unable to save chat message.') });
-  }
-
-  if (!conversationId) {
-    const leadId = `lead-chat-${fingerprint}`;
-    const crmLead = {
-      id: leadId,
-      name,
-      email,
-      phone: '',
-      company: '',
-      service: 'Website Chat',
-      message,
-      status: 'new',
-      priority: 'Medium',
-      owner: '',
-      value: '',
-      followUpDate: '',
-      source: 'Website Chat',
-      notes: `Chat conversation: ${conversation.id}`,
-      createdAt: now,
-      updatedAt: now,
-      activities: [
-        {
-          id: `activity-chat-${fingerprint}`,
-          type: 'Created',
-          text: 'Lead created automatically from website chat.',
-          at: now
-        }
-      ]
-    };
-
-    const { error: leadError } = await supabase
-      .from('leads')
-      .upsert({
-        id: leadId,
-        data: crmLead,
-        created_at: now,
-        updated_at: now
-      }, { onConflict: 'id' });
-
-    if (leadError) console.error('Website chat CRM lead sync failed', leadError);
   }
 
   return response.status(201).json({ status: 'saved', conversationId: conversation.id });

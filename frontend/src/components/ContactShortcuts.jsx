@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 const phoneNumber = '+9779705501969';
 const displayPhoneNumber = '+977 9705501969';
 const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}`;
-const initialChat = { name: '', email: '', message: '' };
+const initialChat = { name: '', email: '', phone: '', company: '', message: '' };
 const CHAT_SESSION_KEY = 'yalabyte-website-chat-session';
 
 export { displayPhoneNumber, phoneNumber, whatsappUrl };
@@ -20,7 +20,9 @@ export default function ContactShortcuts() {
   const [chatForm, setChatForm] = useState(() => ({
     ...initialChat,
     name: chatSession?.name || '',
-    email: chatSession?.email || ''
+    email: chatSession?.email || '',
+    phone: chatSession?.phone || '',
+    company: chatSession?.company || ''
   }));
   const [messages, setMessages] = useState([]);
   const [chatStatus, setChatStatus] = useState({ type: 'idle', message: '' });
@@ -55,14 +57,20 @@ export default function ContactShortcuts() {
     event.preventDefault();
     const name = chatForm.name.trim();
     const email = chatForm.email.trim().toLowerCase();
+    const phone = chatForm.phone.trim();
+    const company = chatForm.company.trim();
     const message = chatForm.message.trim();
 
-    if (!name || !email || !message) {
-      setChatStatus({ type: 'error', message: 'Please add your name, email, and message.' });
+    if (!name || !email || !phone || !company || !message) {
+      setChatStatus({ type: 'error', message: 'Please add your name, email, phone, company, and message.' });
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setChatStatus({ type: 'error', message: 'Please enter a valid email address.' });
+      return;
+    }
+    if (phone.length < 7) {
+      setChatStatus({ type: 'error', message: 'Please add a valid contact number.' });
       return;
     }
     if (message.length < 20) {
@@ -80,6 +88,8 @@ export default function ContactShortcuts() {
         body: JSON.stringify({
           name,
           email,
+          phone,
+          company,
           message,
           sourcePath: window.location.pathname,
           conversationId: chatSession?.conversationId || ''
@@ -87,11 +97,11 @@ export default function ContactShortcuts() {
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.detail || 'Unable to send your chat right now.');
-      const session = { conversationId: result.conversationId, name, email };
+      const session = { conversationId: result.conversationId, name, email, phone, company };
       window.localStorage.setItem(CHAT_SESSION_KEY, JSON.stringify(session));
       setChatSession(session);
       setChatStatus({ type: 'success', message: 'Message sent.' });
-      setChatForm({ name, email, message: '' });
+      setChatForm({ name, email, phone, company, message: '' });
       await loadMessages(result.conversationId);
     } catch (error) {
       console.error('Website chat send failed', error);
@@ -127,7 +137,7 @@ export default function ContactShortcuts() {
           </header>
           <div className="min-h-0 flex-1 overflow-y-auto bg-slate-50 px-4 py-4">
             <div className="max-w-[86%] rounded-2xl rounded-tl-md border border-slate-200 bg-white px-3.5 py-2.5 text-sm leading-6 shadow-sm">
-              Hi, share what you need and we will reply here.
+              Hi, share your details and what you need. We will reply here.
             </div>
             {hasThread ? (
               <div className="mt-3 space-y-2 pr-1">
@@ -146,6 +156,8 @@ export default function ContactShortcuts() {
             <div className="grid gap-2 sm:grid-cols-2">
               <input className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="name" onChange={handleChatChange} placeholder="Name" value={chatForm.name} />
               <input className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="email" onChange={handleChatChange} placeholder="Email" type="email" value={chatForm.email} />
+              <input className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="phone" onChange={handleChatChange} placeholder="Contact number" value={chatForm.phone} />
+              <input className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="company" onChange={handleChatChange} placeholder="Company name" value={chatForm.company} />
             </div>
             <textarea className="min-h-24 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="message" onChange={handleChatChange} placeholder={hasThread ? 'Write another message...' : 'Tell us what you need...'} value={chatForm.message} />
             {chatStatus.message ? (
