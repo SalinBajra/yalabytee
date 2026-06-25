@@ -3,13 +3,12 @@ import { createHash } from 'node:crypto';
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function serverHeaders(serverKey, prefer = 'return=representation') {
-  const headers = {
+  return {
     apikey: serverKey,
+    Authorization: `Bearer ${serverKey}`,
     'Content-Type': 'application/json',
     Prefer: prefer
   };
-  if (!serverKey.startsWith('sb_secret_')) headers.Authorization = `Bearer ${serverKey}`;
-  return headers;
 }
 
 export default async function handler(request, response) {
@@ -86,7 +85,7 @@ export default async function handler(request, response) {
       if (!conversationResponse.ok || !conversation?.id) {
         const detail = JSON.stringify(conversationRows).slice(0, 500);
         console.error('Website chat conversation failed', conversationResponse.status, detail);
-        return response.status(502).json({ detail: 'Unable to start chat conversation.' });
+        return response.status(502).json({ detail: `Unable to start chat conversation (${conversationResponse.status}).` });
       }
     } else {
       await fetch(`${supabaseUrl}/rest/v1/website_chat_conversations?id=eq.${encodeURIComponent(conversationId)}`, {
