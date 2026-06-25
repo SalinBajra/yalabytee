@@ -52,6 +52,14 @@ export default function Header({ currentPath }) {
             ))}
           </div>
           <a
+            href="https://chat.yalabyte.com"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden rounded-md border border-white/15 px-4 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:border-cyanbrand-400 hover:text-cyanbrand-400 sm:inline-flex"
+          >
+            Team Chat
+          </a>
+          <a
             href="/contact"
             onClick={(event) => {
               goTo(event, '/contact');
@@ -81,6 +89,14 @@ export default function Header({ currentPath }) {
               {item.label}
             </a>
           ))}
+          <a
+            href="https://chat.yalabyte.com"
+            target="_blank"
+            rel="noreferrer"
+            className="whitespace-nowrap rounded-md px-3 py-2.5 text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white sm:px-2"
+          >
+            Team Chat
+          </a>
         </div>
       </nav>
     </header>
