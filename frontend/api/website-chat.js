@@ -12,12 +12,15 @@ function getSupabaseServerKey() {
 }
 
 function serverHeaders(serverKey, prefer = 'return=representation') {
-  return {
+  const headers = {
     apikey: serverKey,
-    Authorization: `Bearer ${serverKey}`,
     'Content-Type': 'application/json',
     Prefer: prefer
   };
+  if (!serverKey.startsWith('sb_secret_')) {
+    headers.Authorization = `Bearer ${serverKey}`;
+  }
+  return headers;
 }
 
 export default async function handler(request, response) {
