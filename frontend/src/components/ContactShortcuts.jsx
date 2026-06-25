@@ -94,7 +94,8 @@ export default function ContactShortcuts() {
       setChatForm({ name, email, message: '' });
       await loadMessages(result.conversationId);
     } catch (error) {
-      setChatStatus({ type: 'error', message: error.message || 'Unable to send your chat right now.' });
+      console.error('Website chat send failed', error);
+      setChatStatus({ type: 'error', message: 'Unable to send right now. Please call or WhatsApp us and we will help.' });
     } finally {
       setChatSending(false);
     }

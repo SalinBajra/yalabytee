@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { createClient } from '@supabase/supabase-js';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -11,16 +12,27 @@ function getSupabaseServerKey() {
   );
 }
 
-function serverHeaders(serverKey, prefer = 'return=representation') {
-  const headers = {
-    apikey: serverKey,
-    'Content-Type': 'application/json',
-    Prefer: prefer
-  };
-  if (!serverKey.startsWith('sb_secret_')) {
-    headers.Authorization = `Bearer ${serverKey}`;
+function getSupabaseClient() {
+  const supabaseUrl = String(process.env.SUPABASE_URL || '').replace(/\/$/, '');
+  const serverKey = getSupabaseServerKey();
+  if (!supabaseUrl || !serverKey) return null;
+  return createClient(supabaseUrl, serverKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  });
+}
+
+function publicError(error, fallback) {
+  const message = error?.message || '';
+  if (/permission denied|row-level security|invalid api key|jwt|not authorized/i.test(message)) {
+    return `${fallback} Supabase rejected the website server key. In the website Vercel project, SUPABASE_SERVICE_ROLE_KEY must be the service-role/secret key from the same Supabase project that has the chat tables.`;
   }
-  return headers;
+  if (/does not exist|schema cache/i.test(message)) {
+    return `${fallback} The chat tables are missing from the Supabase project used by the website.`;
+  }
+  return fallback;
 }
 
 export default async function handler(request, response) {
@@ -29,9 +41,8 @@ export default async function handler(request, response) {
     return response.status(405).json({ detail: 'Method not allowed.' });
   }
 
-  const supabaseUrl = String(process.env.SUPABASE_URL || '').replace(/\/$/, '');
-  const serverKey = getSupabaseServerKey();
-  if (!supabaseUrl || !serverKey) {
+  const supabase = getSupabaseClient();
+  if (!supabase) {
     return response.status(503).json({ detail: 'Chat integration is not configured.' });
   }
 
@@ -39,22 +50,18 @@ export default async function handler(request, response) {
     const conversationId = String(request.query?.conversationId || '').trim();
     if (!conversationId) return response.status(400).json({ detail: 'Conversation id is required.' });
 
-    try {
-      const messagesResponse = await fetch(
-        `${supabaseUrl}/rest/v1/website_chat_messages?conversation_id=eq.${encodeURIComponent(conversationId)}&select=*&order=created_at.asc`,
-        { headers: serverHeaders(serverKey) }
-      );
-      if (!messagesResponse.ok) {
-        const detail = (await messagesResponse.text()).slice(0, 500);
-        console.error('Website chat message load failed', messagesResponse.status, detail);
-        return response.status(502).json({ detail: 'Unable to load chat messages.' });
-      }
-      const messages = await messagesResponse.json();
-      return response.status(200).json({ messages });
-    } catch (error) {
-      console.error('Website chat message load failed', error instanceof Error ? error.message : 'Unknown error');
-      return response.status(502).json({ detail: 'Unable to reach the chat database.' });
+    const { data, error } = await supabase
+      .from('website_chat_messages')
+      .select('*')
+      .eq('conversation_id', conversationId)
+      .order('created_at', { ascending: true });
+
+    if (error) {
+      console.error('Website chat message load failed', error);
+      return response.status(502).json({ detail: publicError(error, 'Unable to load chat messages.') });
     }
+
+    return response.status(200).json({ messages: data || [] });
   }
 
   const payload = request.body || {};
@@ -74,111 +81,99 @@ export default async function handler(request, response) {
   const now = new Date().toISOString();
   const fingerprint = createHash('sha256').update(email).digest('hex').slice(0, 32);
 
-  try {
-    let conversation = { id: conversationId };
-
-    if (!conversationId) {
-      const conversationResponse = await fetch(`${supabaseUrl}/rest/v1/website_chat_conversations`, {
-        method: 'POST',
-        headers: serverHeaders(serverKey),
-        body: JSON.stringify({
-          customer_name: name,
-          customer_email: email,
-          subject: 'Website chat',
-          source_path: sourcePath,
-          created_at: now,
-          updated_at: now,
-          last_activity_at: now
-        })
-      });
-
-      const conversationRows = await conversationResponse.json().catch(() => []);
-      conversation = Array.isArray(conversationRows) ? conversationRows[0] : conversationRows;
-      if (!conversationResponse.ok || !conversation?.id) {
-        const detail = JSON.stringify(conversationRows).slice(0, 500);
-        console.error('Website chat conversation failed', conversationResponse.status, detail);
-        const hint = conversationResponse.status === 401 || conversationResponse.status === 403
-          ? ' Supabase rejected the server key. In Vercel, set SUPABASE_SERVICE_ROLE_KEY or SUPABASE_SECRET_KEY to the secret/service-role key, not the publishable/anon key.'
-          : '';
-        return response.status(502).json({ detail: `Unable to start chat conversation (${conversationResponse.status}).${hint}` });
-      }
-    } else {
-      await fetch(`${supabaseUrl}/rest/v1/website_chat_conversations?id=eq.${encodeURIComponent(conversationId)}`, {
-        method: 'PATCH',
-        headers: serverHeaders(serverKey, 'return=minimal'),
-        body: JSON.stringify({
-          status: 'open',
-          updated_at: now,
-          last_activity_at: now
-        })
-      });
-    }
-
-    const messageResponse = await fetch(`${supabaseUrl}/rest/v1/website_chat_messages`, {
-      method: 'POST',
-      headers: serverHeaders(serverKey, 'return=minimal'),
-      body: JSON.stringify({
-        conversation_id: conversation.id,
-        author_type: 'client',
-        author_name: name,
-        author_email: email,
-        body: message,
-        created_at: now
+  let conversation = { id: conversationId };
+  if (!conversationId) {
+    const { data, error } = await supabase
+      .from('website_chat_conversations')
+      .insert({
+        customer_name: name,
+        customer_email: email,
+        subject: 'Website chat',
+        source_path: sourcePath,
+        created_at: now,
+        updated_at: now,
+        last_activity_at: now
       })
-    });
-    if (!messageResponse.ok) {
-      const detail = (await messageResponse.text()).slice(0, 500);
-      console.error('Website chat message failed', messageResponse.status, detail);
-      const hint = messageResponse.status === 401 || messageResponse.status === 403
-        ? ' Supabase rejected the server key. Check the website Vercel secret key.'
-        : '';
-      return response.status(502).json({ detail: `Unable to save chat message.${hint}` });
+      .select('id')
+      .single();
+
+    if (error || !data?.id) {
+      console.error('Website chat conversation failed', error);
+      return response.status(502).json({ detail: publicError(error, 'Unable to start chat conversation.') });
     }
+    conversation = data;
+  } else {
+    const { error } = await supabase
+      .from('website_chat_conversations')
+      .update({
+        status: 'open',
+        updated_at: now,
+        last_activity_at: now
+      })
+      .eq('id', conversationId);
 
-    if (!conversationId) {
-      const leadId = `lead-chat-${fingerprint}`;
-      const crmLead = {
-        id: leadId,
-        name,
-        email,
-        phone: '',
-        company: '',
-        service: 'Website Chat',
-        message,
-        status: 'new',
-        priority: 'Medium',
-        owner: '',
-        value: '',
-        followUpDate: '',
-        source: 'Website Chat',
-        notes: `Chat conversation: ${conversation.id}`,
-        createdAt: now,
-        updatedAt: now,
-        activities: [
-          {
-            id: `activity-chat-${fingerprint}`,
-            type: 'Created',
-            text: 'Lead created automatically from website chat.',
-            at: now
-          }
-        ]
-      };
-
-      await fetch(`${supabaseUrl}/rest/v1/leads`, {
-        method: 'POST',
-        headers: serverHeaders(serverKey, 'resolution=merge-duplicates,return=minimal'),
-        body: JSON.stringify({
-          id: leadId,
-          data: crmLead,
-          created_at: now,
-          updated_at: now
-        })
-      });
+    if (error) {
+      console.error('Website chat conversation update failed', error);
+      return response.status(502).json({ detail: publicError(error, 'Unable to continue chat conversation.') });
     }
-
-    return response.status(201).json({ status: 'saved', conversationId: conversation.id });
-  } catch (error) {
-    console.error('Website chat failed', error instanceof Error ? error.message : 'Unknown error');
-    return response.status(502).json({ detail: 'Unable to reach the chat database.' });
   }
+
+  const { error: messageError } = await supabase
+    .from('website_chat_messages')
+    .insert({
+      conversation_id: conversation.id,
+      author_type: 'client',
+      author_name: name,
+      author_email: email,
+      body: message,
+      created_at: now
+    });
+
+  if (messageError) {
+    console.error('Website chat message failed', messageError);
+    return response.status(502).json({ detail: publicError(messageError, 'Unable to save chat message.') });
+  }
+
+  if (!conversationId) {
+    const leadId = `lead-chat-${fingerprint}`;
+    const crmLead = {
+      id: leadId,
+      name,
+      email,
+      phone: '',
+      company: '',
+      service: 'Website Chat',
+      message,
+      status: 'new',
+      priority: 'Medium',
+      owner: '',
+      value: '',
+      followUpDate: '',
+      source: 'Website Chat',
+      notes: `Chat conversation: ${conversation.id}`,
+      createdAt: now,
+      updatedAt: now,
+      activities: [
+        {
+          id: `activity-chat-${fingerprint}`,
+          type: 'Created',
+          text: 'Lead created automatically from website chat.',
+          at: now
+        }
+      ]
+    };
+
+    const { error: leadError } = await supabase
+      .from('leads')
+      .upsert({
+        id: leadId,
+        data: crmLead,
+        created_at: now,
+        updated_at: now
+      }, { onConflict: 'id' });
+
+    if (leadError) console.error('Website chat CRM lead sync failed', leadError);
+  }
+
+  return response.status(201).json({ status: 'saved', conversationId: conversation.id });
 }
