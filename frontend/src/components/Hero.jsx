@@ -1,8 +1,6 @@
 import { useRef } from 'react';
 import { navigateTo } from '../utils/routes.js';
 
-const capabilities = ['Business Websites', 'Web Platforms', 'Launch Support'];
-
 export default function Hero() {
   const visualRef = useRef(null);
 
@@ -48,7 +46,6 @@ export default function Hero() {
 
       <div className="studio-hero__inner">
         <div className="studio-hero__copy">
-          <p className="studio-hero__eyebrow"><span />YalaByte Studio / Nepal to worldwide</p>
           <h1 className="studio-hero__title">
             DESIGN.<br />BUILD.<br /><em>LAUNCH.</em>
           </h1>
@@ -61,16 +58,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="studio-hero__strip">
-          <span className="studio-hero__strip-label">Built for what’s next</span>
-          <div className="studio-hero__capabilities">
-            {capabilities.map((item, index) => <span key={item}><b>0{index + 1}</b>{item}</span>)}
-          </div>
-          <a href="#services" onClick={(event) => {
-            event.preventDefault();
-            document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' });
-          }}>Explore <i>↓</i></a>
-        </div>
+        <div />
       </div>
     </section>
   );
