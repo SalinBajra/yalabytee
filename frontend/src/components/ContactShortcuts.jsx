@@ -176,32 +176,38 @@ export default function ContactShortcuts() {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6"
+      className="fixed bottom-4 right-4 z-[90] flex flex-col items-end gap-3 sm:bottom-5 sm:right-5"
     >
       {chatOpen ? (
-        <section className="mb-1 flex max-h-[min(540px,calc(100vh-8rem))] w-[min(92vw,360px)] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white text-navy-950 shadow-[0_24px_70px_rgba(6,17,31,0.24)]" aria-label="YalaByte website chat">
-          <header className="flex items-start justify-between gap-3 bg-navy-950 px-4 py-3.5 text-white">
+        <section className="mb-1 flex max-h-[min(560px,calc(100vh-7.25rem))] w-[min(92vw,340px)] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white text-navy-950 shadow-[0_24px_70px_rgba(6,17,31,0.24)]" aria-label="YalaByte website chat">
+          <header className="flex items-start justify-between gap-3 bg-navy-950 px-4 py-3 text-white">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(52,211,153,0.14)]" />
-                <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-cyanbrand-400">YalaByte Chat</p>
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(52,211,153,0.14)]" />
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-cyanbrand-400">YalaByte Chat</p>
               </div>
               <h2 className="mt-1 text-base font-extrabold tracking-tight">Talk to our team</h2>
-              <p className="mt-1 text-xs font-medium text-slate-300">{chatEnded ? 'This conversation is closed.' : 'Usually replies inside the business day.'}</p>
+              <p className="mt-0.5 text-xs font-medium text-slate-300">{chatEnded ? 'This conversation is closed.' : 'We usually reply within a business day.'}</p>
             </div>
             <button
               type="button"
-              className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-white/15 text-lg leading-none text-white transition hover:bg-white/10"
+              className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/15 text-lg leading-none text-white transition hover:bg-white/10"
               onClick={() => setChatOpen(false)}
               aria-label="Close chat"
             >
               ×
             </button>
           </header>
-          <div className="min-h-0 flex-1 overflow-y-auto bg-slate-50 px-4 py-4">
-            <div className="max-w-[86%] rounded-2xl rounded-tl-md border border-slate-200 bg-white px-3.5 py-2.5 text-sm leading-6 shadow-sm">
-              {hasConversation ? 'You can continue the conversation here.' : 'Hi, share your details and what you need. We will reply here.'}
-            </div>
+          <div className={`min-h-0 flex-1 overflow-y-auto bg-slate-50 px-4 ${showDetails && !chatEnded ? 'py-3' : 'py-4'}`}>
+            {showDetails && !chatEnded ? (
+              <p className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold leading-5 text-slate-700 shadow-sm">
+                Share your contact details and project note.
+              </p>
+            ) : (
+              <div className="max-w-[86%] rounded-2xl rounded-tl-md border border-slate-200 bg-white px-3.5 py-2.5 text-sm leading-6 shadow-sm">
+                {hasConversation ? 'You can continue the conversation here.' : 'Hi, share your details and what you need. We will reply here.'}
+              </div>
+            )}
             {hasThread ? (
               <div className="mt-3 space-y-2 pr-1">
                 {messages.map((item) => (
@@ -215,13 +221,17 @@ export default function ContactShortcuts() {
               </div>
             ) : null}
           </div>
-          <form className="shrink-0 space-y-2.5 border-t border-slate-200 bg-white p-4" onSubmit={sendChat}>
+          <form className="shrink-0 space-y-2.5 border-t border-slate-200 bg-white p-3.5" onSubmit={sendChat}>
             {showDetails && !chatEnded ? (
-              <div className="grid gap-2 sm:grid-cols-2">
-                <input className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="name" onChange={handleChatChange} placeholder="Name" value={chatForm.name} />
-                <input className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="email" onChange={handleChatChange} placeholder="Email" type="email" value={chatForm.email} />
-                <input className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="phone" onChange={handleChatChange} placeholder="Contact number" value={chatForm.phone} />
-                <input className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="company" onChange={handleChatChange} placeholder="Company name" value={chatForm.company} />
+              <div className="grid gap-2">
+                <div className="grid grid-cols-2 gap-2">
+                  <input className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="name" onChange={handleChatChange} placeholder="Name" value={chatForm.name} />
+                  <input className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="email" onChange={handleChatChange} placeholder="Email" type="email" value={chatForm.email} />
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <input className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="phone" onChange={handleChatChange} placeholder="Phone" value={chatForm.phone} />
+                  <input className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="company" onChange={handleChatChange} placeholder="Company" value={chatForm.company} />
+                </div>
               </div>
             ) : null}
             {chatEnded ? (
@@ -230,10 +240,10 @@ export default function ContactShortcuts() {
                 <p className="mt-1 text-xs font-medium leading-5 text-slate-500">This conversation is closed. Start a new chat if you need more help.</p>
               </div>
             ) : (
-              <textarea className="min-h-16 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="message" onChange={handleChatChange} placeholder={hasThread ? 'Write another message...' : 'Tell us what you need...'} value={chatForm.message} />
+              <textarea className="min-h-16 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="message" onChange={handleChatChange} placeholder={hasThread ? 'Write another message...' : 'Tell us what you need...'} value={chatForm.message} />
             )}
             {chatStatus.message ? (
-              <p className={`rounded-xl px-3 py-2 text-sm font-semibold ${chatStatus.type === 'success' ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-700'}`}>
+              <p className={`rounded-lg px-3 py-2 text-xs font-bold leading-5 ${chatStatus.type === 'success' ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-700'}`}>
                 {chatStatus.message}
               </p>
             ) : null}
@@ -246,14 +256,14 @@ export default function ContactShortcuts() {
                 {chatSending ? 'Sending...' : hasConversation ? 'Send Reply' : 'Start Chat'}
               </button>
             )}
-            <div className="flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
+            <div className="flex items-center justify-between gap-2 border-t border-slate-100 pt-2.5">
               <div className="flex gap-2">
-                <a className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 text-slate-700 transition hover:border-cyanbrand-400 hover:bg-slate-50 hover:text-navy-950" href={`tel:${phoneNumber}`} title="Call us" aria-label="Call us">
+                <a className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 text-slate-700 transition hover:border-cyanbrand-400 hover:bg-slate-50 hover:text-navy-950" href={`tel:${phoneNumber}`} title="Call us" aria-label="Call us">
                   <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
                     <path d="M7.5 4.5 10 9l-1.8 1.8a12.2 12.2 0 0 0 5 5L15 14l4.5 2.5-.8 3.2c-.2.7-.8 1.1-1.5 1A16.5 16.5 0 0 1 3.3 6.8c-.1-.7.3-1.3 1-1.5l3.2-.8Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </a>
-                <a className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 text-slate-700 transition hover:border-[#25D366] hover:bg-slate-50 hover:text-navy-950" href={whatsappUrl} target="_blank" rel="noreferrer" title="WhatsApp" aria-label="WhatsApp">
+                <a className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 text-slate-700 transition hover:border-[#25D366] hover:bg-slate-50 hover:text-navy-950" href={whatsappUrl} target="_blank" rel="noreferrer" title="WhatsApp" aria-label="WhatsApp">
                   <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
                     <path d="M5 19 6.2 15.8A7.6 7.6 0 1 1 9 18.4L5 19Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M9.5 8.8c.3 2.7 2 4.4 4.7 4.7l1-1.1c.2-.2.5-.3.8-.2l1.5.5c.3.1.5.4.5.7v1.4c0 .4-.3.8-.7.8-5.1.2-8.9-3.6-8.7-8.7 0-.4.4-.7.8-.7h1.4c.3 0 .6.2.7.5l.5 1.5c.1.3 0 .6-.2.8l-1.1 1Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
