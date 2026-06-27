@@ -23,6 +23,7 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="Everything your website needs. Nothing it doesn’t."
         text="Strategy, design, development, and launch support—brought together around a clear business goal."
+        visual="/images/yalabyte-3d-app-ecosystem.png"
       />
 
       <section className="service-detail-section">

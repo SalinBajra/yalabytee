@@ -10,6 +10,7 @@ export default function PortfolioPage() {
         eyebrow="Portfolio"
         title="Live Demos, ready to explore"
         text="Browse complete Travel, Café, and Logistics Live Demos with realistic pages, content, and navigation."
+        visual="/images/yalabyte-3d-responsive-platform.png"
         actions={portfolioDemos.map((demo) => (
           <DemoLauncher key={demo.slug} project={demo} className="rounded-lg border border-white/20 px-4 py-2.5 text-sm font-bold text-white transition hover:border-cyanbrand-400 hover:bg-white/[0.08]">
             {demo.title}
