@@ -34,7 +34,7 @@ export default function Hero() {
         <div className="studio-visual__float">
           <div className="studio-visual__halo" />
           <img
-            src="/images/yalabyte-hero-digital-system.png"
+            src="/images/yalabyte-hero-abstract-vortex.png"
             alt=""
             className="studio-visual__image"
             loading="eager"
@@ -48,14 +48,15 @@ export default function Hero() {
 
       <div className="studio-hero__inner">
         <div className="studio-hero__copy">
+          <p className="studio-hero__eyebrow"><span />YalaByte Studio / Nepal to worldwide</p>
           <h1 className="studio-hero__title">
             DESIGN.<br />BUILD.<br /><em>LAUNCH.</em>
           </h1>
           <div className="studio-hero__intro-row">
-            <p>Premium business websites and custom web applications, designed and developed by YalaByte in Nepal.</p>
+            <p>Premium business websites and custom web applications with clear structure, polished design, and reliable launch support.</p>
             <div className="studio-hero__actions">
               <button onClick={() => navigateTo('/portfolio')} className="studio-button studio-button--outline">View Work</button>
-              <button onClick={() => navigateTo('/contact')} className="studio-button studio-button--solid">Contact</button>
+              <button onClick={() => navigateTo('/contact')} className="studio-button studio-button--solid">Start Project</button>
             </div>
           </div>
         </div>

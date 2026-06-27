@@ -16,6 +16,13 @@ const process = [
   ['04', 'Launch', 'We test, deploy, connect the essentials, and stay close after your website goes live.']
 ];
 
+const proof = [
+  ['01', 'Strategy before screens', 'The offer, audience, and conversion path are clarified before design starts.'],
+  ['02', 'Responsive by default', 'Layouts are shaped for mobile, laptop, and larger displays from the beginning.'],
+  ['03', 'Built to launch', 'Forms, performance, SEO basics, and deployment details are handled with care.'],
+  ['04', 'Support after handover', 'Updates, technical fixes, and improvements can continue after the first release.']
+];
+
 export default function HomePage() {
   useEffect(() => {
     const elements = document.querySelectorAll('.home-reveal');
@@ -39,10 +46,22 @@ export default function HomePage() {
     <>
       <Hero />
 
+      <section className="studio-proof">
+        <div className="studio-container studio-proof__grid">
+          {proof.map(([number, title, text], index) => (
+            <article className="home-reveal studio-proof__item" style={{ '--reveal-delay': `${index * 55}ms` }} key={title}>
+              <span>{number}</span>
+              <h2>{title}</h2>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section id="services" className="studio-section studio-services">
         <div className="studio-container">
           <div className="home-reveal studio-heading">
-            <p>Services / 01</p>
+            <p>Services / 02</p>
             <h2>Web experiences built with clarity, character, and purpose.</h2>
           </div>
           <div className="studio-service-list">
@@ -59,7 +78,7 @@ export default function HomePage() {
       <section className="studio-section studio-process">
         <div className="studio-container studio-process__grid">
           <div className="home-reveal studio-heading studio-heading--compact">
-            <p>Process / 02</p>
+            <p>Process / 03</p>
             <h2>From first conversation to confident launch.</h2>
           </div>
           <div className="studio-process__steps">
@@ -74,7 +93,7 @@ export default function HomePage() {
 
       <section className="studio-about">
         <div className="studio-container home-reveal studio-about__grid">
-          <p>About YalaByte / 03</p>
+          <p>About YalaByte / 04</p>
           <div>
             <h2>Based in Nepal.<br />Built for everywhere.</h2>
             <p>YalaByte builds premium websites and web platforms for ambitious businesses—from Nepal to clients worldwide. We bring strategy, design, and development together to create digital work with lasting value.</p>
