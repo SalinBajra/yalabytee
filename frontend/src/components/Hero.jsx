@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import StudioThreeScene from './StudioThreeScene.jsx';
 import { navigateTo } from '../utils/routes.js';
 
 const capabilities = ['Business Websites', 'Web Platforms', 'Launch Support'];
@@ -34,7 +33,13 @@ export default function Hero() {
       <div ref={visualRef} className="studio-visual" aria-hidden="true">
         <div className="studio-visual__float">
           <div className="studio-visual__halo" />
-          <StudioThreeScene />
+          <img
+            src="/images/yalabyte-hero-digital-system.png"
+            alt=""
+            className="studio-visual__image"
+            loading="eager"
+            fetchPriority="high"
+          />
           <div className="studio-visual__light" />
         </div>
       </div>

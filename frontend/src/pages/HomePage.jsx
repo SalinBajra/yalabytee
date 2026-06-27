@@ -16,12 +16,6 @@ const process = [
   ['04', 'Launch', 'We test, deploy, connect the essentials, and stay close after your website goes live.']
 ];
 
-const techVisuals = [
-  ['/images/yalabyte-3d-system-layers.png', '3D web platform system layers'],
-  ['/images/yalabyte-3d-app-ecosystem.png', '3D connected app ecosystem'],
-  ['/images/yalabyte-3d-responsive-platform.png', '3D responsive website platform']
-];
-
 export default function HomePage() {
   useEffect(() => {
     const elements = document.querySelectorAll('.home-reveal');
@@ -78,25 +72,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="systems" className="studio-tech-gallery">
-        <div className="studio-container">
-          <div className="home-reveal studio-heading studio-heading--compact">
-            <p>Systems / 03</p>
-            <h2>3D visuals for modern digital products.</h2>
-          </div>
-          <div className="studio-tech-gallery__grid">
-            {techVisuals.map(([src, alt], index) => (
-              <figure className="home-reveal studio-tech-card" style={{ '--reveal-delay': `${index * 70}ms` }} key={src}>
-                <img src={src} alt={alt} loading="lazy" />
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="studio-about">
         <div className="studio-container home-reveal studio-about__grid">
-          <p>About YalaByte / 04</p>
+          <p>About YalaByte / 03</p>
           <div>
             <h2>Based in Nepal.<br />Built for everywhere.</h2>
             <p>YalaByte builds premium websites and web platforms for ambitious businesses—from Nepal to clients worldwide. We bring strategy, design, and development together to create digital work with lasting value.</p>
