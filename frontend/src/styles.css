@@ -18,6 +18,14 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.site-header {
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  background: rgba(7, 8, 18, .9);
+  box-shadow: 0 18px 55px rgba(0,0,0,.24);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+}
+
 /* Code-built home hero --------------------------------------------------- */
 .hero-shell {
   --hero-bg: #05050d;
@@ -515,40 +523,41 @@ body {
   width: min(calc(100% - 40px), 1280px);
   min-height: calc(100svh - 65px);
   margin: 0 auto;
-  padding: clamp(64px, 8vh, 92px) 0 25px;
+  padding: clamp(46px, 6vh, 72px) 0 clamp(44px, 5vh, 68px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.studio-hero__copy { position: relative; z-index: 2; max-width: 790px; animation: hero-copy-in .85s cubic-bezier(.22,1,.36,1) both; }
+.studio-hero__copy { position: relative; z-index: 2; max-width: 980px; animation: hero-copy-in .85s cubic-bezier(.22,1,.36,1) both; }
 .studio-hero__title {
   margin: 0;
-  max-width: 780px;
-  font-size: clamp(4.7rem, 8.65vw, 8.8rem);
+  max-width: 960px;
+  font-size: clamp(5.5rem, 10.2vw, 10.9rem);
   font-weight: 780;
-  line-height: .78;
-  letter-spacing: -.074em;
+  line-height: .76;
+  letter-spacing: -.08em;
 }
 .studio-hero__title em { color: rgba(255,255,255,.42); font-style: normal; }
 .studio-hero__intro-row {
-  max-width: 840px;
-  margin-top: clamp(48px, 7vh, 78px);
-  padding-top: 28px;
+  max-width: 910px;
+  margin-top: clamp(36px, 5.4vh, 62px);
+  padding-top: 25px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 5vw, 70px);
   border-top: 1px solid rgba(255,255,255,.17);
 }
-.studio-hero__intro-row > p { max-width: 470px; margin: 0; color: rgba(255,255,255,.68); font-size: 15px; line-height: 1.75; }
+.studio-hero__intro-row > p { max-width: 520px; margin: 0; color: rgba(255,255,255,.72); font-size: clamp(1rem, 1.25vw, 1.18rem); line-height: 1.68; }
 .studio-hero__actions { display: flex; flex: none; gap: 10px; }
 .studio-button {
-  min-height: 49px;
-  padding: 0 21px;
+  min-height: 56px;
+  padding: 0 27px;
   border: 1px solid transparent;
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: .13em;
   text-transform: uppercase;
@@ -659,29 +668,25 @@ body {
   }
 
   .studio-hero__inner {
-    padding-top: clamp(58px, 6.5vh, 76px);
+    padding-top: clamp(42px, 5vh, 64px);
   }
 
   .studio-hero__copy {
-    max-width: 790px;
+    max-width: 1040px;
   }
 
   .studio-hero__title {
-    font-size: clamp(5.55rem, 6.7vw, 8rem);
+    font-size: clamp(7rem, 8.6vw, 11rem);
   }
 
   .studio-hero__intro-row {
-    max-width: 820px;
-    margin-top: clamp(44px, 5.2vh, 62px);
-    padding-top: 24px;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 28px;
+    max-width: 940px;
+    margin-top: clamp(40px, 5vh, 64px);
+    padding-top: 26px;
   }
 
   .studio-hero__intro-row > p {
-    max-width: 420px;
+    max-width: 520px;
   }
 
   .studio-visual {
@@ -704,10 +709,10 @@ body {
 @media (max-width: 640px) {
   .studio-hero, .studio-hero__inner { min-height: calc(100svh - 64px); }
   .studio-hero__inner, .studio-container { width: calc(100% - 32px); }
-  .studio-hero__inner { padding-top: 48px; padding-bottom: 18px; }
+  .studio-hero__inner { padding-top: 36px; padding-bottom: 34px; }
   .studio-visual { top: 0; bottom: 0; width: 175vw; right: -108vw; opacity: .62; }
-  .studio-hero__title { font-size: clamp(3.7rem, 18vw, 5.45rem); line-height: .8; }
-  .studio-hero__intro-row { margin-top: 30px; padding-top: 21px; display: block; }
+  .studio-hero__title { font-size: clamp(4.2rem, 20vw, 6rem); line-height: .78; }
+  .studio-hero__intro-row { margin-top: 34px; padding-top: 21px; display: block; }
   .studio-hero__intro-row > p { max-width: 95%; font-size: 13px; line-height: 1.68; }
   .studio-hero__actions { margin-top: 20px; }
   .studio-button { min-height: 46px; padding: 0 16px; font-size: 9px; }

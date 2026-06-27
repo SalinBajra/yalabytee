@@ -29,7 +29,7 @@ export default function Header({ currentPath }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070716]/58 shadow-[0_18px_55px_rgba(0,0,0,0.18)] backdrop-blur-2xl">
+    <header className="site-header sticky top-0 z-50">
       <nav className="mx-auto max-w-[1500px] px-5 py-3 sm:px-6 lg:px-8" aria-label="Primary navigation">
         <div className="flex items-center justify-between gap-3 sm:gap-5">
           <div className="flex min-w-0 items-center gap-3 sm:gap-4">
