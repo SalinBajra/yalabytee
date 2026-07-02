@@ -157,7 +157,18 @@ export default async function handler(request, response) {
     }
 
     if (existing?.ended_at || existing?.status === 'resolved') {
-      return response.status(409).json({ detail: 'This chat has ended. Please start a new chat to send another message.' });
+      return response.status(409).json({
+        detail: 'This chat has ended. Please start a new chat to send another message.',
+        conversation: {
+          id: existing.id,
+          status: existing.status,
+          ended_at: existing.ended_at || now,
+          customer_name: existing.customer_name,
+          customer_email: existing.customer_email,
+          customer_phone: existing.customer_phone,
+          customer_company: existing.customer_company
+        }
+      });
     }
 
     const { error } = await supabase

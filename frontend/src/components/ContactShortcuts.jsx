@@ -32,6 +32,32 @@ export default function ContactShortcuts() {
   const showDetails = !hasConversation;
   const hasThread = messages.length > 0;
 
+  const syncConversationSession = (conversation, conversationId = chatSession?.conversationId) => {
+    if (!conversation || !conversationId) return null;
+    const endedAt = conversation.ended_at || (conversation.status === 'resolved' ? new Date().toISOString() : '');
+    const nextSession = {
+      conversationId,
+      name: conversation.customer_name || chatSession?.name || '',
+      email: conversation.customer_email || chatSession?.email || '',
+      phone: conversation.customer_phone || chatSession?.phone || '',
+      company: conversation.customer_company || chatSession?.company || '',
+      endedAt
+    };
+    window.localStorage.setItem(CHAT_SESSION_KEY, JSON.stringify(nextSession));
+    setChatSession(nextSession);
+    setChatForm((current) => ({
+      ...current,
+      name: nextSession.name,
+      email: nextSession.email,
+      phone: nextSession.phone,
+      company: nextSession.company
+    }));
+    if (endedAt) {
+      setChatStatus({ type: 'success', message: 'This chat has been closed by the YalaByte team.' });
+    }
+    return nextSession;
+  };
+
   const loadMessages = async (conversationId = chatSession?.conversationId) => {
     if (!conversationId) return;
     try {
@@ -40,23 +66,7 @@ export default function ContactShortcuts() {
       if (!response.ok) throw new Error(result.detail || 'Unable to load messages.');
       setMessages(Array.isArray(result.messages) ? result.messages : []);
       if (result.conversation) {
-        const nextSession = {
-          conversationId,
-          name: result.conversation.customer_name || chatSession?.name || '',
-          email: result.conversation.customer_email || chatSession?.email || '',
-          phone: result.conversation.customer_phone || chatSession?.phone || '',
-          company: result.conversation.customer_company || chatSession?.company || '',
-          endedAt: result.conversation.ended_at || (result.conversation.status === 'resolved' ? new Date().toISOString() : '')
-        };
-        window.localStorage.setItem(CHAT_SESSION_KEY, JSON.stringify(nextSession));
-        setChatSession(nextSession);
-        setChatForm((current) => ({
-          ...current,
-          name: nextSession.name,
-          email: nextSession.email,
-          phone: nextSession.phone,
-          company: nextSession.company
-        }));
+        syncConversationSession(result.conversation, conversationId);
       }
     } catch {
       // Keep the current thread visible; the next poll can recover.
@@ -127,6 +137,11 @@ export default function ContactShortcuts() {
         })
       });
       const result = await response.json().catch(() => ({}));
+      if (response.status === 409 && result.conversation) {
+        syncConversationSession(result.conversation, chatSession?.conversationId);
+        await loadMessages(chatSession?.conversationId);
+        return;
+      }
       if (!response.ok) throw new Error(result.detail || 'Unable to send your chat right now.');
       const session = { conversationId: result.conversationId, name, email, phone, company, endedAt: '' };
       window.localStorage.setItem(CHAT_SESSION_KEY, JSON.stringify(session));
