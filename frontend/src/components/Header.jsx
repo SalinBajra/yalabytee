@@ -12,7 +12,7 @@ function NavLink({ item, currentPath }) {
         event.preventDefault();
         navigateTo(item.path);
       }}
-      className={`relative whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition ${isActive ? 'bg-white/10 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] after:absolute after:inset-x-4 after:-bottom-1 after:h-px after:bg-cyanbrand-400' : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'}`}
+      className={`relative whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition ${isActive ? 'bg-white/10 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]' : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'}`}
     >
       {item.label}
     </a>
