@@ -81,7 +81,6 @@ export default function Hero() {
 
       <div className="studio-hero__inner">
         <div className="studio-hero__copy">
-          <p className="studio-hero__eyebrow"><span /> Website Development & IT Services</p>
           <h1 className="studio-hero__title">
             Modern websites<br />that build<br /><em>business trust.</em>
           </h1>
