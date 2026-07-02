@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
 import Hero from '../components/Hero.jsx';
+import { portfolioDemos } from '../data/portfolioDemos.js';
 import { navigateTo } from '../utils/routes.js';
 
 const services = [
-  ['01', 'Business Websites', 'Distinctive, responsive websites that communicate your value clearly and turn attention into action.'],
-  ['02', 'Custom Web Applications', 'Purpose-built portals, platforms, and digital tools shaped around your users and business.'],
-  ['03', 'UI/UX Design', 'Thoughtful structure and polished interfaces that make every interaction feel simple and intentional.'],
-  ['04', 'SEO & Launch Support', 'Performance, search foundations, deployment, and practical support for a confident launch.']
+  ['01', 'Website Development', 'Fast, responsive websites with polished pages, clear content structure, and reliable launch foundations.', 'Code'],
+  ['02', 'SEO', 'Search-ready page architecture, metadata, performance basics, and content structure for better discovery.', 'Rank'],
+  ['03', 'UI/UX Design', 'Thoughtful flows, refined interface systems, and mobile-first layouts that make action feel natural.', 'Flow'],
+  ['04', 'Business Websites', 'Professional company websites that communicate credibility, services, and next steps clearly.', 'Brand'],
+  ['05', 'Landing Pages', 'Focused pages for campaigns, offers, launches, and lead capture with strong calls to action.', 'Lead'],
+  ['06', 'Maintenance Support', 'Ongoing updates, improvements, troubleshooting, and technical care after your website goes live.', 'Care']
 ];
 
 const process = [
@@ -14,6 +17,19 @@ const process = [
   ['02', 'Design', 'We shape the visual direction, page structure, and user experience around real content.'],
   ['03', 'Develop', 'We build a fast, responsive experience with clean implementation and careful quality control.'],
   ['04', 'Launch', 'We test, deploy, connect the essentials, and stay close after your website goes live.']
+];
+
+const stats = [
+  ['4+', 'Core service areas'],
+  ['100%', 'Responsive builds'],
+  ['24/7', 'Inquiry-ready forms'],
+  ['SEO', 'Launch foundations']
+];
+
+const trustPoints = [
+  ['Strategy first', 'We clarify your audience, goals, pages, and conversion path before design moves too far.'],
+  ['Clean execution', 'Your site is built with practical structure, responsive layouts, and performance-minded code.'],
+  ['Long-term support', 'YalaByte stays close after launch for updates, refinements, and growth-focused improvements.']
 ];
 
 export default function HomePage() {
@@ -39,16 +55,22 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <section id="services" className="studio-section studio-services">
+      <section id="services" className="studio-section studio-services studio-services--premium">
         <div className="studio-container">
           <div className="home-reveal studio-heading">
             <p>Services / 01</p>
             <h2>Web experiences built with clarity, character, and purpose.</h2>
           </div>
-          <div className="studio-service-list">
-            {services.map(([number, title, text], index) => (
-              <article key={title} className="home-reveal studio-service" style={{ '--reveal-delay': `${index * 65}ms` }}>
-                <span>{number}</span><h3>{title}</h3><p>{text}</p><i aria-hidden="true">↗</i>
+          <div className="studio-service-grid">
+            {services.map(([number, title, text, icon], index) => (
+              <article key={title} className="home-reveal studio-service-card" style={{ '--reveal-delay': `${index * 65}ms` }}>
+                <div className="studio-service-card__top">
+                  <span>{number}</span>
+                  <i aria-hidden="true">{icon}</i>
+                </div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <b aria-hidden="true">↗</b>
               </article>
             ))}
           </div>
@@ -56,10 +78,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="studio-section studio-work studio-work--premium">
+        <div className="studio-container">
+          <div className="home-reveal studio-heading studio-heading--light">
+            <p>Showcase / 02</p>
+            <h2>Website previews shaped for real industries and real conversion paths.</h2>
+          </div>
+          <div className="studio-showcase-grid">
+            {portfolioDemos.map((project, index) => (
+              <article key={project.slug} className="home-reveal studio-showcase-card" style={{ '--reveal-delay': `${index * 90}ms` }}>
+                <button type="button" onClick={() => navigateTo(`/portfolio/${project.slug}`)}>
+                  <span className="studio-showcase-card__screen">
+                    <img src={project.image} alt={`${project.title} website preview`} loading="lazy" />
+                    <i>{project.category}</i>
+                  </span>
+                  <span className="studio-showcase-card__meta">
+                    <b>{project.title}</b>
+                    <small>{project.features.slice(0, 2).join(' / ')}</small>
+                  </span>
+                </button>
+              </article>
+            ))}
+          </div>
+          <button className="home-reveal studio-text-link studio-text-link--light" onClick={() => navigateTo('/portfolio')}>View portfolio demos <span>→</span></button>
+        </div>
+      </section>
+
       <section className="studio-section studio-process">
         <div className="studio-container studio-process__grid">
           <div className="home-reveal studio-heading studio-heading--compact">
-            <p>Process / 02</p>
+            <p>Process / 03</p>
             <h2>From first conversation to confident launch.</h2>
           </div>
           <div className="studio-process__steps">
@@ -72,9 +120,35 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="studio-section studio-why">
+        <div className="studio-container">
+          <div className="home-reveal studio-heading">
+            <p>Why YalaByte / 04</p>
+            <h2>A trustworthy partner for websites that need to look sharp and work hard.</h2>
+          </div>
+          <div className="studio-stats">
+            {stats.map(([value, label], index) => (
+              <article key={label} className="home-reveal" style={{ '--reveal-delay': `${index * 70}ms` }}>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </article>
+            ))}
+          </div>
+          <div className="studio-trust-grid">
+            {trustPoints.map(([title, text], index) => (
+              <article key={title} className="home-reveal studio-trust-card" style={{ '--reveal-delay': `${index * 80}ms` }}>
+                <span>{`0${index + 1}`}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="studio-about">
         <div className="studio-container home-reveal studio-about__grid">
-          <p>About YalaByte / 03</p>
+          <p>About YalaByte / 05</p>
           <div>
             <h2>Based in Nepal.<br />Built for everywhere.</h2>
             <p>YalaByte builds premium websites and web platforms for ambitious businesses—from Nepal to clients worldwide. We bring strategy, design, and development together to create digital work with lasting value.</p>
@@ -85,6 +159,11 @@ export default function HomePage() {
 
       <section className="studio-contact-cta">
         <div className="studio-contact-cta__glow" aria-hidden="true" />
+        <div className="studio-contact-cta__panel" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
         <div className="studio-container home-reveal">
           <p>Have a project in mind?</p>
           <div><h2>Ready to build<br />your website?</h2><button onClick={() => navigateTo('/contact')}>Discuss a project <span>↗</span></button></div>
