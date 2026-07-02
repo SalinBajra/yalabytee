@@ -3,10 +3,12 @@ import { navigateTo } from '../utils/routes.js';
 import usePageReveal from '../hooks/usePageReveal.js';
 
 const coreServices = [
-  ['01', 'Business Websites', 'Premium, responsive websites that make your business easier to understand, trust, and contact.', 'Strategy · Design · Development'],
-  ['02', 'Custom Web Applications', 'Focused portals, platforms, booking flows, and internal tools built around the way your business works.', 'Product UX · Frontend · Backend'],
-  ['03', 'UI/UX Design', 'Clear page structures and polished interfaces that turn complex information into simple journeys.', 'Wireframes · Interface systems · Prototypes'],
-  ['04', 'SEO & Launch Support', 'Technical foundations, performance checks, deployment, and post-launch care handled properly.', 'SEO setup · Deployment · Support']
+  ['01', 'Website Development', 'Premium, responsive websites that make your business easier to understand, trust, and contact.', 'Strategy · Design · Development', 'Web'],
+  ['02', 'Custom Web Applications', 'Focused portals, platforms, booking flows, dashboards, and internal tools built around the way your business works.', 'Product UX · Frontend · Backend', 'App'],
+  ['03', 'UI/UX Design', 'Clear page structures and polished interfaces that turn complex information into simple journeys.', 'Wireframes · Interface systems · Prototypes', 'UX'],
+  ['04', 'SEO-Ready Launches', 'Technical foundations, metadata, performance checks, deployment, and post-launch care handled properly.', 'SEO setup · Deployment · Support', 'SEO'],
+  ['05', 'Website Maintenance', 'Ongoing refinements, security-minded updates, troubleshooting, and content support after launch.', 'Updates · Fixes · Improvements', 'Care'],
+  ['06', 'Digital Solutions', 'Practical digital systems for growing businesses that need better lead flow, operations, and customer touchpoints.', 'Consulting · Integrations · Workflows', 'Grow']
 ];
 
 const launchSupport = [
@@ -31,12 +33,13 @@ export default function ServicesPage() {
             <p>Core capabilities / 01</p>
             <h2>Focused expertise,<br />from idea to launch.</h2>
           </div>
-          <div className="service-detail-list">
-            {coreServices.map(([number, title, text, scope], index) => (
-              <article className="page-reveal service-detail-row" style={{ '--page-delay': `${index * 70}ms` }} key={title}>
-                <span>{number}</span>
+          <div className="service-detail-grid">
+            {coreServices.map(([number, title, text, scope, icon], index) => (
+              <article className="page-reveal service-detail-card" style={{ '--page-delay': `${index * 70}ms` }} key={title}>
+                <div><span>{number}</span><i>{icon}</i></div>
                 <h3>{title}</h3>
-                <div><p>{text}</p><small>{scope}</small></div>
+                <p>{text}</p>
+                <small>{scope}</small>
               </article>
             ))}
           </div>

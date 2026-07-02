@@ -12,7 +12,7 @@ function NavLink({ item, currentPath }) {
         event.preventDefault();
         navigateTo(item.path);
       }}
-      className={`relative whitespace-nowrap px-3 py-2 text-sm font-semibold transition ${isActive ? 'text-white after:absolute after:inset-x-3 after:-bottom-0.5 after:h-px after:bg-cyanbrand-400' : 'text-slate-400 hover:text-white'}`}
+      className={`relative whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition ${isActive ? 'bg-white/10 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] after:absolute after:inset-x-4 after:-bottom-1 after:h-px after:bg-cyanbrand-400' : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'}`}
     >
       {item.label}
     </a>
@@ -30,8 +30,8 @@ export default function Header({ currentPath }) {
 
   return (
     <header className="site-header sticky top-0 z-50">
-      <nav className="mx-auto max-w-[1500px] px-5 py-3 sm:px-6 lg:px-8" aria-label="Primary navigation">
-        <div className="flex items-center justify-between gap-3 sm:gap-5">
+      <nav className="mx-auto max-w-[1500px] px-4 py-3 sm:px-6 lg:px-8" aria-label="Primary navigation">
+        <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.035] px-3 py-2 shadow-[0_18px_60px_rgba(0,0,0,0.18)] sm:gap-5 sm:px-4">
           <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <a
               href="/"
@@ -43,10 +43,10 @@ export default function Header({ currentPath }) {
               <BrandLogo />
             </a>
             <div className="flex min-w-0 items-center border-l border-white/15 pl-3 sm:pl-4">
-              <p className="whitespace-nowrap text-[10px] font-medium uppercase tracking-[0.24em] text-slate-100 sm:text-xs sm:tracking-[0.34em]">Yala Byte</p>
+              <p className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.24em] text-slate-100 sm:text-xs sm:tracking-[0.28em]">YalaByte</p>
             </div>
           </div>
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-black/20 p-1 lg:flex">
             {routes.map((item) => (
               <NavLink key={item.path} item={item} currentPath={currentPath} />
             ))}
@@ -56,13 +56,13 @@ export default function Header({ currentPath }) {
             onClick={(event) => {
               goTo(event, '/contact');
             }}
-            className="hidden rounded-md bg-cyanbrand-400 px-4 py-2.5 text-sm font-bold text-navy-950 transition hover:-translate-y-0.5 hover:bg-white sm:inline-flex"
+            className="hidden rounded-full bg-cyanbrand-400 px-5 py-3 text-sm font-black text-navy-950 shadow-[0_14px_34px_rgba(19,200,222,0.22)] transition hover:-translate-y-0.5 hover:bg-white sm:inline-flex"
           >
             Discuss a Project <span aria-hidden="true" className="ml-2">↗</span>
           </a>
           <button
             type="button"
-            className="grid h-10 w-10 place-items-center rounded-md border border-white/15 text-white sm:hidden"
+            className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/[0.04] text-white sm:hidden"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
@@ -70,13 +70,13 @@ export default function Header({ currentPath }) {
             <span className="text-xl leading-none">{menuOpen ? '×' : '≡'}</span>
           </button>
         </div>
-        <div className={`${menuOpen ? 'grid' : 'hidden'} mt-3 gap-1 border-t border-white/10 pt-3 sm:flex sm:justify-between sm:overflow-x-auto lg:hidden`}>
+        <div className={`${menuOpen ? 'grid' : 'hidden'} mt-3 gap-1 rounded-2xl border border-white/10 bg-black/25 p-2 sm:flex sm:justify-between sm:overflow-x-auto lg:hidden`}>
           {routes.map((item) => (
             <a
               key={item.path}
               href={item.path}
               onClick={(event) => goTo(event, item.path)}
-              className={`whitespace-nowrap rounded-md px-3 py-2.5 text-sm font-semibold sm:px-2 ${currentPath === item.path ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/10 hover:text-white'}`}
+              className={`whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-semibold sm:px-3 ${currentPath === item.path ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/10 hover:text-white'}`}
             >
               {item.label}
             </a>

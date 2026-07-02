@@ -100,8 +100,8 @@ export default function Contact() {
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
             <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.07] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.22)] backdrop-blur-xl">
               <p className="font-semibold">Project inquiries</p>
-            <a className="mt-3 block text-sm leading-7 text-cyanbrand-100 transition hover:text-white" href="mailto:info@yalabyte.com">info@yalabyte.com</a>
-            <p className="text-sm leading-7 text-slate-300">Available for website, web app, and digital consulting inquiries.</p>
+              <a className="mt-3 block text-sm leading-7 text-cyanbrand-100 transition hover:text-white" href="mailto:info@yalabyte.com">info@yalabyte.com</a>
+              <p className="text-sm leading-7 text-slate-300">Available for website, web app, and digital consulting inquiries.</p>
             </div>
             <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
               <p className="text-3xl font-black text-white">24h</p>
