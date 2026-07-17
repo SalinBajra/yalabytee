@@ -21,7 +21,14 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="studio-hero" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
+    <section
+      id="home"
+      className="studio-hero"
+      aria-labelledby="home-hero-title"
+      aria-describedby="home-hero-description"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointer}
+    >
       <div className="studio-hero__scene" aria-hidden="true">
         <div className="studio-hero__grid" />
         <div className="studio-hero__beam" />
@@ -30,7 +37,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div ref={visualRef} className="studio-visual studio-visual--mockup" aria-hidden="true">
+      <div ref={visualRef} className="studio-hero__visual studio-visual studio-visual--mockup" aria-hidden="true">
         <div className="studio-visual__orb studio-visual__orb--cyan" />
         <div className="studio-visual__orb studio-visual__orb--violet" />
         <div className="studio-mockup-stage">
@@ -81,15 +88,27 @@ export default function Hero() {
 
       <div className="studio-hero__inner">
         <div className="studio-hero__copy">
-          <h1 className="studio-hero__title">
-            Modern websites<br />that build<br /><em>business trust.</em>
+          <p className="studio-hero__eyebrow"><span /> Digital website systems for service brands</p>
+          <h1 id="home-hero-title" className="studio-hero__title">
+            Websites that feel premium and convert with momentum.
           </h1>
-          <div className="studio-hero__intro-row">
-            <p>Premium business websites and custom web applications with clear structure, polished design, and reliable launch support.</p>
-            <div className="studio-hero__actions">
-              <button onClick={() => navigateTo('/portfolio')} className="studio-button studio-button--outline">View Work</button>
-              <button onClick={() => navigateTo('/contact')} className="studio-button studio-button--solid">Start Project</button>
+          <div id="home-hero-description" className="studio-hero__intro">
+            <p>
+              Launch a polished site with intentional structure, clear messaging, and dependable support that helps your business grow.
+            </p>
+            <div className="studio-hero__chips">
+              {heroServices.map((item) => (
+                <span key={item} className="studio-hero__chip">{item}</span>
+              ))}
             </div>
+          </div>
+          <div className="studio-hero__actions">
+            <button type="button" onClick={() => navigateTo('/portfolio')} className="studio-button studio-button--outline">
+              View work
+            </button>
+            <button type="button" onClick={() => navigateTo('/contact')} className="studio-button studio-button--solid">
+              Start project
+            </button>
           </div>
         </div>
       </div>

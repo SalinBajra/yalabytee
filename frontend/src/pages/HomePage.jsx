@@ -55,11 +55,11 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <section id="services" className="studio-section studio-services studio-services--premium">
+      <section id="services" aria-labelledby="services-heading" className="studio-section studio-services studio-services--premium">
         <div className="studio-container">
           <div className="home-reveal studio-heading">
             <p>Services / 01</p>
-            <h2>Web experiences built with clarity, character, and purpose.</h2>
+            <h2 id="services-heading">Web experiences built with clarity, character, and purpose.</h2>
           </div>
           <div className="studio-service-grid">
             {services.map(([number, title, text, icon], index) => (
@@ -74,15 +74,15 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-          <button className="home-reveal studio-text-link" onClick={() => navigateTo('/services')}>Explore all services <span>→</span></button>
+          <button type="button" className="home-reveal studio-text-link" onClick={() => navigateTo('/services')}>Explore all services <span>→</span></button>
         </div>
       </section>
 
-      <section className="studio-section studio-work studio-work--premium">
+      <section id="work" aria-labelledby="work-heading" className="studio-section studio-work studio-work--premium">
         <div className="studio-container">
           <div className="home-reveal studio-heading studio-heading--light">
             <p>Showcase / 02</p>
-            <h2>Website previews shaped for real industries and real conversion paths.</h2>
+            <h2 id="work-heading">Website previews shaped for real industries and real conversion paths.</h2>
           </div>
           <div className="studio-showcase-grid">
             {portfolioDemos.map((project, index) => (
@@ -100,15 +100,15 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-          <button className="home-reveal studio-text-link studio-text-link--light" onClick={() => navigateTo('/portfolio')}>View portfolio demos <span>→</span></button>
+          <button type="button" className="home-reveal studio-text-link studio-text-link--light" onClick={() => navigateTo('/portfolio')}>View portfolio demos <span>→</span></button>
         </div>
       </section>
 
-      <section className="studio-section studio-process">
+      <section id="process" aria-labelledby="process-heading" className="studio-section studio-process">
         <div className="studio-container studio-process__grid">
           <div className="home-reveal studio-heading studio-heading--compact">
             <p>Process / 03</p>
-            <h2>From first conversation to confident launch.</h2>
+            <h2 id="process-heading">From first conversation to confident launch.</h2>
           </div>
           <div className="studio-process__steps">
             {process.map(([number, title, text], index) => (
@@ -120,11 +120,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="studio-section studio-why">
+      <section id="why" aria-labelledby="why-heading" className="studio-section studio-why">
         <div className="studio-container">
           <div className="home-reveal studio-heading">
             <p>Why YalaByte / 04</p>
-            <h2>A trustworthy partner for websites that need to look sharp and work hard.</h2>
+            <h2 id="why-heading">A trustworthy partner for websites that need to look sharp and work hard.</h2>
           </div>
           <div className="studio-stats">
             {stats.map(([value, label], index) => (
@@ -146,18 +146,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="studio-about">
+      <section id="about" aria-labelledby="about-heading" className="studio-about">
         <div className="studio-container home-reveal studio-about__grid">
           <p>About YalaByte / 05</p>
           <div>
-            <h2>Based in Nepal.<br />Built for everywhere.</h2>
+            <h2 id="about-heading">Based in Nepal.<br />Built for everywhere.</h2>
             <p>YalaByte builds premium websites and web platforms for ambitious businesses—from Nepal to clients worldwide. We bring strategy, design, and development together to create digital work with lasting value.</p>
-            <button className="studio-text-link studio-text-link--light" onClick={() => navigateTo('/about')}>Meet YalaByte <span>→</span></button>
+            <button type="button" className="studio-text-link studio-text-link--light" onClick={() => navigateTo('/about')}>Meet YalaByte <span>→</span></button>
           </div>
         </div>
       </section>
 
-      <section className="studio-contact-cta">
+      <section id="contact" aria-labelledby="contact-heading" className="studio-contact-cta">
         <div className="studio-contact-cta__glow" aria-hidden="true" />
         <div className="studio-contact-cta__panel" aria-hidden="true">
           <span />
@@ -166,7 +166,10 @@ export default function HomePage() {
         </div>
         <div className="studio-container home-reveal">
           <p>Have a project in mind?</p>
-          <div><h2>Ready to build<br />your website?</h2><button onClick={() => navigateTo('/contact')}>Discuss a project <span>↗</span></button></div>
+          <div>
+            <h2 id="contact-heading">Ready to build<br />your website?</h2>
+            <button type="button" onClick={() => navigateTo('/contact')}>Discuss a project <span>↗</span></button>
+          </div>
         </div>
       </section>
     </>

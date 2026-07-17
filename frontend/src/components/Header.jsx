@@ -56,7 +56,7 @@ export default function Header({ currentPath }) {
             onClick={(event) => {
               goTo(event, '/contact');
             }}
-            className="hidden rounded-full bg-cyanbrand-400 px-5 py-3 text-sm font-black text-navy-950 shadow-[0_14px_34px_rgba(19,200,222,0.22)] transition hover:-translate-y-0.5 hover:bg-white sm:inline-flex"
+            className="hidden rounded-full bg-cyanbrand-500 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-cyanbrand-600 sm:inline-flex"
           >
             Discuss a Project <span aria-hidden="true" className="ml-2">↗</span>
           </a>
