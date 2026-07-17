@@ -219,12 +219,11 @@ export default function ContactShortcuts() {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-[90] flex flex-col items-end gap-3 sm:bottom-5 sm:right-5"
+      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-[90] flex flex-col items-end gap-3 sm:bottom-[calc(1.25rem+env(safe-area-inset-bottom))] sm:right-5"
     >
       {chatOpen ? (
-        <section className="mb-1 flex max-h-[min(640px,calc(100vh-7.25rem))] w-[min(94vw,390px)] flex-col overflow-hidden rounded-[1.45rem] border border-white/50 bg-white text-navy-950 shadow-[0_28px_90px_rgba(6,17,31,0.28)] ring-1 ring-slate-950/5" aria-label="ChatByte website chat">
-          <header className="relative overflow-hidden bg-navy-950 px-4 py-4 text-white">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(57,215,232,0.22),transparent_34%),radial-gradient(circle_at_90%_20%,rgba(255,255,255,0.08),transparent_30%)]" aria-hidden="true" />
+        <section className="mb-1 flex max-h-[min(640px,calc(100vh-7.25rem))] w-[min(94vw,390px)] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white text-navy-950 shadow-[0_24px_70px_rgba(24,22,18,0.22)] ring-1 ring-slate-950/5" aria-label="ChatByte website chat">
+          <header className="relative overflow-hidden bg-[#1e211f] px-4 py-4 text-white">
             <div className="relative flex items-start justify-between gap-3">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
@@ -381,7 +380,7 @@ export default function ContactShortcuts() {
         aria-label="Open website chat"
         title="Open website chat"
         onClick={() => setChatOpen((open) => !open)}
-        className="group flex h-14 items-center gap-3 rounded-full bg-cyanbrand-500 px-4 text-navy-950 shadow-lg shadow-cyanbrand-500/20 transition hover:-translate-y-0.5 hover:bg-cyanbrand-400 hover:shadow-xl"
+        className="group flex h-12 items-center gap-2 rounded-xl border border-slate-200 bg-[#fffdf8] px-3 text-[#1e211f] shadow-[0_14px_38px_rgba(24,22,18,0.16)] transition hover:-translate-y-0.5 hover:border-cyanbrand-500 focus:outline-none focus:ring-2 focus:ring-cyanbrand-500 focus:ring-offset-2"
       >
         <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
           <path d="M5 6.5h14v9H9.5L5 19.5v-13Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
