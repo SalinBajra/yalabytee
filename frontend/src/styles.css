@@ -179,6 +179,106 @@
   }
 }
 
+/* Inner page repair overrides ------------------------------------------ */
+
+.yb-nav-link:focus-visible {
+  outline: 0;
+  box-shadow: inset 0 -2px 0 var(--yb-cyan-dark);
+}
+
+.yb-nav-link[aria-current='page'] {
+  font-weight: 820;
+}
+
+.inner-hero {
+  min-height: min(560px, calc(100svh - 76px));
+  display: grid;
+  align-items: end;
+  padding: clamp(82px, 10vw, 132px) 0 clamp(70px, 8vw, 108px);
+  color: var(--yb-white);
+  background:
+    linear-gradient(110deg, rgba(30, 33, 31, 0.98) 0%, rgba(30, 33, 31, 0.92) 58%, rgba(30, 33, 31, 0.82) 100%),
+    url('/images/yalabyte-hero-workspace.jpg') center / cover no-repeat;
+}
+
+.inner-hero__grid {
+  opacity: 0;
+  background-image: none;
+  mask-image: none;
+}
+
+.inner-hero__content {
+  width: var(--yb-shell);
+}
+
+.inner-hero__content > p {
+  color: var(--yb-cyan);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.18em;
+}
+
+.inner-hero__content > div {
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.48fr);
+  align-items: end;
+  gap: clamp(32px, 6vw, 86px);
+}
+
+.inner-hero h1 {
+  max-width: 850px;
+  color: var(--yb-white);
+  font-size: clamp(3.05rem, 5.9vw, 5rem);
+  font-weight: 720;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.inner-hero__aside {
+  border-top-color: rgba(255, 253, 248, 0.22);
+}
+
+.inner-hero__aside > p {
+  color: rgba(255, 253, 248, 0.78);
+  text-shadow: none;
+}
+
+.inner-hero__actions a,
+.inner-hero__actions button {
+  border-color: rgba(255, 253, 248, 0.22) !important;
+  background: rgba(255, 253, 248, 0.06);
+  color: var(--yb-white) !important;
+}
+
+.inner-hero__actions a:hover,
+.inner-hero__actions button:hover {
+  border-color: var(--yb-cyan) !important;
+  background: rgba(19, 200, 222, 0.12);
+}
+
+@media (max-width: 980px) {
+  .inner-hero {
+    min-height: auto;
+  }
+
+  .inner-hero__content > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .inner-hero {
+    padding: 56px 0 68px;
+  }
+
+  .inner-hero h1 {
+    font-size: clamp(2.65rem, 12vw, 3.75rem);
+  }
+
+  .inner-hero__aside {
+    margin-top: 0;
+  }
+}
+
 /* YalaByte editorial identity ------------------------------------------ */
 
 :root {
