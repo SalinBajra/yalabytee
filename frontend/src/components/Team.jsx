@@ -1,11 +1,13 @@
-import SectionHeader from './SectionHeader.jsx';
+import PageHero from './PageHero.jsx';
 import { team } from '../data/siteData.js';
 
 export default function Team() {
   return (
     <section className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader
+        <PageHero
+          variant="section"
+          withSection={false}
           eyebrow="How responsibilities are covered"
           title="The work stays connected from planning through support"
           text="Strategy, interface decisions, development, and launch are handled as parts of the same website—not separate assignments."

@@ -1,6 +1,9 @@
-import { navigateTo } from '../utils/routes.js';
 import usePageReveal from '../hooks/usePageReveal.js';
-import SectionHeader from '../components/SectionHeader.jsx';
+import CardGrid from '../components/CardGrid.jsx';
+import ContentCard from '../components/ContentCard.jsx';
+import CTASection from '../components/CTASection.jsx';
+import PageHero from '../components/PageHero.jsx';
+import Section from '../components/Section.jsx';
 import { services, addons, processSteps } from '../data/siteData.js';
 
 export default function ServicesPage() {
@@ -8,28 +11,27 @@ export default function ServicesPage() {
 
   return (
     <>
-      <section className="bg-slate-50 px-5 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="studio-container">
-          <SectionHeader
+      <Section variant="slate">
+          <PageHero
+            variant="section"
+            withSection={false}
             eyebrow="Services"
             title="Digital services built around your business goals"
             text="Strategy, design, development, launch support, and care for websites and web applications that work for your customers."
           />
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <CardGrid variant="services">
             {services.slice(0, 6).map((service) => (
-              <article key={service.title} className="page-reveal rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-slate-300">
+              <ContentCard key={service.title} variant="service">
                 <p className="text-sm font-bold uppercase tracking-[0.24em] text-cyanbrand-600">{service.title}</p>
                 <p className="mt-4 text-sm leading-7 text-slate-600">{service.text}</p>
                 <p className="mt-6 text-xs font-black uppercase tracking-[0.28em] text-slate-500">{service.outcome}</p>
-              </article>
+              </ContentCard>
             ))}
-          </div>
-        </div>
-      </section>
+          </CardGrid>
+      </Section>
 
-      <section className="bg-white px-5 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="studio-container">
+      <Section variant="white">
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <div className="page-reveal">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-slate-500">Support</p>
@@ -38,57 +40,46 @@ export default function ServicesPage() {
                 The website is only the start. We also help with the technical setup, launch checklist, and the systems you need after go-live.
               </p>
             </div>
-            <div className="grid gap-4">
+            <CardGrid variant="stack">
               {addons.map((item, index) => (
-                <div key={item} className="page-reveal rounded-[1.6rem] border border-slate-200 bg-slate-50 p-6 shadow-sm" style={{ '--page-delay': `${index * 40}ms` }}>
+                <ContentCard as="div" key={item} variant="soft" style={{ '--page-delay': `${index * 40}ms` }}>
                   <p className="text-sm leading-7 text-slate-700">{item}</p>
-                </div>
+                </ContentCard>
               ))}
-            </div>
+            </CardGrid>
           </div>
-        </div>
-      </section>
+      </Section>
 
-      <section className="bg-slate-50 px-5 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="studio-container">
-          <div className="page-reveal mx-auto max-w-3xl text-center">
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-cyanbrand-600">Process</p>
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">A practical process for every website project.</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
-              Every project follows the same clear path: discovery, design, build, and launch. This keeps scope manageable and quality predictable.
-            </p>
-          </div>
+      <Section variant="slate">
+          <PageHero
+            variant="section"
+            withSection={false}
+            eyebrow="Process"
+            title="A practical process for every website project."
+            text="Every project follows the same clear path: discovery, design, build, and launch. This keeps scope manageable and quality predictable."
+            className="page-reveal mx-auto max-w-3xl text-center"
+            eyebrowClassName="text-xs font-black uppercase tracking-[0.28em] text-cyanbrand-600"
+            titleClassName="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl"
+            textClassName="mt-4 text-sm leading-7 text-slate-600 sm:text-base"
+          />
 
-          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <CardGrid variant="process">
             {processSteps.map((step) => (
-              <article key={step.title} className="page-reveal rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm">
+              <ContentCard key={step.title} variant="plain">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-navy-900 text-sm font-black text-white">{step.label}</div>
                 <h3 className="mt-6 text-xl font-semibold text-slate-950">{step.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-600">{step.text}</p>
-              </article>
+              </ContentCard>
             ))}
-          </div>
-        </div>
-      </section>
+          </CardGrid>
+      </Section>
 
-      <section className="bg-cyanbrand-500 px-5 py-16 text-white sm:px-6 lg:px-8 lg:py-24">
-        <div className="studio-container flex flex-col items-start gap-8 rounded-[2rem] border border-white/15 bg-white/10 px-8 py-12 shadow-soft sm:flex-row sm:items-center sm:justify-between">
-          <div className="max-w-3xl">
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-cyanbrand-100">Ready?</p>
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl">Let’s turn your next idea into a website that works.</h2>
-            <p className="mt-4 text-sm leading-7 text-cyanbrand-100/90 sm:text-base">
-              Tell us about your project, timeline, and current challenges. YalaByte will reply with a practical first plan.
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => navigateTo('/contact')}
-            className="rounded-full bg-white px-8 py-4 text-sm font-black text-slate-950 transition hover:bg-slate-100"
-          >
-            Discuss your project
-          </button>
-        </div>
-      </section>
+      <CTASection
+        eyebrow="Ready?"
+        title="Let’s turn your next idea into a website that works."
+        text="Tell us about your project, timeline, and current challenges. YalaByte will reply with a practical first plan."
+        buttonText="Discuss your project"
+      />
     </>
   );
 }

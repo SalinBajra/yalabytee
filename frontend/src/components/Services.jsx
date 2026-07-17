@@ -1,4 +1,4 @@
-import SectionHeader from './SectionHeader.jsx';
+import PageHero from './PageHero.jsx';
 import { services } from '../data/siteData.js';
 
 export default function Services({ showIntro = true }) {
@@ -6,8 +6,9 @@ export default function Services({ showIntro = true }) {
     <section className={`bg-[#141618] px-5 text-white sm:px-6 lg:px-8 ${showIntro ? 'py-24' : 'py-16 sm:py-20 lg:py-24'}`}>
       <div className="mx-auto max-w-7xl">
         {showIntro ? (
-          <SectionHeader
-            light
+          <PageHero
+            variant="sectionLight"
+            withSection={false}
             eyebrow="Services"
             title="Website work, scoped around the actual job"
             text="Start with a new company website, improve an existing one, or add the custom tools your team needs."

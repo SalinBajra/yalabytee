@@ -1,12 +1,13 @@
-import SectionHeader from './SectionHeader.jsx';
+import PageHero from './PageHero.jsx';
 import { processSteps } from '../data/siteData.js';
 
 export default function Process() {
   return (
     <section className="bg-navy-950 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          light
+        <PageHero
+          variant="sectionLight"
+          withSection={false}
           eyebrow="Process"
           title="A disciplined process that keeps the project moving"
           text="Every website has a lot of small decisions. We organize them into a clear path so your team knows what is happening, why it matters, and what comes next."

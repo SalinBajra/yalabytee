@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { navigateTo } from '../utils/routes.js';
+import Button from './Button.jsx';
 
-export default function DemoLauncher({ project, className = '', children }) {
+export default function DemoLauncher({ project, className = '', variant = 'plain', children }) {
   const [isLaunching, setIsLaunching] = useState(false);
   const destination = `/portfolio/${project.slug}`;
 
@@ -23,9 +24,9 @@ export default function DemoLauncher({ project, className = '', children }) {
 
   return (
     <>
-      <button type="button" onClick={() => setIsLaunching(true)} className={className}>
+      <Button onClick={() => setIsLaunching(true)} variant={variant} className={className}>
         {children}
-      </button>
+      </Button>
       {isLaunching && createPortal(
         <div className="demo-launcher fixed inset-0 z-[100] overflow-hidden bg-[#070716] text-white" role="dialog" aria-modal="true" aria-label={`Launching ${project.title}`}>
           <img src={project.image} alt="" className="demo-launcher-image absolute inset-0 h-full w-full object-cover opacity-25" aria-hidden="true" />
@@ -35,7 +36,7 @@ export default function DemoLauncher({ project, className = '', children }) {
           <div className="relative mx-auto flex min-h-full max-w-7xl flex-col justify-between px-5 py-7 sm:px-8 sm:py-10">
             <div className="flex items-center justify-between border-b border-white/15 pb-5">
               <p className="text-xs font-black uppercase tracking-[0.24em] text-cyanbrand-300">YalaByte · Website demo</p>
-              <button type="button" onClick={() => setIsLaunching(false)} className="text-xs font-bold uppercase tracking-[0.16em] text-white/55 transition hover:text-white">Cancel</button>
+              <Button onClick={() => setIsLaunching(false)} className="text-xs font-bold uppercase tracking-[0.16em] text-white/55 transition hover:text-white">Cancel</Button>
             </div>
 
             <div className="demo-launcher-copy max-w-3xl py-16">
@@ -58,7 +59,7 @@ export default function DemoLauncher({ project, className = '', children }) {
               <div className="demo-launcher-track h-px overflow-hidden bg-white/15"><div className="demo-launcher-progress h-full bg-cyanbrand-300" /></div>
               <div className="mt-5 flex items-center justify-between gap-5">
                 <p className="text-xs font-bold uppercase tracking-[0.17em] text-white/45">Opening {project.title}</p>
-                <button type="button" onClick={launchNow} className="text-xs font-black uppercase tracking-[0.16em] text-white transition hover:text-cyanbrand-300">Enter now ↗</button>
+                <Button onClick={launchNow} className="text-xs font-black uppercase tracking-[0.16em] text-white transition hover:text-cyanbrand-300">Enter now ↗</Button>
               </div>
             </div>
           </div>

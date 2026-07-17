@@ -1,11 +1,13 @@
-import SectionHeader from './SectionHeader.jsx';
+import PageHero from './PageHero.jsx';
 import { faqs } from '../data/siteData.js';
 
 export default function FAQ() {
   return (
     <section className="bg-slate-50 px-5 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <SectionHeader
+        <PageHero
+          variant="section"
+          withSection={false}
           eyebrow="FAQs"
           title="Useful answers before we start"
           text="The basics on scope, hosting, custom features, and support after launch."
