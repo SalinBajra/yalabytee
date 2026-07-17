@@ -42,8 +42,8 @@ export default function Header({ currentPath }) {
             >
               <BrandLogo />
             </a>
-            <div className="flex min-w-0 items-center border-l border-white/15 pl-3 sm:pl-4">
-              <p className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.24em] text-slate-100 sm:text-xs sm:tracking-[0.28em]">YalaByte</p>
+            <div className="flex min-w-0 items-center border-l border-slate-200 pl-3 sm:pl-4">
+              <p className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.24em] text-slate-700 sm:text-xs sm:tracking-[0.28em]">YalaByte</p>
             </div>
           </div>
           <div className="hidden items-center gap-1 rounded-full border border-white/8 bg-transparent p-1 lg:flex">
