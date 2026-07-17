@@ -11,7 +11,7 @@ function FooterLink({ to, children }) {
         event.preventDefault();
         navigateTo(to);
       }}
-      className="transition hover:text-navy-950"
+      className="transition hover:text-cyanbrand-500"
     >
       {children}
     </a>
@@ -38,7 +38,7 @@ function SocialLink({ href, children }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-100 px-5 py-12 text-navy-950 sm:px-6 lg:px-8">
+    <footer className="bg-white px-5 py-12 text-slate-900 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.2fr_0.7fr_1fr_0.8fr]">
         <div>
           <BrandLogo />
@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
         <div>
           <p className="font-semibold">Contact</p>
-          <a className="mt-4 block text-sm leading-7 text-slate-600 transition hover:text-navy-950" href="mailto:info@yalabyte.com">info@yalabyte.com</a>
+          <a className="mt-4 block text-sm leading-7 text-slate-600 transition hover:text-cyanbrand-500" href="mailto:info@yalabyte.com">info@yalabyte.com</a>
           <p className="text-sm leading-7 text-slate-600">Business inquiries and project consultations</p>
           <div className="mt-5 flex flex-wrap gap-3">
             <SocialLink href="https://www.instagram.com/yalabyte/">Instagram</SocialLink>

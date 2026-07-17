@@ -1,16 +1,9 @@
 import { useEffect } from 'react';
-import Hero from '../components/Hero.jsx';
+import EditorialHero from '../components/EditorialHero.jsx';
+import FeaturedProject from '../components/FeaturedProject.jsx';
+import ServicesPanel from '../components/ServicesPanel.jsx';
 import { portfolioDemos } from '../data/portfolioDemos.js';
 import { navigateTo } from '../utils/routes.js';
-
-const services = [
-  ['01', 'Website Development', 'Fast, responsive websites with polished pages, clear content structure, and reliable launch foundations.', 'Code'],
-  ['02', 'SEO', 'Search-ready page architecture, metadata, performance basics, and content structure for better discovery.', 'Rank'],
-  ['03', 'UI/UX Design', 'Thoughtful flows, refined interface systems, and mobile-first layouts that make action feel natural.', 'Flow'],
-  ['04', 'Business Websites', 'Professional company websites that communicate credibility, services, and next steps clearly.', 'Brand'],
-  ['05', 'Landing Pages', 'Focused pages for campaigns, offers, launches, and lead capture with strong calls to action.', 'Lead'],
-  ['06', 'Maintenance Support', 'Ongoing updates, improvements, troubleshooting, and technical care after your website goes live.', 'Care']
-];
 
 const process = [
   ['01', 'Discover', 'We clarify the business, audience, content, and outcomes your website needs to deliver.'],
@@ -53,30 +46,11 @@ export default function HomePage() {
 
   return (
     <>
-      <Hero />
+      <EditorialHero />
 
-      <section id="services" aria-labelledby="services-heading" className="studio-section studio-services studio-services--premium">
-        <div className="studio-container">
-          <div className="home-reveal studio-heading">
-            <p>Services / 01</p>
-            <h2 id="services-heading">Web experiences built with clarity, character, and purpose.</h2>
-          </div>
-          <div className="studio-service-grid">
-            {services.map(([number, title, text, icon], index) => (
-              <article key={title} className="home-reveal studio-service-card" style={{ '--reveal-delay': `${index * 65}ms` }}>
-                <div className="studio-service-card__top">
-                  <span>{number}</span>
-                  <i aria-hidden="true">{icon}</i>
-                </div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-                <b aria-hidden="true">↗</b>
-              </article>
-            ))}
-          </div>
-          <button type="button" className="home-reveal studio-text-link" onClick={() => navigateTo('/services')}>Explore all services <span>→</span></button>
-        </div>
-      </section>
+      <ServicesPanel />
+
+      <FeaturedProject index={0} />
 
       <section id="work" aria-labelledby="work-heading" className="studio-section studio-work studio-work--premium">
         <div className="studio-container">
