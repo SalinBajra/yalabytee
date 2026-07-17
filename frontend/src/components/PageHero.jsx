@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import Section from './Section.jsx';
+import { useMotionVariants } from './MotionSection.jsx';
 
 const variants = {
   page: {
@@ -63,21 +65,25 @@ export default function PageHero({
 }) {
   const config = variants[variant] || variants.page;
   const Heading = level === 1 ? 'h1' : 'h2';
+  const MotionComponent = typeof Component === 'string' ? motion[Component] || Component : Component;
+  const { reveal, revealGroup } = useMotionVariants();
   const content = (
-    <Component className={[config.container, className].filter(Boolean).join(' ')} {...props}>
+    <MotionComponent className={[config.container, className].filter(Boolean).join(' ')} variants={props.variants || revealGroup} {...props}>
       <div className={config.shell}>
         <div>
-          {eyebrow ? <p className={[config.eyebrow, eyebrowClassName].filter(Boolean).join(' ')}>{eyebrow}</p> : null}
-          <Heading className={[config.title, titleClassName].filter(Boolean).join(' ')}>{title}</Heading>
+          {eyebrow ? <motion.p variants={reveal} className={[config.eyebrow, eyebrowClassName].filter(Boolean).join(' ')}>{eyebrow}</motion.p> : null}
+          <motion.div variants={reveal}>
+            <Heading className={[config.title, titleClassName].filter(Boolean).join(' ')}>{title}</Heading>
+          </motion.div>
         </div>
         {(text || actions) ? (
           <div className={config.textWrap}>
-            {text ? <p className={[config.text, textClassName].filter(Boolean).join(' ')}>{text}</p> : null}
-            {actions ? <div className={[config.actions, actionsClassName].filter(Boolean).join(' ')}>{actions}</div> : null}
+            {text ? <motion.p variants={reveal} className={[config.text, textClassName].filter(Boolean).join(' ')}>{text}</motion.p> : null}
+            {actions ? <motion.div variants={reveal} className={[config.actions, actionsClassName].filter(Boolean).join(' ')}>{actions}</motion.div> : null}
           </div>
         ) : null}
       </div>
-    </Component>
+    </MotionComponent>
   );
 
   if (!withSection) return content;

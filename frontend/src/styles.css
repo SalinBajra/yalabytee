@@ -536,6 +536,36 @@
   }
 }
 
+/* Final shared navigation motion */
+
+.yb-nav-link {
+  position: relative;
+}
+
+.yb-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.yb-nav-link:hover::after,
+.yb-nav-link[aria-current='page']::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yb-nav-link::after {
+    transition: none;
+  }
+}
+
 /* Premium homepage system -------------------------------------------------- */
 
 :root {

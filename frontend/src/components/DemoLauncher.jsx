@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { navigateTo } from '../utils/routes.js';
 import Button from './Button.jsx';
 
-export default function DemoLauncher({ project, className = '', variant = 'plain', children }) {
+export default function DemoLauncher({ project, className = '', variant = 'primary', children }) {
   const [isLaunching, setIsLaunching] = useState(false);
   const destination = `/portfolio/${project.slug}`;
 
@@ -36,7 +36,7 @@ export default function DemoLauncher({ project, className = '', variant = 'plain
           <div className="relative mx-auto flex min-h-full max-w-7xl flex-col justify-between px-5 py-7 sm:px-8 sm:py-10">
             <div className="flex items-center justify-between border-b border-white/15 pb-5">
               <p className="text-xs font-black uppercase tracking-[0.24em] text-cyanbrand-300">YalaByte · Website demo</p>
-              <Button onClick={() => setIsLaunching(false)} className="text-xs font-bold uppercase tracking-[0.16em] text-white/55 transition hover:text-white">Cancel</Button>
+              <Button variant="secondary" onClick={() => setIsLaunching(false)} className="!border-0 !bg-transparent !p-0 text-xs font-bold uppercase tracking-[0.16em] !text-white/55 shadow-none transition hover:!text-white">Cancel</Button>
             </div>
 
             <div className="demo-launcher-copy max-w-3xl py-16">
@@ -59,7 +59,7 @@ export default function DemoLauncher({ project, className = '', variant = 'plain
               <div className="demo-launcher-track h-px overflow-hidden bg-white/15"><div className="demo-launcher-progress h-full bg-cyanbrand-300" /></div>
               <div className="mt-5 flex items-center justify-between gap-5">
                 <p className="text-xs font-bold uppercase tracking-[0.17em] text-white/45">Opening {project.title}</p>
-                <Button onClick={launchNow} className="text-xs font-black uppercase tracking-[0.16em] text-white transition hover:text-cyanbrand-300">Enter now ↗</Button>
+                <Button variant="secondary" onClick={launchNow} className="!border-0 !bg-transparent !p-0 text-xs font-black uppercase tracking-[0.16em] !text-white shadow-none transition hover:!text-cyanbrand-300">Enter now ↗</Button>
               </div>
             </div>
           </div>

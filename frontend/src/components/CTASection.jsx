@@ -25,7 +25,7 @@ export default function CTASection({
           <h2 className={titleClassName}>{title}</h2>
           <p className={textClassName}>{text}</p>
         </div>
-        <Button variant="light" className={buttonClassName} onClick={onClick || (() => navigateTo(to))}>
+        <Button variant="primary" className={buttonClassName} onClick={onClick || (() => navigateTo(to))}>
           {buttonText}
         </Button>
       </div>

@@ -7,15 +7,21 @@ import DemoLauncher from './DemoLauncher.jsx';
 import PageHero from './PageHero.jsx';
 import Section from './Section.jsx';
 
+const imagePositions = {
+  travel: '50% 48%',
+  cafe: '50% 54%',
+  logistics: '50% 50%'
+};
+
 function PortfolioProject({ project, index }) {
   const isFlipped = index % 2 === 1;
 
   return (
     <ContentCard className="grid gap-8 border-t border-slate-200 py-12 lg:grid-cols-2 lg:items-center">
       <div className={`${isFlipped ? 'lg:order-2' : ''}`}>
-        <Button className="group block w-full overflow-hidden rounded-[1.25rem] bg-slate-200" onClick={() => navigateTo(`/portfolio/${project.slug}`)} aria-label={`Open ${project.title} project`}>
-          <img src={project.image} alt={`${project.title} website preview`} loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105" />
-        </Button>
+        <button type="button" className="group block w-full overflow-hidden rounded-[1.25rem] bg-slate-200" onClick={() => navigateTo(`/portfolio/${project.slug}`)} aria-label={`Open ${project.title} project`}>
+          <img src={project.image} alt={`${project.title} website preview`} loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105" style={{ objectPosition: imagePositions[project.slug] || '50% 50%' }} />
+        </button>
       </div>
 
       <div>
