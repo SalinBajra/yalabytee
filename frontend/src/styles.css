@@ -94,8 +94,8 @@ button, a {
 .studio-hero {
   position: relative;
   overflow: hidden;
-  background: var(--bg);
-  color: var(--text);
+  background: radial-gradient(circle at 16% 16%, rgba(67,211,233,.14), transparent 18%), radial-gradient(circle at 88% 14%, rgba(99,91,255,.08), transparent 16%), linear-gradient(180deg, #060b18 0%, #09101d 44%, #06101f 100%);
+  color: #f8fafc;
   padding: clamp(72px, 12vw, 120px) 0 clamp(60px, 8vw, 90px);
 }
 
@@ -103,9 +103,67 @@ button, a {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 18% 18%, rgba(15,103,122,.08), transparent 22%), radial-gradient(circle at 88% 14%, rgba(15,103,122,.04), transparent 12%);
+  background: radial-gradient(circle at 18% 18%, rgba(67,211,233,.12), transparent 20%), radial-gradient(circle at 88% 14%, rgba(99,91,255,.08), transparent 12%);
   pointer-events: none;
 }
+
+.studio-hero__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.studio-hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: .18;
+  transform: translateZ(0);
+}
+
+.studio-hero__beam {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 24%, rgba(67,211,233,.18), transparent 18%),
+    radial-gradient(circle at 76% 22%, rgba(135,96,255,.14), transparent 14%);
+  opacity: .85;
+  filter: blur(0.5px);
+}
+
+.studio-hero__particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.studio-hero__particles i {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 0 18px rgba(67,211,233,.24);
+  opacity: .48;
+  animation: studio-particle 12s ease-in-out infinite;
+}
+
+.studio-hero__particles i:nth-child(1) { top: 18%; left: 12%; animation-delay: 0s; }
+.studio-hero__particles i:nth-child(2) { top: 28%; left: 68%; animation-delay: 1.2s; }
+.studio-hero__particles i:nth-child(3) { top: 42%; left: 36%; animation-delay: 2.1s; }
+.studio-hero__particles i:nth-child(4) { top: 18%; left: 84%; animation-delay: 3.4s; }
+.studio-hero__particles i:nth-child(5) { top: 64%; left: 22%; animation-delay: 4.1s; }
+.studio-hero__particles i:nth-child(6) { top: 56%; left: 55%; animation-delay: 5.2s; }
+.studio-hero__particles i:nth-child(7) { top: 72%; left: 80%; animation-delay: 6.3s; }
+.studio-hero__particles i:nth-child(8) { top: 74%; left: 42%; animation-delay: 7.1s; }
+.studio-hero__particles i:nth-child(9) { top: 48%; left: 12%; animation-delay: 8s; }
+.studio-hero__particles i:nth-child(10) { top: 38%; left: 92%; animation-delay: 9.4s; }
 
 .studio-hero__inner {
   position: relative;
@@ -122,13 +180,23 @@ button, a {
 }
 
 .studio-hero__eyebrow {
-  margin: 0 0 18px;
-  font-size: 0.78rem;
-  line-height: 1.25;
-  letter-spacing: 0.18em;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 24px;
+  color: rgba(216,251,255,.78);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0;
   text-transform: uppercase;
-  color: var(--accent);
-  font-weight: 700;
+}
+
+.studio-hero__eyebrow span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #43d3e9;
+  box-shadow: 0 0 0 8px rgba(67,211,233,.1), 0 0 28px rgba(67,211,233,.85);
 }
 
 .studio-hero__title {
@@ -137,14 +205,32 @@ button, a {
   line-height: 0.96;
   font-weight: 800;
   max-width: 12ch;
+  color: #ffffff;
 }
 
 .studio-hero__intro {
   margin-top: 26px;
   max-width: 600px;
-  color: var(--text-muted);
+  color: rgba(255,255,255,.78);
   font-size: 1.05rem;
   line-height: 1.75;
+}
+
+.studio-hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.studio-hero__chip {
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.92);
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .studio-hero__actions {
@@ -175,6 +261,7 @@ button, a {
 .studio-button--solid {
   background: var(--accent);
   color: #fff;
+  box-shadow: 0 20px 50px rgba(15,103,122,.18);
 }
 
 .studio-button--solid:hover {
@@ -183,12 +270,12 @@ button, a {
 
 .studio-button--outline {
   background: transparent;
-  color: var(--text-strong);
-  border-color: var(--border);
+  color: #fff;
+  border-color: rgba(255,255,255,.2);
 }
 
 .studio-button--outline:hover {
-  border-color: var(--accent);
+  border-color: rgba(67,211,233,.5);
 }
 
 .studio-hero__visual {
@@ -198,6 +285,11 @@ button, a {
   place-items: center;
   width: 100%;
   min-height: 520px;
+}
+
+.studio-visual {
+  transform: translate(var(--parallax-x, 0), var(--parallax-y, 0));
+  transition: transform .28s ease;
 }
 
 .studio-hero__visual-card {
@@ -784,7 +876,7 @@ button, a {
 
 @media (max-width: 900px) {
   .studio-visual { top: 0; bottom: 0; width: 118vw; right: -55vw; opacity: .72; }
-  .studio-hero__fade { background: linear-gradient(90deg, #04050a 0%, rgba(4,5,10,.94) 45%, rgba(4,5,10,.4) 100%), linear-gradient(0deg,#04050a,transparent 36%); }
+  .studio-hero__fade { background: linear-gradient(90deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,0) 56%); }
   .studio-heading, .studio-about__grid { grid-template-columns: .35fr 1.65fr; }
   .studio-service { grid-template-columns: 50px .8fr 1.2fr auto; }
   .studio-project { grid-column: span 6; }
