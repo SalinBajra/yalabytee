@@ -8,8 +8,8 @@ export default function PortfolioPage() {
     <>
       <PageHero
         eyebrow="Portfolio"
-        title="Live Demos, ready to explore"
-        text="Browse complete Travel, Café, and Logistics Live Demos with realistic pages, content, and navigation."
+        title="Website demos with full-page thinking."
+        text="Explore complete demo websites shaped around industry-specific content, navigation, service pages, and inquiry paths."
         actions={portfolioDemos.map((demo) => (
           <DemoLauncher key={demo.slug} project={demo} className="rounded-lg border border-white/20 px-4 py-2.5 text-sm font-bold text-white transition hover:border-cyanbrand-400 hover:bg-white/[0.08]">
             {demo.title}
