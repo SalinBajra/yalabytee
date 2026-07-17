@@ -30,8 +30,8 @@ export default function Header({ currentPath }) {
 
   return (
     <header className="site-header sticky top-0 z-50">
-      <nav className="mx-auto max-w-[1500px] px-4 py-3 sm:px-6 lg:px-8" aria-label="Primary navigation">
-        <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.035] px-3 py-2 shadow-[0_18px_60px_rgba(0,0,0,0.18)] sm:gap-5 sm:px-4">
+      <nav className="mx-auto max-w-[1500px] px-4 py-2 sm:px-6 lg:px-8" aria-label="Primary navigation">
+        <div className="flex items-center justify-between gap-3 rounded-xl border border-white/8 bg-white/[0.02] px-2 py-1 shadow-[0_12px_40px_rgba(0,0,0,0.12)] sm:gap-4 sm:px-3">
           <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <a
               href="/"
@@ -46,7 +46,7 @@ export default function Header({ currentPath }) {
               <p className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.24em] text-slate-100 sm:text-xs sm:tracking-[0.28em]">YalaByte</p>
             </div>
           </div>
-          <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-black/20 p-1 lg:flex">
+          <div className="hidden items-center gap-1 rounded-full border border-white/8 bg-transparent p-1 lg:flex">
             {routes.map((item) => (
               <NavLink key={item.path} item={item} currentPath={currentPath} />
             ))}

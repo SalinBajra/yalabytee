@@ -284,7 +284,9 @@ button, a {
   display: grid;
   place-items: center;
   width: 100%;
-  min-height: 520px;
+  max-width: 720px;
+  justify-self: end;
+  min-height: 460px;
 }
 
 .studio-visual {
