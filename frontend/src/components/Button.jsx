@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 
 const variantClasses = {
-  primary: 'rounded-full bg-navy-950 px-7 py-4 text-sm font-black text-white shadow-sm transition hover:bg-cyanbrand-600',
-  secondary: 'rounded-full border border-slate-300 bg-white/80 px-7 py-4 text-sm font-black text-slate-950 transition hover:border-cyanbrand-500 hover:bg-cyanbrand-50'
+  primary: 'rounded-card bg-accent px-7 py-4 text-sm font-black text-base-900 transition hover:bg-accent-hover',
+  secondary: 'rounded-card border border-border bg-white/[0.03] px-7 py-4 text-sm font-black text-ink transition hover:border-accent hover:bg-accent-muted'
 };
 
 export default function Button({

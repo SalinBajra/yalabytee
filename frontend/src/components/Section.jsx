@@ -3,10 +3,10 @@ import { useMotionVariants } from './MotionSection.jsx';
 
 const sectionVariants = {
   none: '',
-  slate: 'bg-slate-50 px-5 py-16 sm:px-6 lg:px-8 lg:py-24',
-  white: 'bg-white px-5 py-16 sm:px-6 lg:px-8 lg:py-24',
-  whiteLarge: 'bg-white px-5 py-20 sm:px-6 lg:px-8 lg:py-28',
-  dark: 'bg-navy-950 px-5 py-16 text-white sm:px-6 lg:px-8 lg:py-24'
+  slate: 'bg-base-800 px-5 py-16 text-ink sm:px-6 lg:px-8 lg:py-24',
+  white: 'bg-base-900 px-5 py-16 text-ink sm:px-6 lg:px-8 lg:py-24',
+  whiteLarge: 'bg-base-900 px-5 py-20 text-ink sm:px-6 lg:px-8 lg:py-28',
+  dark: 'bg-base-800 px-5 py-16 text-ink sm:px-6 lg:px-8 lg:py-24'
 };
 
 export default function Section({

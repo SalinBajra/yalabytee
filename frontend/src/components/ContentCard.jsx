@@ -3,11 +3,11 @@ import { useMotionVariants } from './MotionSection.jsx';
 
 const cardVariants = {
   none: '',
-  service: 'page-reveal rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-slate-300',
-  plain: 'page-reveal rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm',
-  soft: 'page-reveal rounded-[1.6rem] border border-slate-200 bg-slate-50 p-6 shadow-sm',
-  panel: 'rounded-3xl bg-white p-7 shadow-sm',
-  proofDark: 'page-reveal rounded-[1.75rem] border border-white/10 bg-white/5 p-7'
+  service: 'page-reveal rounded-card border border-border-subtle bg-base-700 p-7 transition',
+  plain: 'page-reveal rounded-card border border-border-subtle bg-base-700 p-7',
+  soft: 'page-reveal rounded-card border border-border-subtle bg-base-700 p-6',
+  panel: 'rounded-card bg-base-700 p-7',
+  proofDark: 'page-reveal rounded-card border border-border-subtle bg-white/[0.04] p-7'
 };
 
 export default function ContentCard({

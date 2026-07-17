@@ -36,7 +36,7 @@ export default function App() {
   if (path === '/client-portal') return <ClientPortalPage />;
 
   return (
-    <div className="min-h-screen bg-slate-50 text-ink antialiased">
+    <div className="min-h-screen bg-base-900 text-ink antialiased">
       <Header currentPath={path} />
       <main>
         <Page />

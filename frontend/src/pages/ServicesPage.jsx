@@ -23,9 +23,9 @@ export default function ServicesPage() {
           <CardGrid variant="services">
             {services.slice(0, 6).map((service) => (
               <ContentCard key={service.title} variant="service">
-                <p className="text-sm font-bold uppercase tracking-[0.24em] text-cyanbrand-600">{service.title}</p>
-                <p className="mt-4 text-sm leading-7 text-slate-600">{service.text}</p>
-                <p className="mt-6 text-xs font-black uppercase tracking-[0.28em] text-slate-500">{service.outcome}</p>
+                <p className="text-sm font-bold uppercase tracking-[0.24em] text-accent">{service.title}</p>
+                <p className="mt-4 text-sm leading-7 text-ink-muted">{service.text}</p>
+                <p className="mt-6 text-xs font-black uppercase tracking-[0.28em] text-ink-faint">{service.outcome}</p>
               </ContentCard>
             ))}
           </CardGrid>
@@ -34,16 +34,16 @@ export default function ServicesPage() {
       <Section variant="white">
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <div className="page-reveal">
-              <p className="text-xs font-black uppercase tracking-[0.28em] text-slate-500">Support</p>
-              <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Launch-ready foundations and ongoing care.</h2>
-              <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+              <p className="text-eyebrow uppercase text-accent">Support</p>
+              <h2 className="mt-4 text-headline text-ink">Launch-ready foundations and ongoing care.</h2>
+              <p className="mt-4 text-sm leading-7 text-ink-muted sm:text-base">
                 The website is only the start. We also help with the technical setup, launch checklist, and the systems you need after go-live.
               </p>
             </div>
             <CardGrid variant="stack">
               {addons.map((item, index) => (
                 <ContentCard as="div" key={item} variant="soft" style={{ '--page-delay': `${index * 40}ms` }}>
-                  <p className="text-sm leading-7 text-slate-700">{item}</p>
+                  <p className="text-sm leading-7 text-ink-muted">{item}</p>
                 </ContentCard>
               ))}
             </CardGrid>
@@ -58,17 +58,17 @@ export default function ServicesPage() {
             title="A practical process for every website project."
             text="Every project follows the same clear path: discovery, design, build, and launch. This keeps scope manageable and quality predictable."
             className="page-reveal mx-auto max-w-3xl text-center"
-            eyebrowClassName="text-xs font-black uppercase tracking-[0.28em] text-cyanbrand-600"
-            titleClassName="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl"
-            textClassName="mt-4 text-sm leading-7 text-slate-600 sm:text-base"
+            eyebrowClassName="text-eyebrow uppercase text-accent"
+            titleClassName="mt-4 text-headline text-ink"
+            textClassName="mt-4 text-sm leading-7 text-ink-muted sm:text-base"
           />
 
           <CardGrid variant="process">
             {processSteps.map((step) => (
               <ContentCard key={step.title} variant="plain">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-navy-900 text-sm font-black text-white">{step.label}</div>
-                <h3 className="mt-6 text-xl font-semibold text-slate-950">{step.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">{step.text}</p>
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-card bg-accent-muted text-sm font-black text-accent">{step.label}</div>
+                <h3 className="mt-6 text-xl font-semibold text-ink">{step.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-ink-muted">{step.text}</p>
               </ContentCard>
             ))}
           </CardGrid>

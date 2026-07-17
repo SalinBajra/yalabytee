@@ -85,54 +85,54 @@ export default function Contact() {
   };
 
   return (
-    <section className="bg-white px-5 py-20 sm:px-6 lg:px-8">
+    <section className="bg-base-900 px-5 py-20 text-ink sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
           <div className="space-y-6">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyanbrand-600">Contact</p>
-            <div className="rounded-[1.35rem] border border-slate-200 bg-slate-50 p-8 shadow-soft">
-              <p className="text-sm font-semibold text-slate-900">Project inquiries</p>
-              <a className="mt-3 block text-sm leading-7 text-cyanbrand-600 transition hover:text-cyanbrand-700" href="mailto:info@yalabyte.com">info@yalabyte.com</a>
-              <p className="mt-3 text-sm leading-7 text-slate-600">Available for website, web app, and digital consulting inquiries.</p>
+            <p className="text-eyebrow uppercase text-accent">Contact</p>
+            <div className="rounded-card border border-border-subtle bg-base-700 p-8">
+              <p className="text-sm font-semibold text-ink">Project inquiries</p>
+              <a className="mt-3 block text-sm leading-7 text-accent transition hover:text-accent-hover" href="mailto:info@yalabyte.com">info@yalabyte.com</a>
+              <p className="mt-3 text-sm leading-7 text-ink-muted">Available for website, web app, and digital consulting inquiries.</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <div className="rounded-[1.35rem] border border-slate-200 bg-slate-50 p-6 shadow-soft">
-                <p className="text-sm font-semibold text-slate-900">Response timing</p>
-                <p className="mt-2 text-3xl font-black text-slate-950">24h</p>
-                <p className="mt-3 text-sm leading-7 text-slate-600">A practical response path for qualified project inquiries.</p>
+              <div className="rounded-card border border-border-subtle bg-base-700 p-6">
+                <p className="text-sm font-semibold text-ink">Response timing</p>
+                <p className="mt-2 text-3xl font-black text-ink">24h</p>
+                <p className="mt-3 text-sm leading-7 text-ink-muted">A practical response path for qualified project inquiries.</p>
               </div>
-              <div className="rounded-[1.35rem] border border-slate-200 bg-slate-50 p-6 shadow-soft">
-                <p className="text-sm font-semibold text-slate-900">Ready to start</p>
-                <p className="mt-2 text-xl font-bold text-slate-950">Scope, launch, and post-launch support.</p>
-                <p className="mt-3 text-sm leading-7 text-slate-600">Tell us what you need and we’ll suggest the most practical next step.</p>
+              <div className="rounded-card border border-border-subtle bg-base-700 p-6">
+                <p className="text-sm font-semibold text-ink">Ready to start</p>
+                <p className="mt-2 text-xl font-bold text-ink">Scope, launch, and post-launch support.</p>
+                <p className="mt-3 text-sm leading-7 text-ink-muted">Tell us what you need and we’ll suggest the most practical next step.</p>
               </div>
             </div>
           </div>
-          <form className="rounded-[1.6rem] border border-slate-200 bg-slate-100 p-6 shadow-soft sm:p-8" onSubmit={handleSubmit}>
+          <form className="rounded-card border border-border bg-base-700 p-6 sm:p-8" onSubmit={handleSubmit}>
           <div className="grid gap-5 sm:grid-cols-2">
-            <label className="text-sm font-semibold text-navy-950">
+            <label className="text-sm font-semibold text-ink">
               Name
-              <input className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="name" value={form.name} onChange={handleChange} autoComplete="name" />
+              <input className="mt-2 w-full rounded-card border border-border-subtle bg-base-800 px-4 py-3 text-sm text-ink outline-none transition focus:border-accent focus:ring-4 focus:ring-accent-muted" name="name" value={form.name} onChange={handleChange} autoComplete="name" />
             </label>
-            <label className="text-sm font-semibold text-navy-950">
+            <label className="text-sm font-semibold text-ink">
               Email
-              <input className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="email" type="email" value={form.email} onChange={handleChange} autoComplete="email" />
+              <input className="mt-2 w-full rounded-card border border-border-subtle bg-base-800 px-4 py-3 text-sm text-ink outline-none transition focus:border-accent focus:ring-4 focus:ring-accent-muted" name="email" type="email" value={form.email} onChange={handleChange} autoComplete="email" />
             </label>
           </div>
           <div className="mt-5 grid gap-5 sm:grid-cols-2">
-            <label className="text-sm font-semibold text-navy-950">
+            <label className="text-sm font-semibold text-ink">
               Contact number
-              <input className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="phone" value={form.phone} onChange={handleChange} autoComplete="tel" inputMode="tel" placeholder="+977 98XXXXXXXX" />
+              <input className="mt-2 w-full rounded-card border border-border-subtle bg-base-800 px-4 py-3 text-sm text-ink outline-none transition focus:border-accent focus:ring-4 focus:ring-accent-muted" name="phone" value={form.phone} onChange={handleChange} autoComplete="tel" inputMode="tel" placeholder="+977 98XXXXXXXX" />
             </label>
-            <label className="text-sm font-semibold text-navy-950">
+            <label className="text-sm font-semibold text-ink">
               Company
-              <input className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="company" value={form.company} onChange={handleChange} autoComplete="organization" />
+              <input className="mt-2 w-full rounded-card border border-border-subtle bg-base-800 px-4 py-3 text-sm text-ink outline-none transition focus:border-accent focus:ring-4 focus:ring-accent-muted" name="company" value={form.company} onChange={handleChange} autoComplete="organization" />
             </label>
           </div>
           <div className="mt-5 grid gap-5 sm:grid-cols-2">
-            <label className="text-sm font-semibold text-navy-950">
+            <label className="text-sm font-semibold text-ink">
               Service needed
-              <select className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="service" value={form.service} onChange={handleChange}>
+              <select className="mt-2 w-full rounded-card border border-border-subtle bg-base-800 px-4 py-3 text-sm text-ink outline-none transition focus:border-accent focus:ring-4 focus:ring-accent-muted" name="service" value={form.service} onChange={handleChange}>
                 <option value="">Select a service</option>
                 {serviceOptions.map((option) => (
                   <option key={option} value={option}>
@@ -142,16 +142,16 @@ export default function Contact() {
               </select>
             </label>
           </div>
-          <label className="mt-5 block text-sm font-semibold text-navy-950">
+          <label className="mt-5 block text-sm font-semibold text-ink">
             Message
-            <textarea className="mt-2 min-h-36 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="message" value={form.message} onChange={handleChange} />
+            <textarea className="mt-2 min-h-36 w-full rounded-card border border-border-subtle bg-base-800 px-4 py-3 text-sm text-ink outline-none transition focus:border-accent focus:ring-4 focus:ring-accent-muted" name="message" value={form.message} onChange={handleChange} />
           </label>
           {status.message ? (
             <p className={`mt-5 rounded-lg px-4 py-3 text-sm font-medium ${status.type === 'success' ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-700'}`} role="status">
               {status.message}
             </p>
           ) : null}
-          <button className="mt-6 w-full rounded-xl bg-cyanbrand-500 px-6 py-4 text-sm font-black text-navy-950 shadow-[0_18px_38px_rgba(19,200,222,0.24)] transition hover:-translate-y-0.5 hover:bg-cyanbrand-400 disabled:cursor-not-allowed disabled:opacity-60" type="submit" disabled={isSubmitting}>
+          <button className="mt-6 w-full rounded-card bg-accent px-6 py-4 text-sm font-black text-base-900 transition hover:-translate-y-0.5 hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60" type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Sending...' : 'Send Project Inquiry'}
           </button>
         </form>

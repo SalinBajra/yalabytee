@@ -8,12 +8,12 @@ export default function CTASection({
   text,
   buttonText,
   to = '/contact',
-  sectionClassName = 'bg-cyanbrand-500 px-5 py-16 text-white sm:px-6 lg:px-8 lg:py-24',
-  panelClassName = 'studio-container flex flex-col items-start gap-8 rounded-[2rem] border border-white/15 bg-white/10 px-8 py-12 shadow-soft sm:flex-row sm:items-center sm:justify-between',
+  sectionClassName = 'bg-base-800 px-5 py-16 text-ink sm:px-6 lg:px-8 lg:py-24',
+  panelClassName = 'studio-container flex flex-col items-start gap-8 rounded-card border border-border bg-base-700 px-8 py-12 sm:flex-row sm:items-center sm:justify-between',
   contentClassName = 'max-w-3xl',
-  eyebrowClassName = 'text-xs font-black uppercase tracking-[0.28em] text-cyanbrand-100',
-  titleClassName = 'mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl',
-  textClassName = 'mt-4 text-sm leading-7 text-cyanbrand-100/90 sm:text-base',
+  eyebrowClassName = 'text-eyebrow uppercase text-accent',
+  titleClassName = 'mt-4 text-headline text-ink',
+  textClassName = 'mt-4 text-sm leading-7 text-ink-muted sm:text-base',
   buttonClassName = '',
   onClick
 }) {

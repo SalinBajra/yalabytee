@@ -222,16 +222,16 @@ export default function ContactShortcuts() {
       className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-[90] flex flex-col items-end gap-3 sm:bottom-[calc(1.25rem+env(safe-area-inset-bottom))] sm:right-5"
     >
       {chatOpen ? (
-        <section className="mb-1 flex max-h-[min(640px,calc(100vh-7.25rem))] w-[min(94vw,390px)] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white text-navy-950 shadow-[0_24px_70px_rgba(24,22,18,0.22)] ring-1 ring-slate-950/5" aria-label="ChatByte website chat">
-          <header className="relative overflow-hidden bg-[#1e211f] px-4 py-4 text-white">
+        <section className="mb-1 flex max-h-[min(640px,calc(100vh-7.25rem))] w-[min(94vw,390px)] flex-col overflow-hidden rounded-card border border-border bg-base-800 text-ink" aria-label="ChatByte website chat">
+          <header className="relative overflow-hidden border-b border-border-subtle bg-base-900 px-4 py-4 text-ink">
             <div className="relative flex items-start justify-between gap-3">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(52,211,153,0.14)]" />
-                <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-cyanbrand-400">ChatByte</p>
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-accent">ChatByte</p>
               </div>
               <h2 className="mt-1 text-lg font-extrabold tracking-tight">Hi, welcome to YalaByte.</h2>
-              <p className="mt-1 text-xs font-medium leading-5 text-slate-300">{chatEnded ? 'This conversation is closed.' : 'How can we help you today?'}</p>
+              <p className="mt-1 text-xs font-medium leading-5 text-ink-muted">{chatEnded ? 'This conversation is closed.' : 'How can we help you today?'}</p>
               <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/45">Powered by YalaByte</p>
             </div>
             <button
@@ -244,16 +244,16 @@ export default function ContactShortcuts() {
             </button>
             </div>
           </header>
-          <div className={`min-h-0 flex-1 overflow-y-auto bg-[linear-gradient(180deg,#f8fafc,#eef7f9)] px-4 ${showDetails && !chatEnded ? 'py-3' : 'py-4'}`}>
+          <div className={`min-h-0 flex-1 overflow-y-auto bg-base-800 px-4 ${showDetails && !chatEnded ? 'py-3' : 'py-4'}`}>
             {showDetails && !chatEnded ? (
-              <div className="rounded-2xl border border-slate-200 bg-white px-3.5 py-3 text-sm leading-6 text-slate-700 shadow-sm">
-                <p className="font-extrabold text-navy-950">Chat with the YalaByte team</p>
-                <p className="mt-1 text-xs font-medium leading-5 text-slate-500">
+              <div className="rounded-card border border-border-subtle bg-base-700 px-3.5 py-3 text-sm leading-6 text-ink-muted">
+                <p className="font-extrabold text-ink">Chat with the YalaByte team</p>
+                <p className="mt-1 text-xs font-medium leading-5 text-ink-muted">
                   Ask about website development, project inquiries, pricing, support, SEO, or consultations.
                 </p>
               </div>
             ) : (
-              <div className="max-w-[86%] rounded-2xl rounded-tl-md border border-slate-200 bg-white px-3.5 py-2.5 text-sm leading-6 shadow-sm">
+              <div className="max-w-[86%] rounded-card rounded-tl-md border border-border-subtle bg-base-700 px-3.5 py-2.5 text-sm leading-6 text-ink-muted">
                 {hasConversation ? 'You can continue the conversation here.' : 'Hi, share your details and what you need. We will reply here.'}
               </div>
             )}
@@ -261,7 +261,7 @@ export default function ContactShortcuts() {
               <div className="mt-3 flex flex-wrap gap-2">
                 {quickReplies.map((reply) => (
                   <button
-                    className="rounded-full border border-cyanbrand-500/20 bg-white px-3 py-2 text-left text-xs font-extrabold text-navy-950 shadow-sm transition hover:-translate-y-0.5 hover:border-cyanbrand-400 hover:bg-cyanbrand-100"
+                    className="rounded-pill border border-border bg-base-700 px-3 py-2 text-left text-xs font-extrabold text-ink transition hover:-translate-y-0.5 hover:border-accent hover:bg-accent-muted"
                     key={reply}
                     onClick={() => useQuickReply(reply)}
                     type="button"
@@ -272,11 +272,11 @@ export default function ContactShortcuts() {
               </div>
             ) : null}
             {!chatEnded ? (
-              <div className="mt-3 rounded-2xl border border-cyanbrand-500/20 bg-white/90 px-3.5 py-3 shadow-sm">
-                <p className="text-sm font-extrabold text-navy-950">Would you like our team to contact you?</p>
-                <p className="mt-1 text-xs font-medium leading-5 text-slate-500">Share your details and we will follow up with the right next step.</p>
+              <div className="mt-3 rounded-card border border-border-subtle bg-base-700 px-3.5 py-3">
+                <p className="text-sm font-extrabold text-ink">Would you like our team to contact you?</p>
+                <p className="mt-1 text-xs font-medium leading-5 text-ink-muted">Share your details and we will follow up with the right next step.</p>
                 <button
-                  className="mt-2 rounded-full bg-navy-950 px-3 py-2 text-xs font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-navy-800"
+                  className="mt-2 rounded-card bg-accent px-3 py-2 text-xs font-extrabold text-base-900 transition hover:-translate-y-0.5 hover:bg-accent-hover"
                   onClick={() => useQuickReply('I want the YalaByte team to contact me')}
                   type="button"
                 >
@@ -288,10 +288,10 @@ export default function ContactShortcuts() {
               <div className="mt-3 space-y-2 pr-1">
                 {messages.map((item) => (
                   <div className={`flex ${item.author_type === 'client' ? 'justify-end' : 'justify-start'}`} key={item.id}>
-                    <div className={`max-w-[86%] animate-[chat-message-in_.24s_ease_both] rounded-2xl px-3.5 py-2.5 text-sm leading-6 shadow-sm ${item.author_type === 'client' ? 'rounded-tr-md bg-cyanbrand-100 text-navy-950' : 'rounded-tl-md border border-slate-200 bg-white text-slate-700'}`}>
-                      <p className="mb-0.5 text-[11px] font-extrabold text-slate-500">{item.author_type === 'client' ? 'You' : item.author_name || 'YalaByte'}</p>
+                    <div className={`max-w-[86%] animate-[chat-message-in_.24s_ease_both] rounded-card px-3.5 py-2.5 text-sm leading-6 ${item.author_type === 'client' ? 'rounded-tr-md bg-accent text-base-900' : 'rounded-tl-md border border-border-subtle bg-base-700 text-ink-muted'}`}>
+                      <p className={`mb-0.5 text-[11px] font-extrabold ${item.author_type === 'client' ? 'text-base-800' : 'text-ink-faint'}`}>{item.author_type === 'client' ? 'You' : item.author_name || 'YalaByte'}</p>
                       <p className="whitespace-pre-line">{item.body}</p>
-                      {item.created_at ? <p className="mt-1 text-[10px] font-bold text-slate-400">{new Date(item.created_at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}</p> : null}
+                      {item.created_at ? <p className={`mt-1 text-[10px] font-bold ${item.author_type === 'client' ? 'text-base-800' : 'text-ink-faint'}`}>{new Date(item.created_at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}</p> : null}
                     </div>
                   </div>
                 ))}
@@ -299,7 +299,7 @@ export default function ContactShortcuts() {
             ) : null}
             {chatSending && hasConversation ? (
               <div className="mt-3 flex justify-start">
-                <div className="rounded-2xl rounded-tl-md border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                <div className="rounded-card rounded-tl-md border border-border-subtle bg-base-700 px-4 py-3">
                   <div className="flex items-center gap-1.5" aria-label="Preparing response">
                     <span className="h-2 w-2 animate-[typing-dot_1s_infinite] rounded-full bg-slate-400" />
                     <span className="h-2 w-2 animate-[typing-dot_1s_.14s_infinite] rounded-full bg-slate-400" />
@@ -309,31 +309,31 @@ export default function ContactShortcuts() {
               </div>
             ) : null}
           </div>
-          <form className="shrink-0 space-y-2.5 border-t border-slate-200 bg-white p-3.5" onSubmit={sendChat}>
+          <form className="shrink-0 space-y-2.5 border-t border-border-subtle bg-base-900 p-3.5" onSubmit={sendChat}>
             {showDetails && !chatEnded ? (
               <div className="grid gap-2">
                 <div className="grid grid-cols-2 gap-2">
-                  <input className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="name" onChange={handleChatChange} placeholder="Name" value={chatForm.name} />
-                  <input className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="email" onChange={handleChatChange} placeholder="Email" type="email" value={chatForm.email} />
+                  <input className="min-w-0 rounded-xl border border-border-subtle bg-base-800 px-3 py-2 text-sm font-semibold text-ink outline-none transition placeholder:text-ink-faint focus:border-accent focus:bg-base-700 focus:ring-4 focus:ring-accent-muted" name="name" onChange={handleChatChange} placeholder="Name" value={chatForm.name} />
+                  <input className="min-w-0 rounded-xl border border-border-subtle bg-base-800 px-3 py-2 text-sm font-semibold text-ink outline-none transition placeholder:text-ink-faint focus:border-accent focus:bg-base-700 focus:ring-4 focus:ring-accent-muted" name="email" onChange={handleChatChange} placeholder="Email" type="email" value={chatForm.email} />
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <input className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="phone" onChange={handleChatChange} placeholder="Phone" value={chatForm.phone} />
-                  <input className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="company" onChange={handleChatChange} placeholder="Business name" value={chatForm.company} />
+                  <input className="min-w-0 rounded-xl border border-border-subtle bg-base-800 px-3 py-2 text-sm font-semibold text-ink outline-none transition placeholder:text-ink-faint focus:border-accent focus:bg-base-700 focus:ring-4 focus:ring-accent-muted" name="phone" onChange={handleChatChange} placeholder="Phone" value={chatForm.phone} />
+                  <input className="min-w-0 rounded-xl border border-border-subtle bg-base-800 px-3 py-2 text-sm font-semibold text-ink outline-none transition placeholder:text-ink-faint focus:border-accent focus:bg-base-700 focus:ring-4 focus:ring-accent-muted" name="company" onChange={handleChatChange} placeholder="Business name" value={chatForm.company} />
                 </div>
-                <input className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="projectRequirement" onChange={handleChatChange} placeholder="Project requirement" value={chatForm.projectRequirement} />
-                <select className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold outline-none transition focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="contactTime" onChange={handleChatChange} value={chatForm.contactTime}>
+                <input className="min-w-0 rounded-xl border border-border-subtle bg-base-800 px-3 py-2 text-sm font-semibold text-ink outline-none transition placeholder:text-ink-faint focus:border-accent focus:bg-base-700 focus:ring-4 focus:ring-accent-muted" name="projectRequirement" onChange={handleChatChange} placeholder="Project requirement" value={chatForm.projectRequirement} />
+                <select className="min-w-0 rounded-xl border border-border-subtle bg-base-800 px-3 py-2 text-sm font-semibold text-ink outline-none transition focus:border-accent focus:bg-base-700 focus:ring-4 focus:ring-accent-muted" name="contactTime" onChange={handleChatChange} value={chatForm.contactTime}>
                   <option value="">Preferred contact time</option>
                   {contactTimeOptions.map((item) => <option key={item} value={item}>{item}</option>)}
                 </select>
               </div>
             ) : null}
             {chatEnded ? (
-              <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-3">
-                <p className="text-sm font-extrabold text-navy-950">Chat ended</p>
-                <p className="mt-1 text-xs font-medium leading-5 text-slate-500">This conversation is closed. Start a new chat if you need more help.</p>
+              <div className="rounded-xl border border-border-subtle bg-base-800 px-3 py-3">
+                <p className="text-sm font-extrabold text-ink">Chat ended</p>
+                <p className="mt-1 text-xs font-medium leading-5 text-ink-muted">This conversation is closed. Start a new chat if you need more help.</p>
               </div>
             ) : (
-              <textarea className="min-h-16 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-semibold outline-none transition placeholder:text-slate-400 focus:border-cyanbrand-500 focus:bg-white focus:ring-4 focus:ring-cyanbrand-100" name="message" onChange={handleChatChange} placeholder={hasThread ? 'Type your message here...' : 'Type your message here...'} value={chatForm.message} />
+              <textarea className="min-h-16 w-full resize-none rounded-xl border border-border-subtle bg-base-800 px-3 py-2.5 text-sm font-semibold text-ink outline-none transition placeholder:text-ink-faint focus:border-accent focus:bg-base-700 focus:ring-4 focus:ring-accent-muted" name="message" onChange={handleChatChange} placeholder={hasThread ? 'Type your message here...' : 'Type your message here...'} value={chatForm.message} />
             )}
             {chatStatus.message ? (
               <p className={`rounded-lg px-3 py-2 text-xs font-bold leading-5 ${chatStatus.type === 'success' ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-700'}`}>
@@ -341,25 +341,25 @@ export default function ContactShortcuts() {
               </p>
             ) : null}
             {chatEnded ? (
-              <button className="w-full rounded-xl bg-cyanbrand-500 px-4 py-3 text-sm font-extrabold text-navy-950 shadow-sm transition hover:-translate-y-0.5 hover:bg-cyanbrand-400 hover:shadow-md" onClick={startNewChat} type="button">
+              <button className="w-full rounded-card bg-accent px-4 py-3 text-sm font-extrabold text-base-900 transition hover:-translate-y-0.5 hover:bg-accent-hover" onClick={startNewChat} type="button">
                 Start New Chat
               </button>
             ) : (
-              <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-cyanbrand-500 px-4 py-2.5 text-sm font-extrabold text-navy-950 shadow-sm transition hover:-translate-y-0.5 hover:bg-cyanbrand-400 hover:shadow-md disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-60 disabled:shadow-none" disabled={chatSending} type="submit">
+              <button className="flex w-full items-center justify-center gap-2 rounded-card bg-accent px-4 py-2.5 text-sm font-extrabold text-base-900 transition hover:-translate-y-0.5 hover:bg-accent-hover disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-60" disabled={chatSending} type="submit">
                 {chatSending ? 'Sending...' : hasConversation ? 'Send Reply' : 'Start Chat'}
                 <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
                   <path d="m5 12 14-7-4 14-3-5-7-2Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
                 </svg>
               </button>
             )}
-            <div className="flex items-center justify-between gap-2 border-t border-slate-100 pt-2.5">
+            <div className="flex items-center justify-between gap-2 border-t border-border-subtle pt-2.5">
               <div className="flex gap-2">
-                <a className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 text-slate-700 transition hover:border-cyanbrand-400 hover:bg-slate-50 hover:text-navy-950" href={`tel:${phoneNumber}`} title="Call us" aria-label="Call us">
+                <a className="grid h-10 w-10 place-items-center rounded-xl border border-border-subtle text-ink-muted transition hover:border-accent hover:bg-accent-muted hover:text-ink" href={`tel:${phoneNumber}`} title="Call us" aria-label="Call us">
                   <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
                     <path d="M7.5 4.5 10 9l-1.8 1.8a12.2 12.2 0 0 0 5 5L15 14l4.5 2.5-.8 3.2c-.2.7-.8 1.1-1.5 1A16.5 16.5 0 0 1 3.3 6.8c-.1-.7.3-1.3 1-1.5l3.2-.8Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </a>
-                <a className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 text-slate-700 transition hover:border-[#25D366] hover:bg-slate-50 hover:text-navy-950" href={whatsappUrl} target="_blank" rel="noreferrer" title="WhatsApp" aria-label="WhatsApp">
+                <a className="grid h-10 w-10 place-items-center rounded-xl border border-border-subtle text-ink-muted transition hover:border-[#25D366] hover:bg-white/[0.04] hover:text-ink" href={whatsappUrl} target="_blank" rel="noreferrer" title="WhatsApp" aria-label="WhatsApp">
                   <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
                     <path d="M5 19 6.2 15.8A7.6 7.6 0 1 1 9 18.4L5 19Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M9.5 8.8c.3 2.7 2 4.4 4.7 4.7l1-1.1c.2-.2.5-.3.8-.2l1.5.5c.3.1.5.4.5.7v1.4c0 .4-.3.8-.7.8-5.1.2-8.9-3.6-8.7-8.7 0-.4.4-.7.8-.7h1.4c.3 0 .6.2.7.5l.5 1.5c.1.3 0 .6-.2.8l-1.1 1Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -367,7 +367,7 @@ export default function ContactShortcuts() {
               </a>
               </div>
               {hasConversation && !chatEnded ? (
-                <button className="rounded-xl border border-slate-200 px-3 py-2.5 text-xs font-extrabold text-slate-500 transition hover:bg-slate-50 hover:text-navy-950" disabled={chatSending} onClick={endChat} type="button">
+                <button className="rounded-xl border border-border-subtle px-3 py-2.5 text-xs font-extrabold text-ink-faint transition hover:bg-white/[0.04] hover:text-ink" disabled={chatSending} onClick={endChat} type="button">
                   End chat
                 </button>
               ) : null}
@@ -380,7 +380,7 @@ export default function ContactShortcuts() {
         aria-label="Open website chat"
         title="Open website chat"
         onClick={() => setChatOpen((open) => !open)}
-        className="group flex h-12 items-center gap-2 rounded-xl border border-slate-200 bg-[#fffdf8] px-3 text-[#1e211f] shadow-[0_14px_38px_rgba(24,22,18,0.16)] transition hover:-translate-y-0.5 hover:border-cyanbrand-500 focus:outline-none focus:ring-2 focus:ring-cyanbrand-500 focus:ring-offset-2"
+        className="group flex h-12 items-center gap-2 rounded-card border border-border bg-base-700 px-3 text-ink transition hover:-translate-y-0.5 hover:border-accent hover:shadow-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base-900"
       >
         <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
           <path d="M5 6.5h14v9H9.5L5 19.5v-13Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

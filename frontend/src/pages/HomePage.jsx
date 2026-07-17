@@ -34,7 +34,7 @@ function ProjectVisual({ project, index, featured = false }) {
   return (
     <motion.button
       type="button"
-      className={`group relative min-h-[300px] overflow-hidden rounded-[1.35rem] border border-slate-200 bg-slate-200 text-left shadow-sm ${featured ? 'lg:min-h-[470px]' : ''}`}
+      className={`group relative min-h-[300px] overflow-hidden rounded-card border border-border-subtle bg-base-700 text-left ${featured ? 'lg:min-h-[470px]' : ''}`}
       onClick={() => navigateTo(`/portfolio/${project.slug}`)}
       aria-label={`Open ${project.title}`}
       variants={imageReveal}
@@ -49,7 +49,7 @@ function ProjectVisual({ project, index, featured = false }) {
         style={{ objectPosition: imagePositions[project.slug] || '50% 50%' }}
       />
       <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-      <span className="absolute bottom-5 left-5 rounded-full border border-white/25 bg-black/25 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-white backdrop-blur">
+      <span className="absolute bottom-5 left-5 rounded-pill border border-border bg-base-900/45 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-ink backdrop-blur">
         {project.category}
       </span>
     </motion.button>
@@ -63,9 +63,9 @@ export default function HomePage() {
   const featuredServices = services.slice(0, 3);
 
   return (
-    <div className="overflow-hidden bg-slate-50 text-slate-950">
+    <div className="overflow-hidden bg-base-900 text-ink">
       <Section
-        className="relative bg-[linear-gradient(90deg,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(180deg,rgba(15,23,42,0.035)_1px,transparent_1px)] bg-[length:96px_96px] px-5 py-16 sm:px-6 lg:px-8 lg:py-24"
+        className="relative bg-[radial-gradient(circle_at_70%_20%,rgba(45,212,224,0.12),transparent_34%),linear-gradient(180deg,#061528_0%,#0B1D33_100%)] px-5 py-16 sm:px-6 lg:px-8 lg:py-24"
         containerClassName="studio-container"
         aria-labelledby="home-hero-title"
       >
@@ -110,11 +110,11 @@ export default function HomePage() {
               ]}
             />
 
-            <motion.dl className="mt-10 grid border border-slate-200 bg-slate-200 sm:grid-cols-3" variants={revealGroup} aria-label="YalaByte core work">
+            <motion.dl className="mt-10 grid overflow-hidden rounded-card border border-border-subtle bg-base-700 sm:grid-cols-3" variants={revealGroup} aria-label="YalaByte core work">
               {heroNotes.map(([term, description]) => (
-                <motion.div key={term} variants={reveal} className="bg-white/80 p-5">
-                  <dt className="text-sm font-black text-slate-950">{term}</dt>
-                  <dd className="mt-2 text-sm leading-6 text-slate-600">{description}</dd>
+                <motion.div key={term} variants={reveal} className="border-border-subtle p-5 sm:border-l first:sm:border-l-0">
+                  <dt className="text-sm font-black text-ink">{term}</dt>
+                  <dd className="mt-2 text-sm leading-6 text-ink-muted">{description}</dd>
                 </motion.div>
               ))}
             </motion.dl>
@@ -123,7 +123,7 @@ export default function HomePage() {
           <motion.div className="grid gap-4" variants={reveal}>
             <motion.button
               type="button"
-              className="group relative min-h-[520px] overflow-hidden rounded-[1.35rem] border border-slate-200 bg-slate-200 text-left shadow-2xl shadow-slate-950/15"
+              className="group relative min-h-[520px] overflow-hidden rounded-card border border-border bg-base-700 text-left"
               onClick={() => navigateTo(`/portfolio/${featuredProject.slug}`)}
               aria-label={`Open ${featuredProject.title}`}
               variants={imageReveal}
@@ -131,8 +131,8 @@ export default function HomePage() {
             >
               <img src={featuredProject.image} alt={`${featuredProject.title} website preview`} loading="eager" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" style={{ objectPosition: imagePositions[featuredProject.slug] || '50% 50%' }} />
               <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <span className="absolute inset-x-6 bottom-6 grid gap-2 text-white">
-                <small className="text-xs font-black uppercase tracking-[0.18em] text-white/70">{featuredProject.category}</small>
+              <span className="absolute inset-x-6 bottom-6 grid gap-2 text-ink">
+                <small className="text-xs font-black uppercase tracking-[0.18em] text-ink-muted">{featuredProject.category}</small>
                 <strong className="text-3xl font-black tracking-tight">{featuredProject.title}</strong>
               </span>
             </motion.button>
@@ -142,7 +142,7 @@ export default function HomePage() {
                 <motion.button
                   type="button"
                   key={project.slug}
-                  className="group relative min-h-40 overflow-hidden rounded-[1.1rem] border border-slate-200 bg-slate-900 text-left"
+                  className="group relative min-h-40 overflow-hidden rounded-card border border-border-subtle bg-base-700 text-left"
                   onClick={() => navigateTo(`/portfolio/${project.slug}`)}
                   aria-label={`Open ${project.title}`}
                   variants={reveal}
@@ -151,8 +151,8 @@ export default function HomePage() {
                 >
                   <img src={project.image} alt={`${project.title} website preview`} loading="eager" className="absolute inset-0 h-full w-full object-cover opacity-80 transition duration-700 group-hover:scale-105" style={{ objectPosition: imagePositions[project.slug] || '50% 50%' }} />
                   <span className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/10" />
-                  <span className="absolute inset-x-4 bottom-4 grid gap-1 text-white">
-                    <small className="text-xs font-black uppercase tracking-[0.14em] text-white/65">{project.category}</small>
+                  <span className="absolute inset-x-4 bottom-4 grid gap-1 text-ink">
+                    <small className="text-xs font-black uppercase tracking-[0.14em] text-ink-muted">{project.category}</small>
                     <strong className="text-base font-black">{project.title}</strong>
                   </span>
                 </motion.button>
@@ -162,12 +162,12 @@ export default function HomePage() {
         </motion.div>
       </Section>
 
-      <MotionSection className="border-y border-slate-200 bg-white/70" aria-label="YalaByte project metrics">
+      <MotionSection className="border-y border-border-subtle bg-base-800" aria-label="YalaByte project metrics">
         <div className="studio-container grid sm:grid-cols-3">
           {homeStats.map(([value, label]) => (
-            <div key={label} className="border-slate-200 px-6 py-7 sm:border-l sm:last:border-r">
-              <strong className="text-5xl font-black tracking-[-0.06em] text-slate-950">{value}</strong>
-              <span className="ml-4 inline-block max-w-44 align-baseline text-sm font-bold leading-5 text-slate-600">{label}</span>
+            <div key={label} className="border-border-subtle px-6 py-7 sm:border-l sm:last:border-r">
+              <strong className="text-5xl font-black tracking-[-0.06em] text-ink">{value}</strong>
+              <span className="ml-4 inline-block max-w-44 align-baseline text-sm font-bold leading-5 text-ink-muted">{label}</span>
             </div>
           ))}
         </div>
@@ -187,11 +187,11 @@ export default function HomePage() {
             withSection={false}
             eyebrow="Selected work"
             title="Demo websites with structure, not just screens."
-            titleClassName="text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl"
+            titleClassName="text-headline"
             className="mx-0 max-w-4xl text-left"
             variants={reveal}
           />
-          <motion.p variants={reveal} className="text-base leading-8 text-slate-600">
+          <motion.p variants={reveal} className="text-base leading-8 text-ink-muted">
             Each sample shows how YalaByte can shape navigation, service pages, content hierarchy, and inquiry flow around a specific business type.
           </motion.p>
         </motion.div>
@@ -200,7 +200,7 @@ export default function HomePage() {
           {featuredProjects.map((project, index) => (
             <ContentCard
               as={motion.article}
-              className="grid overflow-hidden border border-slate-200 bg-white shadow-sm lg:grid-cols-[0.86fr_0.48fr] even:lg:grid-cols-[0.48fr_0.86fr]"
+              className="grid overflow-hidden rounded-card border border-border-subtle bg-base-700 lg:grid-cols-[0.86fr_0.48fr] even:lg:grid-cols-[0.48fr_0.86fr]"
               key={project.slug}
               initial="hidden"
               whileInView="visible"
@@ -209,12 +209,12 @@ export default function HomePage() {
             >
               <ProjectVisual project={project} index={index} featured={index === 0} />
               <motion.div className="flex flex-col justify-center p-7 lg:p-12 even:lg:order-first" variants={reveal}>
-                <span className="text-xs font-black uppercase tracking-[0.18em] text-cyanbrand-600">{String(index + 1).padStart(2, '0')} / {project.category}</span>
-                <h3 className="mt-5 text-4xl font-black leading-none tracking-tight text-slate-950 sm:text-5xl">{project.title}</h3>
-                <p className="mt-5 text-base leading-8 text-slate-600">{project.summary}</p>
+                <span className="text-xs font-black uppercase tracking-[0.18em] text-accent">{String(index + 1).padStart(2, '0')} / {project.category}</span>
+                <h3 className="mt-5 text-4xl font-black leading-none tracking-tight text-ink sm:text-5xl">{project.title}</h3>
+                <p className="mt-5 text-base leading-8 text-ink-muted">{project.summary}</p>
                 <div className="mt-7 flex flex-wrap gap-2">
                   {project.features.slice(0, index === 0 ? 4 : 3).map((feature) => (
-                    <small key={feature} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700">{feature}</small>
+                    <small key={feature} className="rounded-pill border border-border-subtle bg-white/[0.03] px-3 py-2 text-xs font-bold text-ink-muted">{feature}</small>
                   ))}
                 </div>
                 <Button className="mt-8 self-start" variant="primary" onClick={() => navigateTo(`/portfolio/${project.slug}`)}>
@@ -232,21 +232,21 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <MotionSection className="bg-navy-950 px-5 py-16 text-white sm:px-6 lg:px-8 lg:py-24" aria-labelledby="positioning-title">
+      <MotionSection className="bg-base-800 px-5 py-16 text-ink sm:px-6 lg:px-8 lg:py-24" aria-labelledby="positioning-title">
         <div className="studio-container grid gap-10 lg:grid-cols-[0.72fr_0.9fr]">
           <PageHero
             variant="sectionLight"
             withSection={false}
             eyebrow="Positioning"
             title="Good websites are built from decisions, not decoration."
-            titleClassName="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl"
+            titleClassName="mt-4 text-headline"
             className="mx-0 max-w-3xl text-left"
           />
           <div>
-            <p className="text-base leading-8 text-slate-300">
+            <p className="text-base leading-8 text-ink-muted">
               We make the important choices visible: what the business offers, who the page is for, what visitors need to understand, and what should happen next. Then we design and build around those decisions.
             </p>
-            <Button variant="secondary" className="mt-8 !border-white/20 !bg-white/[0.04] !text-white hover:!border-cyanbrand-400 hover:!bg-white/[0.08]" onClick={() => navigateTo('/about')}>
+            <Button variant="secondary" className="mt-8" onClick={() => navigateTo('/about')}>
               Learn about our approach →
             </Button>
           </div>
@@ -259,7 +259,7 @@ export default function HomePage() {
           withSection={false}
           eyebrow="Services"
           title="Focused website services for the parts that matter first."
-          titleClassName="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl"
+          titleClassName="mt-4 text-headline"
           text="A short look at the work YalaByte handles most often. The complete service breakdown lives on the services page."
         />
 
@@ -267,7 +267,7 @@ export default function HomePage() {
           {featuredServices.map((service, index) => (
             <ContentCard
               as={motion.article}
-              className="rounded-[1.4rem] border border-slate-200 bg-white p-7 shadow-sm"
+              className="rounded-card border border-border-subtle bg-base-700 p-7"
               key={service.title}
               initial="hidden"
               whileInView="visible"
@@ -275,9 +275,9 @@ export default function HomePage() {
               variants={reveal}
               transition={{ delay: reduceMotion ? 0 : index * 0.04 }}
             >
-              <span className="inline-grid h-11 w-11 place-items-center rounded-2xl bg-cyanbrand-100 text-sm font-black text-cyanbrand-800">{String(index + 1).padStart(2, '0')}</span>
-              <h3 className="mt-7 text-2xl font-black tracking-tight text-slate-950">{service.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{service.text}</p>
+              <span className="inline-grid h-11 w-11 place-items-center rounded-card bg-accent-muted text-sm font-black text-accent">{String(index + 1).padStart(2, '0')}</span>
+              <h3 className="mt-7 text-2xl font-black tracking-tight text-ink">{service.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-ink-muted">{service.text}</p>
             </ContentCard>
           ))}
         </CardGrid>
