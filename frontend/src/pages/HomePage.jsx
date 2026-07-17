@@ -111,52 +111,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="yb-section yb-work" aria-labelledby="selected-work-title">
+      <section className="yb-home-work" aria-labelledby="selected-work-title">
         <div className="yb-shell">
-          <div className="yb-section-heading yb-reveal">
-            <p className="yb-kicker">Selected work</p>
-            <h2 id="selected-work-title">The work leads the identity.</h2>
+          <div className="yb-home-work__intro yb-reveal">
+            <div>
+              <p className="yb-kicker">Selected work</p>
+              <h2 id="selected-work-title">Demo websites with structure, not just screens.</h2>
+            </div>
             <p>
-              These demos use existing YalaByte project assets to show how structure, page flow, and visual tone change by industry.
+              Each sample shows how YalaByte can shape navigation, service pages, content hierarchy, and inquiry flow around a specific business type.
             </p>
           </div>
 
-          <div className="yb-featured-work yb-reveal">
-            <button type="button" className="yb-featured-work__image" onClick={() => navigateTo(`/portfolio/${featuredProject.slug}`)}>
-              <img src={featuredProject.image} alt={`${featuredProject.title} homepage preview`} loading="lazy" />
-            </button>
-            <div className="yb-featured-work__content">
-              <p className="yb-kicker">{featuredProject.category}</p>
-              <h3>{featuredProject.headline}</h3>
-              <p>{featuredProject.summary}</p>
-              <ul aria-label={`${featuredProject.title} features`}>
-                {featuredProject.features.map((feature) => (
-                  <li key={feature}>{feature}</li>
-                ))}
-              </ul>
-              <button type="button" className="yb-text-link" onClick={() => navigateTo(`/portfolio/${featuredProject.slug}`)}>
-                Open project
-              </button>
-            </div>
-          </div>
-
-          <div className="yb-supporting-work">
-            {supportingProjects.map((project, index) => (
-              <article className="yb-work-row yb-reveal" key={project.slug} style={{ '--reveal-delay': `${index * 90}ms` }}>
-                <button type="button" onClick={() => navigateTo(`/portfolio/${project.slug}`)}>
-                  <img src={project.image} alt={`${project.title} website preview`} loading="lazy" />
-                </button>
-                <div>
-                  <p className="yb-kicker">{project.category}</p>
+          <div className="yb-home-work__grid">
+            {portfolioDemos.map((project, index) => (
+              <article className={`yb-home-case yb-reveal ${index === 0 ? 'is-featured' : ''}`} key={project.slug} style={{ '--reveal-delay': `${index * 90}ms` }}>
+                <div className="yb-home-case__image">
+                  <button type="button" onClick={() => navigateTo(`/portfolio/${project.slug}`)} aria-label={`Open ${project.title}`}>
+                    <img src={project.image} alt={`${project.title} website preview`} loading={index === 0 ? 'eager' : 'lazy'} />
+                  </button>
+                </div>
+                <div className="yb-home-case__content">
+                  <span>{String(index + 1).padStart(2, '0')} / {project.category}</span>
                   <h3>{project.title}</h3>
                   <p>{project.summary}</p>
-                  <ul className="yb-work-row__features" aria-label={`${project.title} capabilities`}>
-                    {project.features.slice(0, 3).map((feature) => (
-                      <li key={feature}>{feature}</li>
+                  <div className="yb-home-case__features">
+                    {project.features.slice(0, index === 0 ? 4 : 3).map((feature) => (
+                      <small key={feature}>{feature}</small>
                     ))}
-                  </ul>
-                  <button type="button" className="yb-text-link" onClick={() => navigateTo(`/portfolio/${project.slug}`)}>
-                    View demo
+                  </div>
+                  <button type="button" onClick={() => navigateTo(`/portfolio/${project.slug}`)}>
+                    View project
                   </button>
                 </div>
               </article>
