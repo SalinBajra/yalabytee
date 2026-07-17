@@ -33,6 +33,12 @@ const serviceGroups = [
   }
 ];
 
+const heroNotes = [
+  ['Website development', 'Business websites and redesigns'],
+  ['UI/UX', 'Page flow, hierarchy, and interfaces'],
+  ['Support', 'Launch, maintenance, and improvements']
+];
+
 export default function HomePage() {
   useEffect(() => {
     const elements = document.querySelectorAll('.yb-reveal');
@@ -65,9 +71,9 @@ export default function HomePage() {
         <div className="yb-shell yb-hero__grid">
           <div className="yb-hero__copy yb-reveal">
             <p className="yb-kicker">YalaByte web design and development</p>
-            <h1 id="home-hero-title">Custom websites with the clarity of good editorial design.</h1>
+            <h1 id="home-hero-title">Websites with a clear point of view.</h1>
             <p>
-              YalaByte plans, designs, and builds websites and digital tools for service businesses that need a sharper online presence and reliable launch support.
+              YalaByte plans, designs, and builds websites and digital tools for service businesses that need sharper positioning, cleaner user journeys, and reliable launch support.
             </p>
             <div className="yb-actions" aria-label="Primary actions">
               <button type="button" className="yb-button yb-button--dark" onClick={() => navigateTo('/contact')}>
@@ -77,6 +83,14 @@ export default function HomePage() {
                 View portfolio
               </button>
             </div>
+            <dl className="yb-hero__notes" aria-label="YalaByte core work">
+              {heroNotes.map(([term, description]) => (
+                <div key={term}>
+                  <dt>{term}</dt>
+                  <dd>{description}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
           <div className="yb-hero__work yb-reveal" style={{ '--reveal-delay': '120ms' }} aria-label="Featured YalaByte website examples">
@@ -101,9 +115,9 @@ export default function HomePage() {
         <div className="yb-shell">
           <div className="yb-section-heading yb-reveal">
             <p className="yb-kicker">Selected work</p>
-            <h2 id="selected-work-title">Portfolio-led websites for real business categories.</h2>
+            <h2 id="selected-work-title">The work leads the identity.</h2>
             <p>
-              These demos use existing YalaByte project assets to show how content, page flow, and visual tone can change by industry.
+              These demos use existing YalaByte project assets to show how structure, page flow, and visual tone change by industry.
             </p>
           </div>
 
@@ -136,6 +150,11 @@ export default function HomePage() {
                   <p className="yb-kicker">{project.category}</p>
                   <h3>{project.title}</h3>
                   <p>{project.summary}</p>
+                  <ul className="yb-work-row__features" aria-label={`${project.title} capabilities`}>
+                    {project.features.slice(0, 3).map((feature) => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
                   <button type="button" className="yb-text-link" onClick={() => navigateTo(`/portfolio/${project.slug}`)}>
                     View demo
                   </button>
