@@ -536,6 +536,53 @@
   }
 }
 
+/* Final light studio chrome ---------------------------------------------- */
+
+.yb-site-header {
+  border-bottom: 1px solid rgba(16, 24, 32, 0.12) !important;
+  background: rgba(246, 241, 232, 0.92) !important;
+  color: #101820 !important;
+  backdrop-filter: blur(18px);
+}
+
+.yb-brand-link,
+.yb-desktop-nav a,
+.yb-menu-button {
+  color: #101820 !important;
+}
+
+.yb-desktop-nav a {
+  opacity: 0.72;
+}
+
+.yb-desktop-nav a:hover,
+.yb-desktop-nav a[aria-current='page'] {
+  opacity: 1;
+}
+
+.yb-nav-cta {
+  border: 1px solid rgba(16, 24, 32, 0.18) !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.34) !important;
+  color: #101820 !important;
+  box-shadow: none !important;
+}
+
+.yb-nav-cta:hover {
+  border-color: #0d95a5 !important;
+  background: #ffffff !important;
+  color: #0d95a5 !important;
+}
+
+.yb-mobile-nav {
+  border-bottom: 1px solid rgba(16, 24, 32, 0.12) !important;
+  background: rgba(246, 241, 232, 0.98) !important;
+}
+
+.yb-mobile-nav a {
+  color: #101820 !important;
+}
+
 /* Final shared navigation motion */
 
 .yb-nav-link {
