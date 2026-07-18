@@ -1,14 +1,12 @@
 import { motion } from 'framer-motion';
 import Button from '../components/Button.jsx';
 import CardGrid from '../components/CardGrid.jsx';
-import ContentCard from '../components/ContentCard.jsx';
 import CTASection from '../components/CTASection.jsx';
 import MotionSection, { useMotionVariants } from '../components/MotionSection.jsx';
 import PageHero from '../components/PageHero.jsx';
 import Section from '../components/Section.jsx';
 import { navigateTo } from '../utils/routes.js';
 import { portfolioDemos } from '../data/portfolioDemos.js';
-import { services } from '../data/siteData.js';
 
 const heroNotes = [
   ['Website development', 'Business websites and redesigns'],
@@ -28,17 +26,24 @@ const imagePositions = {
   logistics: '50% 50%'
 };
 
-function ProjectVisual({ project, index, featured = false }) {
+const serviceTeasers = [
+  ['Company Websites', 'Clear pages for service businesses.'],
+  ['Website Redesigns', 'Sharper structure for old sites.'],
+  ['Custom Web Applications', 'Useful tools for internal work.']
+];
+
+function FeaturedWorkTile({ project, index }) {
   const { imageReveal } = useMotionVariants();
+  const isPrimary = index === 0;
 
   return (
     <motion.button
       type="button"
-      className={`group relative min-h-[300px] overflow-hidden rounded-card border border-border-subtle bg-base-700 text-left ${featured ? 'lg:min-h-[470px]' : ''}`}
+      className={`group relative block min-h-[360px] w-full overflow-hidden text-left ${isPrimary ? 'lg:min-h-[620px]' : 'lg:mt-24 lg:min-h-[430px]'}`}
       onClick={() => navigateTo(`/portfolio/${project.slug}`)}
       aria-label={`Open ${project.title}`}
       variants={imageReveal}
-      whileHover={{ y: -6 }}
+      whileHover={{ y: -8 }}
       whileTap={{ scale: 0.99 }}
     >
       <img
@@ -48,9 +53,12 @@ function ProjectVisual({ project, index, featured = false }) {
         className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
         style={{ objectPosition: imagePositions[project.slug] || '50% 50%' }}
       />
-      <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-      <span className="absolute bottom-5 left-5 rounded-pill border border-border bg-base-900/45 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-ink backdrop-blur">
-        {project.category}
+      <span className="absolute inset-0 bg-gradient-to-t from-base-900/95 via-base-900/20 to-transparent" />
+      <span className="absolute inset-x-5 bottom-5 grid gap-2 sm:inset-x-8 sm:bottom-8">
+        <span className="font-mono text-xs uppercase tracking-[0.18em] text-accent">[{String(index + 1).padStart(2, '0')}] {project.category}</span>
+        <strong className={`${isPrimary ? 'text-4xl sm:text-5xl' : 'text-3xl sm:text-4xl'} font-black leading-none tracking-tight text-ink`}>
+          {project.title}
+        </strong>
       </span>
     </motion.button>
   );
@@ -59,8 +67,7 @@ function ProjectVisual({ project, index, featured = false }) {
 export default function HomePage() {
   const { reduceMotion, reveal, revealGroup, imageReveal } = useMotionVariants();
   const [featuredProject, ...supportingProjects] = portfolioDemos;
-  const featuredProjects = portfolioDemos.slice(0, 3);
-  const featuredServices = services.slice(0, 3);
+  const featuredProjects = portfolioDemos.slice(0, 2);
 
   return (
     <div className="overflow-hidden bg-base-900 text-ink">
@@ -175,7 +182,7 @@ export default function HomePage() {
 
       <Section variant="white" aria-labelledby="selected-work-title">
         <motion.div
-          className="grid gap-8 lg:grid-cols-[0.95fr_0.52fr] lg:items-end"
+          className="grid gap-8 lg:grid-cols-[0.82fr_0.52fr] lg:items-end"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.28 }}
@@ -191,45 +198,21 @@ export default function HomePage() {
             className="mx-0 max-w-4xl text-left"
             variants={reveal}
           />
-          <motion.p variants={reveal} className="text-base leading-8 text-ink-muted">
-            Each sample shows how YalaByte can shape navigation, service pages, content hierarchy, and inquiry flow around a specific business type.
-          </motion.p>
+          <motion.button
+            type="button"
+            variants={reveal}
+            className="justify-self-start border-b border-accent pb-1 text-sm font-black text-accent transition hover:border-accent-hover hover:text-accent-hover lg:justify-self-end"
+            onClick={() => navigateTo('/portfolio')}
+          >
+            View full portfolio →
+          </motion.button>
         </motion.div>
 
-        <CardGrid className="mt-14 grid gap-8">
+        <CardGrid className="mt-14 grid gap-5 lg:grid-cols-[1.08fr_0.72fr] lg:items-start">
           {featuredProjects.map((project, index) => (
-            <ContentCard
-              as={motion.article}
-              className="grid overflow-hidden rounded-card border border-border-subtle bg-base-700 lg:grid-cols-[0.86fr_0.48fr] even:lg:grid-cols-[0.48fr_0.86fr]"
-              key={project.slug}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={revealGroup}
-            >
-              <ProjectVisual project={project} index={index} featured={index === 0} />
-              <motion.div className="flex flex-col justify-center p-7 lg:p-12 even:lg:order-first" variants={reveal}>
-                <span className="text-xs font-black uppercase tracking-[0.18em] text-accent">{String(index + 1).padStart(2, '0')} / {project.category}</span>
-                <h3 className="mt-5 text-4xl font-black leading-none tracking-tight text-ink sm:text-5xl">{project.title}</h3>
-                <p className="mt-5 text-base leading-8 text-ink-muted">{project.summary}</p>
-                <div className="mt-7 flex flex-wrap gap-2">
-                  {project.features.slice(0, index === 0 ? 4 : 3).map((feature) => (
-                    <small key={feature} className="rounded-pill border border-border-subtle bg-white/[0.03] px-3 py-2 text-xs font-bold text-ink-muted">{feature}</small>
-                  ))}
-                </div>
-                <Button className="mt-8 self-start" variant="primary" onClick={() => navigateTo(`/portfolio/${project.slug}`)}>
-                  View project
-                </Button>
-              </motion.div>
-            </ContentCard>
+            <FeaturedWorkTile key={project.slug} project={project} index={index} />
           ))}
         </CardGrid>
-
-        <div className="mt-10 flex justify-center">
-          <Button variant="secondary" onClick={() => navigateTo('/portfolio')}>
-            View full portfolio →
-          </Button>
-        </div>
       </Section>
 
       <MotionSection className="bg-base-800 px-5 py-16 text-ink sm:px-6 lg:px-8 lg:py-24" aria-labelledby="positioning-title">
@@ -254,38 +237,48 @@ export default function HomePage() {
       </MotionSection>
 
       <Section variant="slate" aria-labelledby="services-title">
-        <PageHero
-          variant="section"
-          withSection={false}
-          eyebrow="Services"
-          title="Focused website services for the parts that matter first."
-          titleClassName="mt-4 text-headline"
-          text="A short look at the work YalaByte handles most often. The complete service breakdown lives on the services page."
-        />
+        <div className="grid gap-12 lg:grid-cols-[0.56fr_0.9fr] lg:items-start">
+          <PageHero
+            variant="section"
+            withSection={false}
+            eyebrow="Services"
+            title="Three ways we usually help first."
+            titleClassName="mt-4 text-3xl font-semibold leading-tight text-ink sm:text-4xl"
+            className="mx-0 max-w-xl text-left"
+          />
 
-        <CardGrid className="mt-12 grid gap-5 md:grid-cols-3">
-          {featuredServices.map((service, index) => (
-            <ContentCard
-              as={motion.article}
-              className="rounded-card border border-border-subtle bg-base-700 p-7"
-              key={service.title}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.24 }}
-              variants={reveal}
-              transition={{ delay: reduceMotion ? 0 : index * 0.04 }}
+          <motion.div
+            className="border-t border-border-subtle"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.24 }}
+            variants={revealGroup}
+          >
+            {serviceTeasers.map(([title, line], index) => (
+              <motion.button
+                key={title}
+                type="button"
+                className="grid w-full gap-4 border-b border-border-subtle py-7 text-left transition hover:border-accent sm:grid-cols-[96px_1fr]"
+                onClick={() => navigateTo('/services')}
+                variants={reveal}
+                transition={{ delay: reduceMotion ? 0 : index * 0.04 }}
+              >
+                <span className="font-mono text-sm text-accent">[{String(index + 1).padStart(2, '0')}]</span>
+                <span>
+                  <strong className="block text-2xl font-black tracking-tight text-ink">{title}</strong>
+                  <span className="mt-2 block text-sm leading-6 text-ink-muted">{line}</span>
+                </span>
+              </motion.button>
+            ))}
+
+            <button
+              type="button"
+              className="mt-8 border-b border-accent pb-1 text-sm font-black text-accent transition hover:border-accent-hover hover:text-accent-hover"
+              onClick={() => navigateTo('/services')}
             >
-              <span className="inline-grid h-11 w-11 place-items-center rounded-card bg-accent-muted text-sm font-black text-accent">{String(index + 1).padStart(2, '0')}</span>
-              <h3 className="mt-7 text-2xl font-black tracking-tight text-ink">{service.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-ink-muted">{service.text}</p>
-            </ContentCard>
-          ))}
-        </CardGrid>
-
-        <div className="mt-10 flex justify-center">
-          <Button variant="secondary" onClick={() => navigateTo('/services')}>
-            See all services →
-          </Button>
+              See all services →
+            </button>
+          </motion.div>
         </div>
       </Section>
 
