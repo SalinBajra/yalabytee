@@ -1,23 +1,20 @@
 import { motion } from 'framer-motion';
 import Button from '../components/Button.jsx';
-import CardGrid from '../components/CardGrid.jsx';
 import CTASection from '../components/CTASection.jsx';
 import MotionSection, { useMotionVariants } from '../components/MotionSection.jsx';
-import PageHero from '../components/PageHero.jsx';
-import Section from '../components/Section.jsx';
 import { navigateTo } from '../utils/routes.js';
 import { portfolioDemos } from '../data/portfolioDemos.js';
-
-const heroNotes = [
-  ['Website development', 'Business websites and redesigns'],
-  ['UI/UX', 'Page flow, hierarchy, and interfaces'],
-  ['Support', 'Launch, maintenance, and improvements']
-];
 
 const homeStats = [
   ['03', 'live demo verticals'],
   ['06', 'core service tracks'],
   ['01', 'team from strategy to launch']
+];
+
+const serviceTeasers = [
+  ['Company Websites', 'Clear pages for service businesses.'],
+  ['Website Redesigns', 'Sharper structure for old sites.'],
+  ['Custom Web Applications', 'Focused tools for internal work.']
 ];
 
 const imagePositions = {
@@ -26,20 +23,27 @@ const imagePositions = {
   logistics: '50% 50%'
 };
 
-const serviceTeasers = [
-  ['Company Websites', 'Clear pages for service businesses.'],
-  ['Website Redesigns', 'Sharper structure for old sites.'],
-  ['Custom Web Applications', 'Useful tools for internal work.']
-];
+function EditorialLink({ children, onClick, className = '' }) {
+  return (
+    <button
+      type="button"
+      className={`group inline-flex items-center gap-3 text-sm font-black uppercase tracking-[0.16em] text-ink ${className}`}
+      onClick={onClick}
+    >
+      <span className="border-b border-accent pb-1 transition group-hover:text-accent">{children}</span>
+      <span className="text-accent transition group-hover:translate-x-1">+</span>
+    </button>
+  );
+}
 
-function FeaturedWorkTile({ project, index }) {
+function WorkBand({ project, index }) {
   const { imageReveal } = useMotionVariants();
-  const isPrimary = index === 0;
+  const isLead = index === 0;
 
   return (
     <motion.button
       type="button"
-      className={`group relative block min-h-[360px] w-full overflow-hidden text-left ${isPrimary ? 'lg:min-h-[620px]' : 'lg:mt-24 lg:min-h-[430px]'}`}
+      className={`group relative min-h-[430px] w-full overflow-hidden text-left ${isLead ? 'lg:min-h-[620px]' : 'lg:min-h-[460px]'}`}
       onClick={() => navigateTo(`/portfolio/${project.slug}`)}
       aria-label={`Open ${project.title}`}
       variants={imageReveal}
@@ -53,10 +57,13 @@ function FeaturedWorkTile({ project, index }) {
         className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
         style={{ objectPosition: imagePositions[project.slug] || '50% 50%' }}
       />
-      <span className="absolute inset-0 bg-gradient-to-t from-base-900/95 via-base-900/20 to-transparent" />
-      <span className="absolute inset-x-5 bottom-5 grid gap-2 sm:inset-x-8 sm:bottom-8">
-        <span className="font-mono text-xs uppercase tracking-[0.18em] text-accent">[{String(index + 1).padStart(2, '0')}] {project.category}</span>
-        <strong className={`${isPrimary ? 'text-4xl sm:text-5xl' : 'text-3xl sm:text-4xl'} font-black leading-none tracking-tight text-ink`}>
+      <span className="absolute inset-0 bg-gradient-to-t from-base-900 via-base-900/20 to-transparent" />
+      <span className="absolute left-5 top-5 font-mono text-xs uppercase tracking-[0.18em] text-accent sm:left-8 sm:top-8">
+        [{String(index + 1).padStart(2, '0')}]
+      </span>
+      <span className="absolute bottom-6 left-5 right-5 grid gap-3 sm:bottom-8 sm:left-8 sm:right-8">
+        <span className="text-xs font-black uppercase tracking-[0.2em] text-ink-muted">{project.category}</span>
+        <strong className={`${isLead ? 'text-5xl sm:text-6xl' : 'text-4xl sm:text-5xl'} max-w-2xl font-black leading-[0.95] tracking-tight text-ink`}>
           {project.title}
         </strong>
       </span>
@@ -66,225 +73,177 @@ function FeaturedWorkTile({ project, index }) {
 
 export default function HomePage() {
   const { reduceMotion, reveal, revealGroup, imageReveal } = useMotionVariants();
-  const [featuredProject, ...supportingProjects] = portfolioDemos;
-  const featuredProjects = portfolioDemos.slice(0, 2);
+  const [leadProject, secondProject] = portfolioDemos;
+  const featuredProjects = [leadProject, secondProject].filter(Boolean);
 
   return (
     <div className="overflow-hidden bg-base-900 text-ink">
-      <Section
-        className="relative bg-[radial-gradient(circle_at_70%_20%,rgba(45,212,224,0.12),transparent_34%),linear-gradient(180deg,#061528_0%,#0B1D33_100%)] px-5 py-16 sm:px-6 lg:px-8 lg:py-24"
-        containerClassName="studio-container"
-        aria-labelledby="home-hero-title"
-      >
+      <section className="relative min-h-[calc(100vh-72px)] overflow-hidden border-b border-border-subtle bg-base-900 px-5 py-16 sm:px-6 lg:px-8 lg:py-20" aria-labelledby="home-hero-title">
         <motion.div
-          className="grid gap-12 lg:grid-cols-[0.9fr_0.74fr] lg:items-center"
+          className="pointer-events-none absolute -right-[10vw] top-[-18vw] hidden text-[48vw] font-black leading-none tracking-[-0.12em] text-white/[0.035] lg:block"
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.92 }}
+          animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          aria-hidden="true"
+        >
+          YB
+        </motion.div>
+
+        <div className="studio-container relative grid min-h-[calc(100vh-220px)] gap-12 lg:grid-cols-[0.82fr_0.36fr] lg:items-center">
+          <motion.div initial="hidden" animate="visible" variants={revealGroup}>
+            <motion.p variants={reveal} className="font-mono text-sm uppercase tracking-[0.34em] text-accent">
+              YalaByte web design and development
+            </motion.p>
+            <motion.h1
+              id="home-hero-title"
+              variants={reveal}
+              className="mt-10 max-w-6xl text-[clamp(4rem,10vw,10.8rem)] font-black leading-[0.82] tracking-[-0.075em] text-ink"
+            >
+              A digital studio focused on web.
+            </motion.h1>
+            <motion.p variants={reveal} className="mt-10 max-w-2xl text-lg leading-8 text-ink-muted sm:text-xl">
+              YalaByte plans, designs, and builds sharp websites and digital tools for service businesses that need clearer direction online.
+            </motion.p>
+            <motion.div variants={reveal} className="mt-10 flex flex-wrap gap-3">
+              <Button motionEnabled variant="primary" onClick={() => navigateTo('/contact')}>
+                Start a project
+              </Button>
+              <Button motionEnabled variant="secondary" onClick={() => navigateTo('/portfolio')}>
+                View portfolio
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          <motion.aside className="hidden self-end lg:block" initial="hidden" animate="visible" variants={revealGroup} aria-label="Scroll cue and studio notes">
+            <motion.div variants={reveal} className="ml-auto grid w-44 gap-12">
+              <div className="h-40 w-px bg-border" />
+              <p className="[writing-mode:vertical-rl] font-mono text-xs uppercase tracking-[0.32em] text-ink-muted">Scroll</p>
+              <div className="grid grid-cols-4 gap-2 text-center font-mono text-sm text-ink-muted" aria-hidden="true">
+                {Array.from({ length: 16 }).map((_, index) => (
+                  <span key={index} className={index === 9 ? 'text-accent' : ''}>+</span>
+                ))}
+              </div>
+            </motion.div>
+          </motion.aside>
+        </div>
+
+        <motion.div
+          className="studio-container relative mt-12 grid gap-4 border-t border-border-subtle pt-8 sm:grid-cols-3"
           initial="hidden"
           animate="visible"
           variants={revealGroup}
         >
-          <div>
-            <PageHero
-              as={motion.div}
-              variant="home"
-              withSection={false}
-              eyebrow="YalaByte web design and development"
-              title="Websites with a clear point of view."
-              text="YalaByte plans, designs, and builds websites and digital tools for service businesses that need sharper positioning, cleaner user journeys, and reliable launch support."
-              className=""
-              titleClassName="max-w-5xl"
-              variants={reveal}
-              actions={[
-                <Button
-                  key="start"
-                  motionEnabled
-                  variant="primary"
-                  onClick={() => navigateTo('/contact')}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Start a project
-                </Button>,
-                <Button
-                  key="portfolio"
-                  motionEnabled
-                  variant="secondary"
-                  onClick={() => navigateTo('/portfolio')}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  View portfolio
-                </Button>
-              ]}
-            />
-
-            <motion.dl className="mt-10 grid overflow-hidden rounded-card border border-border-subtle bg-base-700 sm:grid-cols-3" variants={revealGroup} aria-label="YalaByte core work">
-              {heroNotes.map(([term, description]) => (
-                <motion.div key={term} variants={reveal} className="border-border-subtle p-5 sm:border-l first:sm:border-l-0">
-                  <dt className="text-sm font-black text-ink">{term}</dt>
-                  <dd className="mt-2 text-sm leading-6 text-ink-muted">{description}</dd>
-                </motion.div>
-              ))}
-            </motion.dl>
-          </div>
-
-          <motion.div className="grid gap-4" variants={reveal}>
-            <motion.button
-              type="button"
-              className="group relative min-h-[520px] overflow-hidden rounded-card border border-border bg-base-700 text-left"
-              onClick={() => navigateTo(`/portfolio/${featuredProject.slug}`)}
-              aria-label={`Open ${featuredProject.title}`}
-              variants={imageReveal}
-              whileHover={reduceMotion ? {} : { y: -8 }}
-            >
-              <img src={featuredProject.image} alt={`${featuredProject.title} website preview`} loading="eager" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" style={{ objectPosition: imagePositions[featuredProject.slug] || '50% 50%' }} />
-              <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <span className="absolute inset-x-6 bottom-6 grid gap-2 text-ink">
-                <small className="text-xs font-black uppercase tracking-[0.18em] text-ink-muted">{featuredProject.category}</small>
-                <strong className="text-3xl font-black tracking-tight">{featuredProject.title}</strong>
-              </span>
-            </motion.button>
-
-            <CardGrid className="grid gap-4 sm:grid-cols-2" aria-label="More website examples">
-              {supportingProjects.map((project) => (
-                <motion.button
-                  type="button"
-                  key={project.slug}
-                  className="group relative min-h-40 overflow-hidden rounded-card border border-border-subtle bg-base-700 text-left"
-                  onClick={() => navigateTo(`/portfolio/${project.slug}`)}
-                  aria-label={`Open ${project.title}`}
-                  variants={reveal}
-                  whileHover={{ x: 4 }}
-                  whileTap={{ scale: 0.99 }}
-                >
-                  <img src={project.image} alt={`${project.title} website preview`} loading="eager" className="absolute inset-0 h-full w-full object-cover opacity-80 transition duration-700 group-hover:scale-105" style={{ objectPosition: imagePositions[project.slug] || '50% 50%' }} />
-                  <span className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/10" />
-                  <span className="absolute inset-x-4 bottom-4 grid gap-1 text-ink">
-                    <small className="text-xs font-black uppercase tracking-[0.14em] text-ink-muted">{project.category}</small>
-                    <strong className="text-base font-black">{project.title}</strong>
-                  </span>
-                </motion.button>
-              ))}
-            </CardGrid>
-          </motion.div>
-        </motion.div>
-      </Section>
-
-      <MotionSection className="border-y border-border-subtle bg-base-800" aria-label="YalaByte project metrics">
-        <div className="studio-container grid sm:grid-cols-3">
           {homeStats.map(([value, label]) => (
-            <div key={label} className="border-border-subtle px-6 py-7 sm:border-l sm:last:border-r">
-              <strong className="text-5xl font-black tracking-[-0.06em] text-ink">{value}</strong>
-              <span className="ml-4 inline-block max-w-44 align-baseline text-sm font-bold leading-5 text-ink-muted">{label}</span>
-            </div>
+            <motion.div key={label} variants={reveal} className="border-border-subtle sm:border-l sm:pl-8 first:sm:border-l-0 first:sm:pl-0">
+              <strong className="block text-5xl font-black tracking-[-0.07em] text-ink">{value}</strong>
+              <span className="mt-2 block max-w-44 text-sm font-bold leading-5 text-ink-muted">{label}</span>
+            </motion.div>
           ))}
+        </motion.div>
+      </section>
+
+      <MotionSection className="bg-base-800 px-5 py-20 text-ink sm:px-6 lg:px-8 lg:py-28" aria-label="Studio focus">
+        <div className="studio-container grid gap-12 lg:grid-cols-[0.4fr_1fr] lg:items-end">
+          <p className="font-mono text-sm uppercase tracking-[0.34em] text-accent">What we do</p>
+          <h2 className="max-w-5xl text-[clamp(3rem,7vw,7.5rem)] font-black leading-[0.9] tracking-[-0.065em]">
+            Driving service brands forward online.
+          </h2>
         </div>
       </MotionSection>
 
-      <Section variant="white" aria-labelledby="selected-work-title">
+      <section className="bg-base-900 px-5 py-20 text-ink sm:px-6 lg:px-8 lg:py-28" aria-labelledby="selected-work-title">
         <motion.div
-          className="grid gap-8 lg:grid-cols-[0.82fr_0.52fr] lg:items-end"
+          className="studio-container"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.28 }}
+          viewport={{ once: true, amount: 0.22 }}
           variants={revealGroup}
         >
-          <PageHero
-            as={motion.div}
-            variant="section"
-            withSection={false}
-            eyebrow="Selected work"
-            title="Demo websites with structure, not just screens."
-            titleClassName="text-headline"
-            className="mx-0 max-w-4xl text-left"
-            variants={reveal}
-          />
-          <motion.button
-            type="button"
-            variants={reveal}
-            className="justify-self-start border-b border-accent pb-1 text-sm font-black text-accent transition hover:border-accent-hover hover:text-accent-hover lg:justify-self-end"
-            onClick={() => navigateTo('/portfolio')}
-          >
-            View full portfolio →
-          </motion.button>
-        </motion.div>
-
-        <CardGrid className="mt-14 grid gap-5 lg:grid-cols-[1.08fr_0.72fr] lg:items-start">
-          {featuredProjects.map((project, index) => (
-            <FeaturedWorkTile key={project.slug} project={project} index={index} />
-          ))}
-        </CardGrid>
-      </Section>
-
-      <MotionSection className="bg-base-800 px-5 py-16 text-ink sm:px-6 lg:px-8 lg:py-24" aria-labelledby="positioning-title">
-        <div className="studio-container grid gap-10 lg:grid-cols-[0.72fr_0.9fr]">
-          <PageHero
-            variant="sectionLight"
-            withSection={false}
-            eyebrow="Positioning"
-            title="Good websites are built from decisions, not decoration."
-            titleClassName="mt-4 text-headline"
-            className="mx-0 max-w-3xl text-left"
-          />
-          <div>
-            <p className="text-base leading-8 text-ink-muted">
-              We make the important choices visible: what the business offers, who the page is for, what visitors need to understand, and what should happen next. Then we design and build around those decisions.
-            </p>
-            <Button variant="secondary" className="mt-8" onClick={() => navigateTo('/about')}>
-              Learn about our approach →
-            </Button>
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_0.32fr] lg:items-end">
+            <motion.div variants={reveal}>
+              <p className="font-mono text-sm uppercase tracking-[0.34em] text-accent">Selected work</p>
+              <h2 id="selected-work-title" className="mt-6 max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.045em] text-ink sm:text-7xl">
+                Two demos. Two different worlds.
+              </h2>
+            </motion.div>
+            <motion.div variants={reveal} className="lg:justify-self-end">
+              <EditorialLink onClick={() => navigateTo('/portfolio')}>View full portfolio</EditorialLink>
+            </motion.div>
           </div>
+
+          <div className="mt-16 grid gap-5 lg:grid-cols-[1.1fr_0.72fr] lg:items-start">
+            {featuredProjects.map((project, index) => (
+              <WorkBand key={project.slug} project={project} index={index} />
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="relative overflow-hidden bg-[#f4f7fb] px-5 py-20 text-base-900 sm:px-6 lg:px-8 lg:py-28" aria-labelledby="services-title">
+        <div className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 [writing-mode:vertical-rl] font-mono text-xs uppercase tracking-[0.42em] text-base-900/35 lg:block">
+          Services / Scroll
         </div>
-      </MotionSection>
+        <motion.div
+          className="studio-container grid gap-14 lg:grid-cols-[0.52fr_0.9fr] lg:items-start"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.22 }}
+          variants={revealGroup}
+        >
+          <motion.div variants={reveal}>
+            <p className="font-mono text-sm uppercase tracking-[0.34em] text-accent">Services</p>
+            <h2 id="services-title" className="mt-6 max-w-xl text-5xl font-black leading-[0.95] tracking-[-0.045em] sm:text-6xl">
+              Three ways we usually help first.
+            </h2>
+          </motion.div>
 
-      <Section variant="slate" aria-labelledby="services-title">
-        <div className="grid gap-12 lg:grid-cols-[0.56fr_0.9fr] lg:items-start">
-          <PageHero
-            variant="section"
-            withSection={false}
-            eyebrow="Services"
-            title="Three ways we usually help first."
-            titleClassName="mt-4 text-3xl font-semibold leading-tight text-ink sm:text-4xl"
-            className="mx-0 max-w-xl text-left"
-          />
-
-          <motion.div
-            className="border-t border-border-subtle"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.24 }}
-            variants={revealGroup}
-          >
+          <motion.div variants={revealGroup} className="border-t border-base-900/15">
             {serviceTeasers.map(([title, line], index) => (
               <motion.button
                 key={title}
                 type="button"
-                className="grid w-full gap-4 border-b border-border-subtle py-7 text-left transition hover:border-accent sm:grid-cols-[96px_1fr]"
+                className="grid w-full gap-5 border-b border-base-900/15 py-8 text-left transition hover:border-accent sm:grid-cols-[120px_1fr]"
                 onClick={() => navigateTo('/services')}
                 variants={reveal}
-                transition={{ delay: reduceMotion ? 0 : index * 0.04 }}
+                transition={{ delay: reduceMotion ? 0 : index * 0.05 }}
               >
                 <span className="font-mono text-sm text-accent">[{String(index + 1).padStart(2, '0')}]</span>
                 <span>
-                  <strong className="block text-2xl font-black tracking-tight text-ink">{title}</strong>
-                  <span className="mt-2 block text-sm leading-6 text-ink-muted">{line}</span>
+                  <strong className="block text-3xl font-black tracking-[-0.035em]">{title}</strong>
+                  <span className="mt-2 block text-base leading-7 text-base-700">{line}</span>
                 </span>
               </motion.button>
             ))}
-
-            <button
-              type="button"
-              className="mt-8 border-b border-accent pb-1 text-sm font-black text-accent transition hover:border-accent-hover hover:text-accent-hover"
-              onClick={() => navigateTo('/services')}
-            >
-              See all services →
-            </button>
+            <EditorialLink className="mt-10 !text-base-900" onClick={() => navigateTo('/services')}>
+              See all services
+            </EditorialLink>
           </motion.div>
-        </div>
-      </Section>
+        </motion.div>
+      </section>
+
+      <section className="relative overflow-hidden bg-base-900 px-5 py-20 text-ink sm:px-6 lg:px-8 lg:py-28">
+        <motion.div
+          className="studio-container grid gap-10 lg:grid-cols-[0.9fr_0.42fr] lg:items-end"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.22 }}
+          variants={revealGroup}
+        >
+          <motion.div variants={reveal}>
+            <p className="font-mono text-sm uppercase tracking-[0.34em] text-accent">Why YalaByte</p>
+            <h2 className="mt-6 max-w-5xl text-[clamp(3rem,7vw,7.2rem)] font-black leading-[0.9] tracking-[-0.065em]">
+              Websites need direction before decoration.
+            </h2>
+          </motion.div>
+          <motion.p variants={reveal} className="max-w-md text-base leading-8 text-ink-muted">
+            We shape the offer, page flow, interface, and launch path so the final site feels intentional from the first scroll.
+          </motion.p>
+        </motion.div>
+      </section>
 
       <CTASection
         eyebrow="Start a project"
-        title="Have a website idea or an old site that needs careful redesign?"
+        title="Have a website idea or an old site that needs serious redesign?"
         text="Tell us what exists, what needs to change, and what the website should help your business do next."
         buttonText="Start the conversation"
       />
